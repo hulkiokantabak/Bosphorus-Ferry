@@ -1,6 +1,8 @@
+import { useEffect, useState } from 'react';
 import { GameState } from '../types';
 import { EndingType, getEndingTitle } from '../engine/endingCalculator';
 import { getScene, getSceneCount } from '../engine/gameEngine';
+import { getDiscoveredEndings, recordEnding, markGameCompleted } from '../engine/stateManager';
 
 interface SummaryScreenProps {
   state: GameState;
@@ -51,7 +53,28 @@ function getTrustColor(value: number): string {
   return 'var(--accent-gold)';
 }
 
+const ALL_ENDINGS: EndingType[] = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'D1', 'D2'];
+
+const ENDING_HINTS: Record<string, string> = {
+  A1: 'Expose the network with overwhelming evidence',
+  A2: 'Bring justice through trust and relationships',
+  B1: 'Accept Vedat\'s deal to protect those you love',
+  B2: 'Broker a compromise that costs you something',
+  C1: 'Hand off the fight and disappear with Defne',
+  C2: 'Take the evidence and vanish to the coast',
+  D1: 'Charge forward when stealth fails',
+  D2: 'Let instinct carry you when plans collapse',
+};
+
 export default function SummaryScreen({ state, ending, onMainMenu, onPlayAgain }: SummaryScreenProps) {
+  const [discoveredEndings, setDiscoveredEndings] = useState<string[]>([]);
+
+  useEffect(() => {
+    recordEnding(ending);
+    markGameCompleted();
+    setDiscoveredEndings(getDiscoveredEndings());
+  }, [ending]);
+
   const endingTitle = getEndingTitle(ending);
   const endingFamily = ENDING_FAMILIES[ending[0]] || ending;
   const scenesExplored = state.visitedScenes.length;
@@ -345,27 +368,78 @@ export default function SummaryScreen({ state, ending, onMainMenu, onPlayAgain }
           </div>
         )}
 
-        {/* Other endings hint */}
+        {/* Ending Tracker */}
         <div
-          className="fade-in text-center mb-10 p-5 rounded"
+          className="fade-in mb-10 p-5 rounded"
           style={{
+            backgroundColor: 'var(--bg-secondary)',
             border: '1px solid var(--border-subtle)',
             animationDelay: '1.7s',
             opacity: 0,
           }}
         >
-          <p
-            className="text-sm mb-2"
-            style={{ fontFamily: "'Lora', Georgia, serif", color: 'var(--text-primary)' }}
+          <h3
+            className="text-xs uppercase tracking-widest mb-4 text-center"
+            style={{ fontFamily: "'Inter', sans-serif", color: 'var(--text-secondary)', letterSpacing: '0.2em' }}
           >
-            You reached <span style={{ color: 'var(--accent-gold)' }}>1 of 8</span> endings.
-          </p>
-          <p
-            className="text-xs italic"
-            style={{ fontFamily: "'Lora', Georgia, serif", color: 'var(--text-secondary)' }}
-          >
-            Different choices lead to different fates. Would Deniz have chosen differently?
-          </p>
+            Endings Discovered — {discoveredEndings.length} of {ALL_ENDINGS.length}
+          </h3>
+          <div className="grid grid-cols-2 gap-2">
+            {ALL_ENDINGS.map((e) => {
+              const discovered = discoveredEndings.includes(e);
+              const isCurrent = e === ending;
+              return (
+                <div
+                  key={e}
+                  className="flex items-center gap-2 px-3 py-2 rounded"
+                  style={{
+                    border: isCurrent
+                      ? '1px solid var(--accent-gold)'
+                      : '1px solid var(--border-subtle)',
+                    backgroundColor: isCurrent ? 'rgba(201, 168, 76, 0.08)' : 'transparent',
+                  }}
+                >
+                  <span
+                    className="text-xs font-medium"
+                    style={{
+                      fontFamily: "'Inter', sans-serif",
+                      color: discovered ? 'var(--accent-gold)' : 'var(--text-secondary)',
+                      opacity: discovered ? 1 : 0.4,
+                      minWidth: '24px',
+                    }}
+                  >
+                    {e}
+                  </span>
+                  <span
+                    className="text-xs"
+                    style={{
+                      fontFamily: "'Lora', Georgia, serif",
+                      color: discovered ? 'var(--text-primary)' : 'var(--text-secondary)',
+                      opacity: discovered ? 1 : 0.4,
+                    }}
+                  >
+                    {discovered ? getEndingTitle(e as EndingType) : ENDING_HINTS[e]}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+          {discoveredEndings.length < ALL_ENDINGS.length && (
+            <p
+              className="text-xs italic text-center mt-4"
+              style={{ fontFamily: "'Lora', Georgia, serif", color: 'var(--text-secondary)' }}
+            >
+              Different choices lead to different fates. Would Deniz have chosen differently?
+            </p>
+          )}
+          {discoveredEndings.length === ALL_ENDINGS.length && (
+            <p
+              className="text-xs italic text-center mt-4"
+              style={{ fontFamily: "'Lora', Georgia, serif", color: 'var(--accent-gold)' }}
+            >
+              Every path walked. Every fate witnessed. Deniz's story is complete.
+            </p>
+          )}
         </div>
 
         {/* Actions */}

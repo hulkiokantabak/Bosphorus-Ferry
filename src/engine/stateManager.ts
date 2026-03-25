@@ -1,6 +1,8 @@
 import { GameState, CharacterAxes } from '../types';
 
 const SAVE_KEY = 'bosphorus-ferry-save';
+const ENDINGS_KEY = 'bosphorus-ferry-endings';
+const COMPLETED_KEY = 'bosphorus-ferry-completed';
 
 export function createInitialState(): GameState {
   return {
@@ -110,4 +112,43 @@ export function hasSave(): boolean {
   } catch {
     return false;
   }
+}
+
+// ============================================================
+// ENDING TRACKER — persists across playthroughs
+// ============================================================
+
+export function getDiscoveredEndings(): string[] {
+  try {
+    const saved = localStorage.getItem(ENDINGS_KEY);
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      if (Array.isArray(parsed)) return parsed;
+    }
+  } catch { /* noop */ }
+  return [];
+}
+
+export function recordEnding(ending: string): void {
+  try {
+    const current = getDiscoveredEndings();
+    if (!current.includes(ending)) {
+      current.push(ending);
+      localStorage.setItem(ENDINGS_KEY, JSON.stringify(current));
+    }
+  } catch { /* noop */ }
+}
+
+export function hasCompletedGame(): boolean {
+  try {
+    return localStorage.getItem(COMPLETED_KEY) === 'true';
+  } catch {
+    return false;
+  }
+}
+
+export function markGameCompleted(): void {
+  try {
+    localStorage.setItem(COMPLETED_KEY, 'true');
+  } catch { /* noop */ }
 }

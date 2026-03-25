@@ -12,7 +12,11 @@ The ferry's engine hums beneath you. The deck is mostly empty at this hour — a
 
 A figure moves near the bow. Another sits alone by the tea counter. And in the cabin below, through the scratched window, you see a woman reading in the same seat she always seems to occupy.
 
-The Bosphorus stretches dark and wide around you. The Asian shore glitters in the distance. Kadıköy is ahead — but right now, you're between worlds, suspended on black water.`,
+The Bosphorus stretches dark and wide around you. The Asian shore glitters in the distance. Kadıköy is ahead — but right now, you're between worlds, suspended on black water.
+
+You catch your reflection in the window — drawn face, shadows under the eyes, the same stubborn jaw Defne had. Your mother always said you were the sensible one. The one who finished things. Defne was the one who started them. She started this. Now you're on a ferry at midnight, chasing a dead woman's secrets across Istanbul.
+
+Sensible would have been staying home. But sensible didn't get on this ferry. Something else did — something that looks a lot like your sister's face in a photograph on a cafe wall, and the way Melis said "I've been waiting for you" like it was both a gift and an accusation.`,
     location: 'Bosphorus Ferry — Night',
     phase: 'ferry',
     npcPresent: ['irfan', 'ayse', 'cem', 'ruya'],
@@ -466,17 +470,17 @@ Whatever Cem knows, he's keeping it. And whatever you know, you're keeping that 
   {
     id: 'ferry1_ruya',
     episode: 1,
-    text: `You descend to the lower cabin. She's there — the quiet woman. Same seat, always the same seat, near the window on the port side. A book open in her lap. Late thirties, dark hair pulled back, the kind of face that's attractive in a way that doesn't draw attention. Which, you suspect, is deliberate.
+    text: `You descend to the lower cabin. She's there — the quiet woman. Same seat, always the same seat, near the window on the port side. A book open in her lap. Late thirties, dark hair pulled back in a tortoiseshell clip, the kind of face that's attractive in a way that doesn't draw attention. Which, you suspect, is deliberate.
 
 She's been on every ferry you've taken. The morning boat. The evening boat. Always reading. Never looking up. Except she looked up once — when you boarded at Arnavutköy tonight. Just a glance, quick and professional, before returning to her book.
 
-You sit across from her. She doesn't acknowledge you. The cabin rocks gently. Pages turn.
+You sit across from her. She doesn't acknowledge you. The cabin rocks gently. Pages turn. She underlines something with a pencil stub — a habit that suggests she argues with her books rather than simply reading them. A thermos of tea sits at her elbow, the lid serving as a cup, steam curling in the cabin draft. She's settled in like someone who lives on these ferries, not someone who rides them.
 
 "You're on every ferry I take," you say.
 
-She turns a page. Doesn't look up. "It's a public ferry."
+She turns a page. Doesn't look up. "It's a public ferry." The faintest trace of an accent — southeastern, maybe Antakya — surfaces on the vowels before she flattens it.
 
-Her Turkish is clean, accentless — the kind of deliberate neutrality that comes from training, not nature. The book in her hands is a Yaşar Kemal novel. Her bag, beside her, is nondescript but sturdy. The kind of bag that carries equipment.`,
+Her Turkish is clean, almost accentless — the kind of deliberate neutrality that comes from training, not nature. The book in her hands is a Yaşar Kemal novel — İnce Memed, the dog-eared spine suggesting this is not her first reading. Her bag, beside her, is nondescript but sturdy. The kind of bag that carries equipment. A thin scar crosses her left thumb, the kind you get from a craft knife or something less innocent.`,
     location: 'Ferry — Lower Cabin',
     phase: 'ferry',
     npcPresent: ['ruya'],
@@ -510,15 +514,15 @@ Her Turkish is clean, accentless — the kind of deliberate neutrality that come
   {
     id: 'ferry1_ruya_confront',
     episode: 1,
-    text: `Her eyes lift from the book. Gray eyes, steady, evaluating. "That's a bold statement."
+    text: `Her eyes lift from the book. Grey eyes, steady, evaluating — the colour of the Bosphorus in winter. "That's a bold statement."
 
 "I'm a journalist. Bold statements are occupational."
 
-A flicker — not quite a smile. "I'm a reader. I ride ferries and read books. There's no conspiracy in that."
+A flicker — not quite a smile. She closes the book and her thumb finds the scar on her left hand, rubbing it absently. A tell, you think. Something she does when she's deciding how much to reveal.
 
-But she closes the book. And she doesn't look away. The cabin is empty except for the two of you and the hum of the engine.
+"I'm a reader. I ride ferries and read books. There's no conspiracy in that." But she doesn't look away. The cabin is empty except for the two of you and the hum of the engine. She pours tea from her thermos into the lid-cup, takes a sip, and the gesture is so domestic it almost breaks the tension. Almost.
 
-"I'll tell you this," she says. "If — hypothetically — someone were watching the same things you're watching, that would mean those things are worth watching. It would mean you're not imagining things. And it would mean—" She pauses. "That you should be very careful about who you talk to in Kadıköy."
+"I'll tell you this," she says. "If — hypothetically — someone were watching the same things you're watching, that would mean those things are worth watching. It would mean you're not imagining things. And it would mean—" She pauses, and something hardens behind her eyes. "That you should be very careful about who you talk to in Kadıköy. This city eats its honest people first."
 
 She opens her book again. "But that's hypothetical."
 
@@ -538,17 +542,17 @@ The ferry horn sounds. Kadıköy is close. She won't give you more tonight. But 
     episode: 1,
     text: `You sit. You wait. The ferry rocks. Pages turn. Neither of you speaks.
 
-Five minutes pass. The engine hums. The water slaps against the hull. You learn things about her from the silence: she's comfortable with it. Trained in it. This is someone whose job requires waiting.
+Five minutes pass. The engine hums. The water slaps against the hull. You learn things about her from the silence: she's comfortable with it. Trained in it. This is someone whose job requires waiting. She pours tea from her thermos, drinks, refills the lid-cup and pushes it across the table toward you. An offering made without words or eye contact — the most trust she's willing to extend tonight. The tea is strong, no sugar. It tastes like someone who takes things as they are.
 
 After seven minutes — you count — she speaks without looking up.
 
-"Yaşar Kemal understood something about this country. That the truth is always buried. Not lost — buried. By people who benefit from the burial." She turns a page. "If you're digging, you should know that the people who did the burying are still alive. And they notice when the earth starts to move."
+"Yaşar Kemal understood something about this country." She taps the open page of İnce Memed with her pencil stub. "That the truth is always buried. Not lost — buried. By people who benefit from the burial." She turns a page. "If you're digging, you should know that the people who did the burying are still alive. And they notice when the earth starts to move."
 
-She looks at you then. A long, measured look. "We'll talk again. Not tonight. Not until I know you won't do something reckless with what I have."
+She looks at you then. A long, measured look. Her thumb finds the scar on her left hand. "We'll talk again. Not tonight. Not until I know you won't do something reckless with what I have."
 
 It's a promise and a test. She's offering information — later, if you earn it. The price is patience. The price is proving you can be trusted with something fragile.
 
-"Rüya," she says. Just the name. Then she returns to her book.`,
+"Rüya," she says. Just the name. She adjusts the tortoiseshell clip in her hair — a small, human gesture that cracks the professional facade for half a second. Then she returns to her book.`,
     location: 'Ferry — Lower Cabin',
     phase: 'ferry',
     npcPresent: ['ruya'],

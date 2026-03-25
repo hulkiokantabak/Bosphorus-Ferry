@@ -21,7 +21,7 @@ export default function NarrativeText({ text, onComplete }: NarrativeTextProps) 
 
   return (
     <div
-      className="cursor-pointer select-none"
+      className="cursor-pointer select-none narrative-mobile"
       onClick={() => {
         if (!isComplete) skip();
       }}

@@ -10,7 +10,7 @@ export default function SaveIndicator({ trigger }: SaveIndicatorProps) {
   useEffect(() => {
     if (trigger === 0) return;
     setVisible(true);
-    const timer = setTimeout(() => setVisible(false), 1500);
+    const timer = setTimeout(() => setVisible(false), 2000);
     return () => clearTimeout(timer);
   }, [trigger]);
 
@@ -18,16 +18,28 @@ export default function SaveIndicator({ trigger }: SaveIndicatorProps) {
 
   return (
     <div
-      className="fixed bottom-4 right-4 text-xs px-3 py-1.5 rounded-sm transition-opacity duration-500"
+      key={trigger}
+      className="fixed bottom-4 right-4 z-30 save-toast flex items-center gap-2 px-3 py-2 rounded-sm"
       style={{
         fontFamily: "'Inter', sans-serif",
         backgroundColor: 'var(--bg-secondary)',
-        color: 'var(--text-secondary)',
-        opacity: visible ? 0.7 : 0,
-        border: '1px solid var(--border-subtle)',
+        border: '1px solid var(--accent-gold-dim)',
+        fontSize: '0.75rem',
       }}
     >
-      Saved
+      <svg
+        width="14"
+        height="14"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="var(--accent-gold)"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <polyline points="20 6 9 17 4 12" />
+      </svg>
+      <span style={{ color: 'var(--accent-gold-dim)' }}>Saved</span>
     </div>
   );
 }

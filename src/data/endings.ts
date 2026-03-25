@@ -25,6 +25,8 @@ You meet her at the Beşiktaş ferry terminal on a Wednesday evening, three mont
 
 The ferry horn sounds behind you. The Bosphorus glitters in the evening light, gold and endless. The old houses along the waterfront glow the way they always have — holding their secrets, keeping their foundations, enduring.
 
+In Arnavutköy, Oğuz reads the headline and nods once, slowly, from his crate by the water. He told the police two years ago. Nobody listened. Someone listened now. In her cafe, Melis puts the newspaper on the table where Defne used to sit, smooths it flat, and cries — the good kind, the kind that means it's over.
+
 You take your sister's hand and walk into the city. Istanbul closes around you like a familiar story, well-worn and still unfinished. The ferries will run tonight, and tomorrow, and the night after that. The water remembers everything. And now, so does the world.`,
     location: 'Istanbul',
     phase: 'ending',
@@ -54,6 +56,10 @@ She looks older. Warier. The two years in hiding have left marks that won't fade
 She nods. For the first time in two years, she smiles. Small, careful, like someone testing whether a broken thing still works.
 
 It works.
+
+Somewhere in Arnavutköy, Oğuz sits on his crate and watches the Bosphorus, the way he does every evening. He doesn't read newspapers. But the fish vendor tells him about the arrests, and the old man nods, threads his net, and says nothing. He said his piece two years ago. The water remembers.
+
+Melis reopens the cafe at night for the first time in two years. She stays open until midnight, the way she used to when Defne was alive. She doesn't explain why. She doesn't need to.
 
 You walk together along the Bosphorus, two sisters in a city of fifteen million, anonymous and alive and finally, finally home.`,
     location: 'Istanbul',
@@ -89,6 +95,8 @@ Vedat nods. He expected nothing else.
 
 Defne comes home on a Sunday. The reunion is quiet — no cameras, no headlines, no justice. Just two sisters on the Beşiktaş waterfront, watching the ferries cross, holding a silence between them that holds both relief and compromise.
 
+Filiz serves Vedat his morning çay the next day, as she has every morning for forty years. Her hands don't shake. Her face betrays nothing. But when she walks to the bakkal that afternoon, she buys two extra lemons — a habit from when she was feeding someone in the servants' quarters. Old habits die hard. Some don't die at all.
+
 The paintings keep their secrets. The network endures. The Bosphorus, as always, says nothing.
 
 But Defne is alive. And sometimes, that's the only truth that matters.`,
@@ -123,7 +131,9 @@ You make the ferry. The morning ferry, dawn light painting the Marmara gold. Def
 
 It's messy. The prosecution will take years. Some of the evidence won't hold. Naz will argue cultural preservation. Selim will hire expensive lawyers. Vedat will fight with every weapon old money provides.
 
-But the silence is broken. And Defne is on the ferry, heading home, the wind in her hair for the first time in two years.
+Bora is at the Kadıköy pier when the ferry arrives. He doesn't say anything. He just wraps Defne in a hug that lifts her off her feet, and for a moment the big man's shoulders shake. Then he sets her down, wipes his eyes with the back of his hand, and says: "I kept your stool warm."
+
+The silence is broken. And Defne is on the ferry, heading home, the wind in her hair for the first time in two years.
 
 That's enough. For now, that's enough.`,
     location: 'Büyükada — Morning Ferry',

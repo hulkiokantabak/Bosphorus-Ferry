@@ -1,13 +1,17 @@
-import { hasSave } from '../engine/stateManager';
+import { useState } from 'react';
+import { hasSave, hasCompletedGame } from '../engine/stateManager';
 
 interface MainMenuProps {
   onNewGame: () => void;
   onContinue: () => void;
   onJournal: () => void;
+  onChapterSelect?: (episode: 1 | 2 | 3) => void;
 }
 
-export default function MainMenu({ onNewGame, onContinue, onJournal }: MainMenuProps) {
+export default function MainMenu({ onNewGame, onContinue, onJournal, onChapterSelect }: MainMenuProps) {
   const savedExists = hasSave();
+  const hasCompleted = hasCompletedGame();
+  const [showChapters, setShowChapters] = useState(false);
 
   const secondaryButtonStyle = {
     fontFamily: "'Inter', sans-serif" as const,
@@ -127,6 +131,74 @@ export default function MainMenu({ onNewGame, onContinue, onJournal }: MainMenuP
             >
               Story Journal
             </button>
+          )}
+
+          {hasCompleted && onChapterSelect && !showChapters && (
+            <button
+              onClick={() => setShowChapters(true)}
+              className="w-64 px-8 py-3 text-sm uppercase tracking-widest border transition-all duration-300 text-center"
+              style={secondaryButtonStyle}
+              onMouseEnter={hoverIn}
+              onMouseLeave={hoverOut}
+            >
+              Chapter Select
+            </button>
+          )}
+
+          {showChapters && onChapterSelect && (
+            <div className="flex flex-col items-center gap-2 mt-2">
+              <p
+                className="text-xs mb-1"
+                style={{
+                  fontFamily: "'Inter', sans-serif",
+                  color: 'var(--text-secondary)',
+                }}
+              >
+                Begin from:
+              </p>
+              {([
+                [1, 'Episode 1 — Arnavutköy'],
+                [2, 'Episode 2 — Kadıköy'],
+                [3, 'Episode 3 — Büyükada'],
+              ] as const).map(([ep, label]) => (
+                <button
+                  key={ep}
+                  onClick={() => onChapterSelect(ep)}
+                  className="w-64 px-8 py-2 text-xs uppercase tracking-widest border transition-all duration-300 text-center"
+                  style={{
+                    fontFamily: "'Lora', Georgia, serif",
+                    backgroundColor: 'transparent',
+                    borderColor: 'var(--accent-gold-dim)',
+                    color: 'var(--accent-gold-dim)',
+                    letterSpacing: '0.1em',
+                    borderRadius: '2px',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = 'var(--accent-gold)';
+                    e.currentTarget.style.color = 'var(--accent-gold)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = 'var(--accent-gold-dim)';
+                    e.currentTarget.style.color = 'var(--accent-gold-dim)';
+                  }}
+                >
+                  {label}
+                </button>
+              ))}
+              <button
+                onClick={() => setShowChapters(false)}
+                className="text-xs mt-1 transition-colors"
+                style={{
+                  fontFamily: "'Inter', sans-serif",
+                  color: 'var(--text-secondary)',
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                }}
+              >
+                Cancel
+              </button>
+            </div>
           )}
         </div>
 

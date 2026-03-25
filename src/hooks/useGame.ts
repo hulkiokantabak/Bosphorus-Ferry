@@ -12,6 +12,7 @@ import {
   makeChoice,
 } from '../engine/gameEngine';
 import { calculateEnding, EndingType } from '../engine/endingCalculator';
+import { trackSceneVisit, trackChoice, trackEnding, trackGameStart, recordLocalPlaythrough } from '../engine/analytics';
 
 // Import all scene data
 import episode1Scenes from '../data/episode1';
@@ -55,6 +56,7 @@ export function useGame() {
     setLastEpisode(1);
     setTransitionEpisode(1);
     setScreen('briefing');
+    trackGameStart(true);
   }, []);
 
   const handleBriefingComplete = useCallback(() => {
@@ -74,6 +76,9 @@ export function useGame() {
 
   const handleChoice = useCallback(
     (choice: Choice) => {
+      // Track choice
+      trackChoice(gameState.currentScene, choice.text, choice.next);
+
       // Check if this leads to an ending
       if (choice.next === 'ending_calculate') {
         const endingType = calculateEnding(gameState);
@@ -96,6 +101,8 @@ export function useGame() {
         setGameState(newState);
         saveGame(newState);
         setScreen('ending');
+        trackEnding(endingType, newState.visitedScenes.length, newState.choiceHistory.length);
+        recordLocalPlaythrough(endingType, newState.visitedScenes.length, newState.choiceHistory.length);
         return;
       }
 
@@ -106,13 +113,20 @@ export function useGame() {
         const newState = makeChoice(gameState, choice);
         setGameState(newState);
         setScreen('ending');
+        trackEnding(endingType, newState.visitedScenes.length, newState.choiceHistory.length);
+        recordLocalPlaythrough(endingType, newState.visitedScenes.length, newState.choiceHistory.length);
         return;
       }
 
       const newState = makeChoice(gameState, choice);
 
-      // Check for episode transition
+      // Track scene visit
       const nextScene = getScene(choice.next);
+      if (nextScene) {
+        trackSceneVisit(nextScene.id, nextScene.episode, nextScene.location);
+      }
+
+      // Check for episode transition
       if (nextScene && nextScene.episode !== lastEpisode) {
         setTransitionEpisode(nextScene.episode);
         setLastEpisode(nextScene.episode);
@@ -152,6 +166,27 @@ export function useGame() {
     setScreen('summary');
   }, []);
 
+  const startFromChapter = useCallback((episode: 1 | 2 | 3) => {
+    clearSave();
+    const initial = createInitialState();
+    const sceneMap: Record<number, string> = {
+      1: 'e1_opening',
+      2: 'e2_opening',
+      3: 'e3_opening',
+    };
+    const chapterState: GameState = {
+      ...initial,
+      currentEpisode: episode,
+      currentScene: sceneMap[episode],
+    };
+    setGameState(chapterState);
+    setEnding(null);
+    setLastEpisode(episode);
+    setTransitionEpisode(episode);
+    setScreen('transition');
+    trackGameStart(false, episode);
+  }, []);
+
   return {
     screen,
     gameState,
@@ -169,5 +204,6 @@ export function useGame() {
     handleJournal,
     handleJournalBack,
     handleSummary,
+    startFromChapter,
   };
 }

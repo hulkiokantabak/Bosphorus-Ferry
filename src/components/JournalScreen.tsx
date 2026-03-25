@@ -1,18 +1,12 @@
 import { useState } from 'react';
 import { GameState } from '../types';
 import { getScene, getSceneCount } from '../engine/gameEngine';
+import { getAllNpcProfiles, getNpcKnownInfo } from '../data/npcProfiles';
 
 interface JournalScreenProps {
   state: GameState;
   onBack: () => void;
 }
-
-const NPC_DISPLAY: Record<string, string> = {
-  selim: 'Selim', melis: 'Melis', oguz: 'Oğuz', levent: 'Levent',
-  irfan: 'İrfan', ayse: 'Ayşe', cem: 'Cem', ruya: 'Rüya',
-  naz: 'Naz', bora: 'Bora', sude: 'Sude', hakan: 'Hakan',
-  vedat: 'Vedat', filiz: 'Filiz', defne: 'Defne', tayfun: 'Tayfun',
-};
 
 const AXIS_LABELS: Record<string, [string, string]> = {
   approach: ['Cautious', 'Bold'],
@@ -44,9 +38,9 @@ function getTrustColor(value: number): string {
 }
 
 export default function JournalScreen({ state, onBack }: JournalScreenProps) {
-  const [tab, setTab] = useState<'journal' | 'stats'>('journal');
+  const [tab, setTab] = useState<'notebook' | 'places' | 'profile'>('notebook');
 
-  // Gather visited locations grouped by episode
+  // Gather data
   const locationsByEpisode: Record<number, Set<string>> = {};
   const npcsEncountered = new Set<string>();
 
@@ -58,19 +52,17 @@ export default function JournalScreen({ state, onBack }: JournalScreenProps) {
       }
       locationsByEpisode[scene.episode].add(scene.location);
       if (scene.npcPresent) {
-        for (const npc of scene.npcPresent) {
-          npcsEncountered.add(npc);
-        }
+        for (const npc of scene.npcPresent) npcsEncountered.add(npc);
       }
     }
   }
-
-  // Also add NPCs with non-zero trust
   for (const [npc, trust] of Object.entries(state.npcTrust)) {
     if (trust !== 0) npcsEncountered.add(npc);
   }
 
   const completion = Math.round((state.visitedScenes.length / Math.max(getSceneCount(), 1)) * 100);
+  const allProfiles = getAllNpcProfiles();
+  const encounteredProfiles = allProfiles.filter(p => npcsEncountered.has(p.id));
 
   const tabStyle = (active: boolean) => ({
     fontFamily: "'Inter', sans-serif" as const,
@@ -127,7 +119,7 @@ export default function JournalScreen({ state, onBack }: JournalScreenProps) {
               letterSpacing: '0.25em',
             }}
           >
-            Story Journal
+            Deniz's Notebook
           </h1>
 
           <div style={{ width: '52px' }} />
@@ -136,38 +128,166 @@ export default function JournalScreen({ state, onBack }: JournalScreenProps) {
         {/* Tabs */}
         <div className="flex gap-6 mb-8" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
           <button
-            onClick={() => setTab('journal')}
+            onClick={() => setTab('notebook')}
             className="pb-3 text-xs uppercase tracking-widest border-0 cursor-pointer transition-colors duration-200"
-            style={tabStyle(tab === 'journal')}
+            style={tabStyle(tab === 'notebook')}
           >
-            Journal
+            People
           </button>
           <button
-            onClick={() => setTab('stats')}
+            onClick={() => setTab('places')}
             className="pb-3 text-xs uppercase tracking-widest border-0 cursor-pointer transition-colors duration-200"
-            style={tabStyle(tab === 'stats')}
+            style={tabStyle(tab === 'places')}
           >
-            Stats
+            Places
+          </button>
+          <button
+            onClick={() => setTab('profile')}
+            className="pb-3 text-xs uppercase tracking-widest border-0 cursor-pointer transition-colors duration-200"
+            style={tabStyle(tab === 'profile')}
+          >
+            Profile
           </button>
         </div>
 
-        {/* Journal Tab */}
-        {tab === 'journal' && (
-          <div className="fade-in space-y-8">
-            {/* Completion */}
+        {/* ============================================================
+            PEOPLE TAB — Detective's Notebook
+            ============================================================ */}
+        {tab === 'notebook' && (
+          <div className="fade-in space-y-4">
+            {encounteredProfiles.length === 0 && (
+              <p className="text-sm italic" style={{ color: 'var(--text-secondary)', fontFamily: "'Lora', Georgia, serif" }}>
+                No one met yet. The notebook is empty.
+              </p>
+            )}
+
+            {[1, 2, 3].map(ep => {
+              const episodeNpcs = encounteredProfiles.filter(p => p.episode === ep);
+              if (episodeNpcs.length === 0) return null;
+              return (
+                <div key={ep}>
+                  <p
+                    className="text-xs uppercase tracking-wider mb-3"
+                    style={{
+                      fontFamily: "'Inter', sans-serif",
+                      color: 'var(--accent-gold-dim)',
+                      letterSpacing: '0.15em',
+                    }}
+                  >
+                    {EPISODE_NAMES[ep]}
+                  </p>
+                  <div className="space-y-3">
+                    {episodeNpcs.map(profile => {
+                      const trust = state.npcTrust[profile.id] ?? 0;
+                      const knownInfo = getNpcKnownInfo(profile.id, state.flags);
+                      return (
+                        <div
+                          key={profile.id}
+                          className="p-4 rounded"
+                          style={{
+                            backgroundColor: 'var(--bg-secondary)',
+                            border: '1px solid var(--border-subtle)',
+                          }}
+                        >
+                          <div className="flex items-start gap-3">
+                            {/* Monogram avatar */}
+                            <div
+                              className="npc-monogram"
+                              style={{
+                                backgroundColor: `${profile.color}22`,
+                                color: profile.color,
+                                border: `1px solid ${profile.color}44`,
+                              }}
+                            >
+                              {profile.monogram}
+                            </div>
+
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center justify-between gap-2 mb-1">
+                                <div>
+                                  <span
+                                    className="text-sm font-medium"
+                                    style={{
+                                      fontFamily: "'Lora', Georgia, serif",
+                                      color: 'var(--accent-gold)',
+                                    }}
+                                  >
+                                    {profile.fullName}
+                                  </span>
+                                  <span
+                                    className="text-xs ml-2"
+                                    style={{
+                                      fontFamily: "'Inter', sans-serif",
+                                      color: 'var(--text-secondary)',
+                                      opacity: 0.6,
+                                    }}
+                                  >
+                                    {profile.role}
+                                  </span>
+                                </div>
+                                <span
+                                  className="text-xs flex-shrink-0"
+                                  style={{
+                                    fontFamily: "'Inter', sans-serif",
+                                    color: getTrustColor(trust),
+                                  }}
+                                >
+                                  {getTrustLabel(trust)}
+                                </span>
+                              </div>
+
+                              {/* Known info */}
+                              <div className="space-y-1 mt-2">
+                                {knownInfo.map((info, i) => (
+                                  <p
+                                    key={i}
+                                    className="text-xs leading-relaxed"
+                                    style={{
+                                      fontFamily: "'Lora', Georgia, serif",
+                                      color: i === 0 ? 'var(--text-secondary)' : 'var(--text-primary)',
+                                      fontStyle: i === 0 ? 'italic' : 'normal',
+                                    }}
+                                  >
+                                    {i > 0 && (
+                                      <span style={{ color: 'var(--accent-gold-dim)', marginRight: '0.4rem' }}>
+                                        &bull;
+                                      </span>
+                                    )}
+                                    {info}
+                                  </p>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+
+        {/* ============================================================
+            PLACES TAB
+            ============================================================ */}
+        {tab === 'places' && (
+          <div className="fade-in space-y-6">
+            {/* Progress */}
             <div>
               <div className="flex items-center justify-between mb-2">
                 <span
                   className="text-xs uppercase tracking-widest"
                   style={{ fontFamily: "'Inter', sans-serif", color: 'var(--text-secondary)' }}
                 >
-                  Progress
+                  World Explored
                 </span>
                 <span
                   className="text-xs"
                   style={{ fontFamily: "'Inter', sans-serif", color: 'var(--accent-gold-dim)' }}
                 >
-                  {completion}% explored
+                  {completion}%
                 </span>
               </div>
               <div
@@ -176,107 +296,46 @@ export default function JournalScreen({ state, onBack }: JournalScreenProps) {
               >
                 <div
                   className="h-full rounded-full transition-all duration-500"
-                  style={{
-                    width: `${completion}%`,
-                    backgroundColor: 'var(--accent-gold)',
-                  }}
+                  style={{ width: `${completion}%`, backgroundColor: 'var(--accent-gold)' }}
                 />
               </div>
             </div>
 
             {/* Locations by Episode */}
-            <div>
-              <h3
-                className="text-xs uppercase tracking-widest mb-4"
-                style={{ fontFamily: "'Inter', sans-serif", color: 'var(--text-secondary)' }}
-              >
-                Locations Visited
-              </h3>
-              {[1, 2, 3].map((ep) => {
-                const locs = locationsByEpisode[ep];
-                if (!locs || locs.size === 0) return null;
-                return (
-                  <div key={ep} className="mb-4">
-                    <p
-                      className="text-xs uppercase tracking-wider mb-2"
-                      style={{
-                        fontFamily: "'Inter', sans-serif",
-                        color: 'var(--accent-gold-dim)',
-                        letterSpacing: '0.15em',
-                      }}
-                    >
-                      Episode {ep} — {EPISODE_NAMES[ep]}
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      {Array.from(locs).map((loc) => (
-                        <span
-                          key={loc}
-                          className="text-xs px-2 py-1 rounded"
-                          style={{
-                            fontFamily: "'Inter', sans-serif",
-                            color: 'var(--text-primary)',
-                            backgroundColor: 'var(--bg-secondary)',
-                            border: '1px solid var(--border-subtle)',
-                          }}
-                        >
-                          {loc}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* NPCs Encountered */}
-            <div>
-              <h3
-                className="text-xs uppercase tracking-widest mb-4"
-                style={{ fontFamily: "'Inter', sans-serif", color: 'var(--text-secondary)' }}
-              >
-                Characters Met
-              </h3>
-              <div className="grid grid-cols-2 gap-2">
-                {Array.from(npcsEncountered).map((npc) => {
-                  const displayName = NPC_DISPLAY[npc] || npc;
-                  const trust = state.npcTrust[npc] ?? 0;
-                  return (
-                    <div
-                      key={npc}
-                      className="flex items-center justify-between px-3 py-2 rounded"
-                      style={{
-                        backgroundColor: 'var(--bg-secondary)',
-                        border: '1px solid var(--border-subtle)',
-                      }}
-                    >
+            {[1, 2, 3].map((ep) => {
+              const locs = locationsByEpisode[ep];
+              if (!locs || locs.size === 0) return null;
+              return (
+                <div key={ep}>
+                  <p
+                    className="text-xs uppercase tracking-wider mb-3"
+                    style={{
+                      fontFamily: "'Inter', sans-serif",
+                      color: 'var(--accent-gold-dim)',
+                      letterSpacing: '0.15em',
+                    }}
+                  >
+                    Episode {ep} — {EPISODE_NAMES[ep]}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {Array.from(locs).map((loc) => (
                       <span
-                        className="text-sm"
-                        style={{
-                          fontFamily: "'Lora', Georgia, serif",
-                          color: 'var(--accent-gold)',
-                        }}
-                      >
-                        {displayName}
-                      </span>
-                      <span
-                        className="text-xs"
+                        key={loc}
+                        className="text-xs px-2 py-1 rounded"
                         style={{
                           fontFamily: "'Inter', sans-serif",
-                          color: getTrustColor(trust),
+                          color: 'var(--text-primary)',
+                          backgroundColor: 'var(--bg-secondary)',
+                          border: '1px solid var(--border-subtle)',
                         }}
                       >
-                        {getTrustLabel(trust)}
+                        {loc}
                       </span>
-                    </div>
-                  );
-                })}
-              </div>
-              {npcsEncountered.size === 0 && (
-                <p className="text-sm italic" style={{ color: 'var(--text-secondary)' }}>
-                  No characters met yet.
-                </p>
-              )}
-            </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
 
             {/* Recent Choices */}
             <div>
@@ -323,144 +382,8 @@ export default function JournalScreen({ state, onBack }: JournalScreenProps) {
                 )}
               </div>
             </div>
-          </div>
-        )}
 
-        {/* Stats Tab */}
-        {tab === 'stats' && (
-          <div className="fade-in space-y-8">
-            {/* Character Axes */}
-            <div>
-              <h3
-                className="text-xs uppercase tracking-widest mb-5"
-                style={{ fontFamily: "'Inter', sans-serif", color: 'var(--text-secondary)' }}
-              >
-                Character Profile
-              </h3>
-              <div className="space-y-5">
-                {Object.entries(AXIS_LABELS).map(([key, [negLabel, posLabel]]) => {
-                  const value = state.axes[key as keyof typeof state.axes];
-                  const pct = ((value + 1) / 2) * 100; // -1..1 → 0..100
-                  return (
-                    <div key={key}>
-                      <div className="flex items-center justify-between mb-2">
-                        <span
-                          className="text-xs"
-                          style={{
-                            fontFamily: "'Inter', sans-serif",
-                            color: value < 0 ? 'var(--text-secondary)' : 'var(--text-secondary)',
-                            opacity: value <= 0 ? 1 : 0.5,
-                          }}
-                        >
-                          {negLabel}
-                        </span>
-                        <span
-                          className="text-xs uppercase tracking-wider"
-                          style={{
-                            fontFamily: "'Inter', sans-serif",
-                            color: 'var(--accent-gold-dim)',
-                            letterSpacing: '0.1em',
-                          }}
-                        >
-                          {key}
-                        </span>
-                        <span
-                          className="text-xs"
-                          style={{
-                            fontFamily: "'Inter', sans-serif",
-                            color: value > 0 ? 'var(--text-secondary)' : 'var(--text-secondary)',
-                            opacity: value >= 0 ? 1 : 0.5,
-                          }}
-                        >
-                          {posLabel}
-                        </span>
-                      </div>
-                      <div
-                        className="relative h-2 rounded-full overflow-hidden"
-                        style={{ backgroundColor: 'var(--border-subtle)' }}
-                      >
-                        {/* Center marker */}
-                        <div
-                          className="absolute top-0 bottom-0 w-px"
-                          style={{
-                            left: '50%',
-                            backgroundColor: 'var(--text-secondary)',
-                            opacity: 0.3,
-                          }}
-                        />
-                        {/* Fill from center */}
-                        <div
-                          className="absolute top-0 bottom-0 rounded-full transition-all duration-500"
-                          style={{
-                            left: value >= 0 ? '50%' : `${pct}%`,
-                            width: `${Math.abs(value) * 50}%`,
-                            backgroundColor: 'var(--accent-gold)',
-                          }}
-                        />
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* NPC Trust Levels */}
-            <div>
-              <h3
-                className="text-xs uppercase tracking-widest mb-5"
-                style={{ fontFamily: "'Inter', sans-serif", color: 'var(--text-secondary)' }}
-              >
-                Relationships
-              </h3>
-              <div className="space-y-3">
-                {Object.entries(state.npcTrust)
-                  .filter(([npc]) => npcsEncountered.has(npc))
-                  .sort((a, b) => b[1] - a[1])
-                  .map(([npc, trust]) => {
-                    const displayName = NPC_DISPLAY[npc] || npc;
-                    // Map trust from -2..3 to 0..100%
-                    const pct = ((trust + 2) / 5) * 100;
-                    return (
-                      <div key={npc}>
-                        <div className="flex items-center justify-between mb-1">
-                          <span
-                            className="text-sm"
-                            style={{
-                              fontFamily: "'Lora', Georgia, serif",
-                              color: 'var(--accent-gold)',
-                            }}
-                          >
-                            {displayName}
-                          </span>
-                          <span
-                            className="text-xs"
-                            style={{
-                              fontFamily: "'Inter', sans-serif",
-                              color: getTrustColor(trust),
-                            }}
-                          >
-                            {getTrustLabel(trust)}
-                          </span>
-                        </div>
-                        <div
-                          className="h-1.5 rounded-full overflow-hidden"
-                          style={{ backgroundColor: 'var(--border-subtle)' }}
-                        >
-                          <div
-                            className="h-full rounded-full transition-all duration-500"
-                            style={{
-                              width: `${pct}%`,
-                              backgroundColor: getTrustColor(trust),
-                            }}
-                          />
-                        </div>
-                      </div>
-                    );
-                  })}
-              </div>
-            </div>
-
-            {/* Active Flags Summary */}
+            {/* Key Discoveries */}
             <div>
               <h3
                 className="text-xs uppercase tracking-widest mb-4"
@@ -491,6 +414,118 @@ export default function JournalScreen({ state, onBack }: JournalScreenProps) {
                     No discoveries yet.
                   </p>
                 )}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ============================================================
+            PROFILE TAB — Character axes and stats
+            ============================================================ */}
+        {tab === 'profile' && (
+          <div className="fade-in space-y-8">
+            {/* Character Axes */}
+            <div>
+              <h3
+                className="text-xs uppercase tracking-widest mb-5"
+                style={{ fontFamily: "'Inter', sans-serif", color: 'var(--text-secondary)' }}
+              >
+                Your Deniz
+              </h3>
+              <div className="space-y-5">
+                {Object.entries(AXIS_LABELS).map(([key, [negLabel, posLabel]]) => {
+                  const value = state.axes[key as keyof typeof state.axes];
+                  const pct = ((value + 1) / 2) * 100;
+                  return (
+                    <div key={key}>
+                      <div className="flex items-center justify-between mb-2">
+                        <span
+                          className="text-xs"
+                          style={{
+                            fontFamily: "'Inter', sans-serif",
+                            color: 'var(--text-secondary)',
+                            opacity: value <= 0 ? 1 : 0.5,
+                          }}
+                        >
+                          {negLabel}
+                        </span>
+                        <span
+                          className="text-xs uppercase tracking-wider"
+                          style={{
+                            fontFamily: "'Inter', sans-serif",
+                            color: 'var(--accent-gold-dim)',
+                            letterSpacing: '0.1em',
+                          }}
+                        >
+                          {key}
+                        </span>
+                        <span
+                          className="text-xs"
+                          style={{
+                            fontFamily: "'Inter', sans-serif",
+                            color: 'var(--text-secondary)',
+                            opacity: value >= 0 ? 1 : 0.5,
+                          }}
+                        >
+                          {posLabel}
+                        </span>
+                      </div>
+                      <div
+                        className="relative h-2 rounded-full overflow-hidden"
+                        style={{ backgroundColor: 'var(--border-subtle)' }}
+                      >
+                        <div
+                          className="absolute top-0 bottom-0 w-px"
+                          style={{ left: '50%', backgroundColor: 'var(--text-secondary)', opacity: 0.3 }}
+                        />
+                        <div
+                          className="absolute top-0 bottom-0 rounded-full transition-all duration-500"
+                          style={{
+                            left: value >= 0 ? '50%' : `${pct}%`,
+                            width: `${Math.abs(value) * 50}%`,
+                            backgroundColor: 'var(--accent-gold)',
+                          }}
+                        />
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Quick stats */}
+            <div
+              className="p-4 rounded"
+              style={{
+                backgroundColor: 'var(--bg-secondary)',
+                border: '1px solid var(--border-subtle)',
+              }}
+            >
+              <div className="grid grid-cols-3 gap-4 text-center">
+                <div>
+                  <p className="text-2xl font-semibold" style={{ fontFamily: "'Lora', Georgia, serif", color: 'var(--accent-gold)' }}>
+                    {state.visitedScenes.length}
+                  </p>
+                  <p className="text-xs mt-1" style={{ fontFamily: "'Inter', sans-serif", color: 'var(--text-secondary)' }}>
+                    Scenes
+                  </p>
+                </div>
+                <div>
+                  <p className="text-2xl font-semibold" style={{ fontFamily: "'Lora', Georgia, serif", color: 'var(--accent-gold)' }}>
+                    {state.choiceHistory.length}
+                  </p>
+                  <p className="text-xs mt-1" style={{ fontFamily: "'Inter', sans-serif", color: 'var(--text-secondary)' }}>
+                    Choices
+                  </p>
+                </div>
+                <div>
+                  <p className="text-2xl font-semibold" style={{ fontFamily: "'Lora', Georgia, serif", color: 'var(--accent-gold)' }}>
+                    {npcsEncountered.size}
+                  </p>
+                  <p className="text-xs mt-1" style={{ fontFamily: "'Inter', sans-serif", color: 'var(--text-secondary)' }}>
+                    Characters
+                  </p>
+                </div>
               </div>
             </div>
           </div>

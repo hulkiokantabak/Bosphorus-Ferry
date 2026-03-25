@@ -1142,15 +1142,17 @@ The side street is quiet. From the market, you hear the calls of vendors and the
 
 A seagull lands on the plane tree above you and screams. Somewhere in the market, glass breaks and someone laughs. Istanbul carries on, indifferent to your discoveries.
 
-You check your phone. Early afternoon. Several threads dangle before you -- the meyhane where Defne had a friend, the pier where a boat captain might provide passage, and Sude with her phone full of evidence. You can\'t pull them all at once.`,
+You check your phone. Early afternoon. Several threads dangle before you -- the meyhane where Defne had a friend, the pier where a boat captain might provide passage, and Sude with her phone full of evidence. You can\'t pull them all at once.
+
+Then, at the edge of your vision -- a man in a black jacket. Lingering by a shopfront. He wasn\'t there a moment ago.`,
     choices: [
       {
         text: 'Find Bora at the meyhane on Bahariye Caddesi.',
-        next: 'e2_meyhane_approach',
+        next: 'e2_followed',
       },
       {
         text: 'Go to the pier. Find a boat to Buyukada.',
-        next: 'e2_hakan_intro',
+        next: 'e2_followed',
       },
       {
         text: 'Go back to Baski Evi when Naz is gone. Meet Sude.',
@@ -2067,6 +2069,199 @@ But first, you have the rest of today to prepare. To gather what you can. To dec
   },
 
   // ============================================================
+  // BEING FOLLOWED — MID-E2 DRAMATIC TURNING POINT
+  // ============================================================
+  {
+    id: 'e2_followed',
+    episode: 2,
+    phase: 'complication',
+    location: 'Kadikoy Side Streets',
+    text: `You feel it before you see it. A prickling at the back of your neck, the animal awareness of being watched. You stop at a shop window — pretending to look at leather bags — and in the reflection you see him. Thirty metres back. Black jacket, close-cropped hair, mirrored sunglasses despite the overcast sky. He's been behind you since you left the market.
+
+You walk. He walks. You stop. He stops — too cleanly, too practiced. This isn't a pickpocket or a curious stranger. This is someone who was told where to find you.
+
+Your pulse climbs. The side street narrows, the apartment balconies closing in overhead. A scooter whines past and the man uses the noise to close the distance. Twenty metres now. Fifteen.
+
+Then your phone buzzes. An unknown number. The text reads: "Turn left at the barber. Blue door. Now."`,
+    choices: [
+      {
+        text: 'Turn left at the barber. Trust the message.',
+        next: 'e2_followed_trust',
+        effects: {
+          axisShift: { trust: 0.2 },
+        },
+      },
+      {
+        text: 'Keep walking straight. Don\'t let a text message dictate your movements.',
+        next: 'e2_followed_confront',
+        effects: {
+          axisShift: { approach: 0.2 },
+        },
+      },
+      {
+        text: 'Duck into the crowded kahvehane on the corner. Lose him in the crowd.',
+        next: 'e2_followed_evade',
+        effects: {
+          axisShift: { method: 0.2 },
+        },
+      },
+    ],
+  },
+
+  {
+    id: 'e2_followed_trust',
+    episode: 2,
+    phase: 'complication',
+    location: 'Kadikoy — Hidden Courtyard',
+    text: `You turn left at the barber — the red-and-white pole spinning in its glass tube — and there it is. A blue door, paint cracked, set into the wall between a tailor's shop and a storage unit. It's ajar. You push through.
+
+A courtyard. Small, overgrown, a fig tree pressing against the walls. Drying laundry hangs from a wire overhead. And standing in the shadow of the stairwell, arms crossed, is Rüya.
+
+"Took you long enough." She's not reading today. Her bag hangs across her body and there's something different in her posture — coiled, operational.
+
+"The man following you is Tayfun. Ex-Jandarma, private security. He works for someone on the islands." She doesn't say Vedat's name aloud. "He picked you up at Baski Evi. You've been watched since you walked in there."
+
+She checks the courtyard entrance. "He won't follow you in here — this building belongs to a retired judge, and Tayfun's smart enough to avoid witnesses. But the moment you walk out, he's back on you."
+
+Her grey eyes are steady. "You need to decide how you handle this. Because it means they know about you. And that changes everything."`,
+    npcPresent: ['ruya'],
+    choices: [
+      {
+        text: '"How do you know all this? Who are you really?"',
+        next: 'e2_followed_ruya_reveal',
+        effects: {
+          npcTrust: { ruya: 1 },
+          axisShift: { trust: 0.1 },
+        },
+      },
+      {
+        text: '"Get me out of here. We can talk later."',
+        next: 'e2_followed_escape',
+        effects: {
+          axisShift: { method: 0.1 },
+          setFlags: ['spotted_by_tayfun'],
+        },
+      },
+    ],
+  },
+
+  {
+    id: 'e2_followed_ruya_reveal',
+    episode: 2,
+    phase: 'complication',
+    location: 'Kadikoy — Hidden Courtyard',
+    npcPresent: ['ruya'],
+    text: `Rüya exhales through her nose — a sound you're learning to recognize as her version of a laugh. She leans against the courtyard wall, and for the first time, something unguarded crosses her face.
+
+"I'm a private investigator. Licensed, if you care about that sort of thing." She pulls a card from her jacket — plain, heavy stock, just a name and a phone number. Rüya Korkmaz. "I was hired by an insurance firm to investigate fraudulent claims on an art collection. Eight months ago."
+
+She tucks the card away before you can take it. "The investigation led me to the same places you've been walking today. Baski Evi. The pier. The meyhane." A pause. "And to your sister's name, in a file that was supposed to be sealed."
+
+She crosses her arms again. "I've been watching you because I needed to know if you'd be useful or if you'd blow the whole thing open like a grenade. The jury's still out." But there's a warmth under the severity — the faintest crack. "Now. Back door, through the tailor's shop. He owes me a favour. Move fast."`,
+    choices: [
+      {
+        text: 'Follow her through the back. Process this later.',
+        next: 'e2_followed_escape',
+        effects: {
+          setFlags: ['spotted_by_tayfun', 'cultivated_ruya'],
+          npcTrust: { ruya: 1 },
+          axisShift: { trust: 0.1 },
+        },
+      },
+    ],
+  },
+
+  {
+    id: 'e2_followed_confront',
+    episode: 2,
+    phase: 'complication',
+    location: 'Kadikoy Side Street',
+    text: `You stop walking. Turn around. The man in the black jacket stops too — ten metres between you, the narrow street suddenly very quiet. A shopkeeper ducks inside and pulls the curtain.
+
+"You've been behind me for six blocks," you say. "If you have something to say, say it."
+
+He tilts his head. Up close he's older than you thought — late forties, a scar across his left eyebrow, hands that hang at his sides with the practised looseness of someone who knows how to use them. He doesn't speak. He just stares.
+
+Then he takes a photo. Your face, straight on, with a phone he produced from nowhere. The shutter click is obscenely casual.
+
+"Güzel," he says. Beautiful. A one-word message that's not a compliment but a filing — your face is now in someone's collection, the way a painting might be. He turns and walks away. Unhurried. Professional.
+
+Your hands are shaking. The street noise floods back. A woman pushes past with a shopping trolley, oblivious. The man in the black jacket rounds a corner and is gone.
+
+They know your face now. They know you're here. The clock just started ticking.`,
+    choices: [
+      {
+        text: 'You need allies. Fast. Head to wherever you haven\'t been yet.',
+        next: 'e2_followed_escape',
+        effects: {
+          setFlags: ['spotted_by_tayfun'],
+          axisShift: { approach: 0.1, heart: 0.1 },
+        },
+      },
+    ],
+  },
+
+  {
+    id: 'e2_followed_evade',
+    episode: 2,
+    phase: 'complication',
+    location: 'Kadikoy Kahvehane',
+    text: `You push through the kahvehane door into a wall of noise and cigarette smoke and the clatter of backgammon dice. Old men hunched over tavla boards, tea glasses sweating, a television blaring a football match that nobody's watching. You weave between tables, muttering apologies, heading for the back.
+
+The kitchen. Steam and the smell of grease. A cook looks up from a vat of lentil soup, startled. You flash a smile that's all teeth and no calm, push through the service door, and you're in an alley — dumpsters, a sleeping cat, the back of a pharmacy.
+
+You lean against the wall and breathe. Your heart is hammering. Through the kahvehane's rear window you can see the front door — the man in the black jacket steps in, scans the room, and walks out again. He's lost you. For now.
+
+But the message is clear. Someone sent a professional to follow you. Someone who knew exactly where you'd been and when. The ground under your feet has shifted — you're no longer just investigating. You're being investigated back.`,
+    choices: [
+      {
+        text: 'Slip out the alley and keep moving. Stay alert.',
+        next: 'e2_followed_escape',
+        effects: {
+          setFlags: ['spotted_by_tayfun'],
+          axisShift: { method: 0.1 },
+        },
+      },
+    ],
+  },
+
+  {
+    id: 'e2_followed_escape',
+    episode: 2,
+    phase: 'complication',
+    location: 'Kadikoy — Safe Distance',
+    text: `You walk fast, head down, weaving through the late afternoon crowd. Every reflection in every shop window is a potential tail. Every man in a dark jacket gets a second look. Your phone feels radioactive in your pocket.
+
+You duck into a passage between buildings and take stock. Your hands have stopped shaking but something fundamental has changed. This morning you were a journalist asking questions. Now you're someone who is being watched by people who make other people disappear.
+
+Defne lived like this. For months. The looking over her shoulder, the checking her phone, the fear that calcified into routine. You understand her now in a way you couldn't before — not as a victim, but as someone who kept going despite the weight of being seen by the wrong eyes.
+
+The afternoon is burning away. You still have threads to pull before tonight — but you pull them now with the knowledge that you're not invisible. Choose carefully.`,
+    choices: [
+      {
+        text: 'Find Bora at the meyhane. You need a friend who can\'t be bought.',
+        next: 'e2_meyhane_approach',
+        condition: { flagFalse: 'met_bora' },
+      },
+      {
+        text: 'Get to the pier. Secure passage before they can cut you off.',
+        next: 'e2_hakan_intro',
+        condition: { flagFalse: 'hakan_deal' },
+      },
+      {
+        text: 'Walk to Moda waterfront. Rüya might be there.',
+        next: 'e2_moda_waterfront',
+        condition: { flag: 'cultivated_ruya' },
+      },
+      {
+        text: 'You have enough. Head straight to the pier and prepare for Büyükada.',
+        next: 'e2_climax_prep',
+        condition: { flag: 'knows_vedat_name' },
+      },
+    ],
+  },
+
+  // ============================================================
   // MODA WATERFRONT (OPTIONAL - RUYA)
   // ============================================================
   {
@@ -2078,9 +2273,13 @@ But first, you have the rest of today to prepare. To gather what you can. To dec
 
 You walk. The wind off the water is cool and smells of kelp and distance. Joggers pass, and couples share simit on benches, and an old man fishes from the rocks with the patience of someone who has nowhere else to be.
 
-Then you see her. Ruya. Sitting on a bench near the tea garden, reading a book with the focused stillness you remember from the ferry. She looks up as you approach, and recognition softens her guarded expression into something almost like relief.
+Then you see her. Rüya. Sitting on a bench near the tea garden, her book closed for once — a battered Orhan Pamuk face-down on her knee. She\'s watching a cormorant dry its wings on a piling, her chin in her hand, and there\'s something unguarded about the pose. For a moment she looks like a woman on a lunch break, not a professional surveilling a target.
 
-"I thought I might see you here," she says. "Sit. Tell me what you\'ve found."`,
+She sees you and the mask reassembles — but not all the way. Her grey eyes carry something that wasn\'t there on the ferry. Concern, maybe. Recognition.
+
+"Sit," she says. "You look like you\'ve had a day."
+
+You notice things you missed before. A thin scar across her left thumb — a craft knife, maybe, or something sharper. The way she sits with her back to the wall and her bag between her feet, never on the bench. The reading glasses folded in her shirt pocket, a concession to age she probably resents.`,
     npcPresent: ['ruya'],
     choices: [
       {
@@ -2108,18 +2307,18 @@ Then you see her. Ruya. Sitting on a bench near the tea garden, reading a book w
     phase: 'exploration',
     location: 'Moda Waterfront',
     npcPresent: ['ruya'],
-    text: `You tell her. All of it -- Naz and the forgeries, Bora and the envelope, Sude\'s photos, Hakan\'s boat. Vedat Arslaner. Buyukada. The words pour out and Ruya listens with the stillness of deep water.
+    text: `You tell her. All of it -- Naz and the forgeries, Bora and the envelope, Sude\'s photos, Hakan\'s boat. Vedat Arslaner. Buyukada. The words pour out and Rüya listens with the stillness of deep water.
 
-When you finish, she closes her book. "Vedat Arslaner. I know that name." Her voice is quiet but precise. "He funds a cultural foundation. Very respectable on the surface. He hosted a gala last year that half the ministry attended."
+When you finish, she does something unexpected. She laughs — a short, dry sound, almost rueful. "You know, I spent four months building a case file that you've essentially reconstructed in a single day. My supervisor would have a stroke." She shakes her head. "Vedat Arslaner. I know that name. He funds a cultural foundation. Very respectable on the surface. He hosted a gala last year that half the ministry attended."
 
-She looks out at the water. "Your sister walked into something larger than one man\'s art collection. This is about how cultural heritage is controlled in this country. Who decides what\'s preserved, what\'s sold, what disappears."
+She looks out at the water, and something crosses her face — not professional detachment but something older, more personal. "I got into this work because of a case like this. Years ago. A family in Antakya had their grandfather\'s manuscript collection seized by a private buyer with forged paperwork. By the time I traced it, the manuscripts were in a vault in Zurich." She\'s quiet a moment. "I couldn\'t get them back. I\'ve been trying to get things back ever since."
 
-She turns to you. "I can\'t go to the island with you. But I can do something else. I have contacts at Hurriyet -- the newspaper. If you get evidence from that mansion, I can make sure it reaches people who\'ll publish it. Insurance."
+She turns to you. "I can\'t go to the island with you — Arslaner knows my face. But I have contacts at Hürriyet. If you get evidence from that mansion, I can make sure it reaches people who\'ll publish it. Insurance."
 
-She places a hand on yours, briefly. "Be careful, Deniz. The Bosphorus is full of things that sank and were forgotten."`,
+She places a hand on yours, briefly. Her fingers are cold from the sea wind. "Be careful, Deniz. The Bosphorus is full of things that sank and were forgotten."`,
     choices: [
       {
-        text: '"Thank you, Ruya. That\'s exactly what I need."',
+        text: '"Thank you, Rüya. That\'s exactly what I need."',
         next: 'e2_climax_prep',
         effects: {
           setFlags: ['ruya_press_contact'],
@@ -2135,13 +2334,15 @@ She places a hand on yours, briefly. "Be careful, Deniz. The Bosphorus is full o
     phase: 'exploration',
     location: 'Moda Waterfront',
     npcPresent: ['ruya'],
-    text: `You sketch the outline -- a network of art smuggling, forged documents, a powerful collector, your sister caught in the middle. You keep names out of it. Ruya listens, her dark eyes reading between your words.
+    text: `You sketch the outline -- a network of art smuggling, forged documents, a powerful collector, your sister caught in the middle. You keep names out of it. Rüya listens, her grey eyes reading between your words. One hand absently turns the reading glasses in her shirt pocket — a tic you\'re beginning to recognize.
 
-"You\'re being careful with me," she says. Not offended -- observant. "Good. You should be." She tucks her book into her bag. "But I\'ll tell you this: whatever you\'re walking into, have a way to get the story out if you can\'t get yourself out. Evidence in one person\'s hands disappears. Evidence in a journalist\'s hands is harder to bury."
+"You\'re being careful with me," she says. Not offended -- observant. "Good. You should be." She tucks her book into her bag — you notice the spine is cracked in three places, a book read and reread. "But I\'ll tell you this: whatever you\'re walking into, have a way to get the story out if you can\'t get yourself out. Evidence in one person\'s hands disappears. Evidence in a journalist\'s hands is harder to bury."
 
-She writes a phone number on the inside cover of a matchbook. "If you need me. Don\'t call -- text. And don\'t use names."
+She writes a phone number on the inside cover of a matchbook — her handwriting is small, precise, the letters barely touching. "If you need me. Don\'t call -- text. And don\'t use names."
 
-She stands, adjusts her scarf against the wind. "Good luck, Deniz. The Bosphorus carries things where they need to go. Trust the current."`,
+She stands, adjusts her scarf against the wind. The sun catches the scar on her thumb. "Good luck, Deniz. The Bosphorus carries things where they need to go. Trust the current."
+
+She walks away along the waterfront, and you notice she doesn\'t look back. Professional discipline or something else — the habit of someone who\'s learned that looking back is how you trip.`,
     choices: [
       {
         text: 'Take the number and head back. Time to prepare.',

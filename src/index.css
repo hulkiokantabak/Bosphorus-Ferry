@@ -120,3 +120,55 @@ body {
   background: var(--accent-gold-dim);
   color: var(--text-primary);
 }
+
+/* ============================================================
+   MOBILE TYPOGRAPHY — more breathing room on small screens
+   ============================================================ */
+@media (max-width: 640px) {
+  body {
+    line-height: 2;
+    font-size: 15px;
+  }
+
+  /* Narrative paragraphs get extra spacing on mobile */
+  .narrative-mobile p {
+    margin-bottom: 1.5rem;
+  }
+}
+
+/* NPC monogram avatar */
+.npc-monogram {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Save toast animation */
+@keyframes saveToast {
+  0% { opacity: 0; transform: translateY(8px); }
+  15% { opacity: 0.9; transform: translateY(0); }
+  85% { opacity: 0.9; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-4px); }
+}
+
+.save-toast {
+  animation: saveToast 2s ease-in-out forwards;
+}
+
+/* Audio toggle button */
+.audio-toggle {
+  transition: color 0.2s, opacity 0.2s;
+}
+
+.audio-toggle:hover {
+  color: var(--accent-gold) !important;
+}

@@ -15,7 +15,9 @@ And there, above the town, visible from the pier: the hill. At its crown, lit by
 
 Vedat Arslaner's house. Where the network has its heart. Where the paintings hide their cargo. And somewhere nearby, in the servants' quarters of another mansion, your sister has been hiding for two years.
 
-The last ferry back isn't until morning. Whatever happens on this island happens tonight.`,
+The last ferry back isn't until morning. Whatever happens on this island happens tonight.
+
+A feeling prickles at the back of your neck — the one your mother always said was the family curse. Deniz's intuition. Every journalist has a moment where the story stops being out there and starts being about you. Standing on this pier, watching the mansion light, you know: you crossed that line days ago.`,
     location: 'Büyükada İskelesi',
     phase: 'arrival',
     choices: [
@@ -429,11 +431,11 @@ You reach the stone wall quickly. The mansion looms beyond it — larger than yo
 
 A sound: boots on gravel. Steady, purposeful. Coming down the hill road toward you.
 
-A man appears around the bend — tall, thick-shouldered, dark jacket. He walks with military precision. Tayfun. He sees you immediately.
+A man appears around the bend — tall, thick-shouldered, dark jacket. He walks with military precision. Tayfun. He sees you immediately — and his hand moves to the radio on his belt before he catches himself.
 
-"This is private property." His voice is flat, professional. "The mansion doesn't receive visitors."
+"This is private property." His voice is flat, professional. But there's something else in it tonight — an edge that says he was told to expect trouble. "The mansion doesn't receive visitors."
 
-He stands between you and the gate, arms at his sides but posture tense. Not threatening — not yet — but making it clear that proceeding requires going through him.`,
+He stands between you and the gate, arms at his sides but posture tense. His eyes scan the path behind you, checking if you're alone. Not threatening — not yet — but making it clear that proceeding requires going through him.`,
     location: 'Büyükada — Hill Road',
     phase: 'complication',
     choices: [
@@ -1036,7 +1038,7 @@ The words land like stones. You sit beside her. The cot creaks under your combin
         },
       },
       {
-        text: '"We leave. Together. Tonight. Forget the network — I just want you safe."',
+        text: '"Defne — look at this room. Two years. I\'m not losing you to this fight. We leave. Tonight."',
         next: 'e3_plan_escape',
         effects: {
           axisShift: { heart: 0.2 },
@@ -1077,7 +1079,7 @@ She looks at you. "I sent the text because I'm out of options. I can't hide anym
         },
       },
       {
-        text: '"Let\'s just go. Leave Turkey. Start over."',
+        text: '"I didn\'t come here for paintings, Defne. I came for you. Let\'s go home — somewhere new."',
         next: 'e3_plan_escape',
         effects: {
           axisShift: { heart: 0.1 },
@@ -1118,7 +1120,7 @@ She staged the drowning a week later. Faked a solo sailing trip. Left the boat a
         },
       },
       {
-        text: '"Forget the evidence. We leave. Both of us. Tonight."',
+        text: '"The evidence can wait. You can\'t. Two years in this room is enough — we leave tonight."',
         next: 'e3_plan_escape',
         effects: {
           axisShift: { heart: 0.2 },
@@ -1212,30 +1214,34 @@ The plan is clean. Simple. The kind of plan that works until it doesn't.`,
   {
     id: 'e3_plan_escape',
     episode: 3,
-    text: `Defne looks at you. In her eyes, a war: the restorer who wants the truth exposed, and the sister who just wants to be safe.
+    text: `Defne grips your hand so tightly the knuckles go white. In the lamplight, you see what two years in this room have done — the hollowed cheeks, the way she flinches at sounds outside the window, the tremor in her restorer's hands that never used to shake.
 
-"Leave," she says. "Just leave. Leave the paintings, leave Vedat, leave all of it." She grips your hand. "I've spent two years in this room thinking about evidence and justice and exposing the truth, and all it got me was a cot in a servants' quarters. Maybe the truth isn't worth the cost."
+"I can't do it anymore," she says. Her voice breaks on the word "can't" — not dramatically, but the way things break when they've been held together too long. "I know what you want. The evidence, the exposure, the justice. I wanted it too. For two years I sat here planning how to bring Vedat down."
 
-The room is quiet. The lamp flame flickers. Outside, the pines whisper.
+She pulls her knees to her chest. The cot creaks.
 
-You think about everything you've gathered — the photos, the testimonies, the names. You think about Naz, who believes she's preserving heritage. About Selim, who lies with practiced grace. About the network that will continue if nobody stops it.
+"But I wake up at three AM every night and check the locks. I flinch when Filiz knocks. I've forgotten what it feels like to walk down a street without counting the exits." She looks at you. "I don't want justice, Deniz. I want to sit in a café without being afraid. I want to sleep through the night. I want my sister back."
 
-And then you think about Defne. Alive. Here. Ready to leave.
+The lamp flickers. Outside, the pines lean in the wind.
 
-Some choices aren't about right and wrong. They're about what you can carry.`,
+You think about Naz, who believes she's preserving heritage. About Selim, who lies with practiced grace. About the network that will continue feeding on silence.
+
+And you think about Defne's hands. Shaking. The hands that used to be the steadiest you'd ever seen.
+
+Some choices aren't about right and wrong. They're about who you came here to save.`,
     location: 'Büyükada — Servants\' Quarters',
     phase: 'climax',
     npcPresent: ['defne'],
     choices: [
       {
-        text: '"Let\'s go. Leave everything. Leave Turkey. Start new."',
+        text: 'Take her hand. "Two one-way tickets. Anywhere. Tomorrow."',
         next: 'e3_escape_leave',
         effects: {
           axisShift: { heart: 0.2, method: -0.2 },
         },
       },
       {
-        text: '"We leave, but we take what we know. Build the case from somewhere safe."',
+        text: '"We go somewhere safe in Turkey. But we take everything we know — and we finish this from a distance."',
         next: 'e3_escape_smart',
         effects: {
           axisShift: { heart: 0.1, method: 0.2 },
@@ -1341,6 +1347,15 @@ Your phone fills with evidence. The clock in the hallway chimes half-past ten.`,
           axisShift: { method: 0.1 },
         },
       },
+      {
+        text: 'The frame dimensions are wrong on painting 19. Check behind the backing — there may be a second layer.',
+        next: 'e3_stealth_exit',
+        condition: { axis: { name: 'method', min: 0.6 } },
+        effects: {
+          setFlags: ['has_evidence_package', 'found_vedat_ledger'],
+          axisShift: { method: 0.1 },
+        },
+      },
     ],
   },
   {
@@ -1350,7 +1365,7 @@ Your phone fills with evidence. The clock in the hallway chimes half-past ten.`,
 
 "Done?" she whispers.
 
-You nod. Show her the phone. Forty-three photographs. Seven documents. Enough to bring down the network.
+You nod. Show her the phone. The photographs scroll past — seven documents, forty-three images. And if you found the hidden ledger behind painting nineteen, something more: Vedat's personal accounting of every transaction, every bribe, every payment to officials who looked the other way. Not just evidence of art fraud — evidence of systemic corruption that reaches into the ministry itself.
 
 She locks the service door behind you. The night air hits you — cold, pine-scented, tasting of salt and relief. You're out. The evidence is on your phone, and Vedat doesn't know.
 
@@ -1377,6 +1392,14 @@ Now the question: what do you do with them?`,
         next: 'ending_a2',
         effects: {
           axisShift: { approach: -0.1 },
+        },
+      },
+      {
+        text: 'Take Defne and the evidence. Disappear to the coast. Build the case from safety.',
+        next: 'ending_c2',
+        condition: { flag: 'found_defne' },
+        effects: {
+          axisShift: { heart: 0.2 },
         },
       },
     ],
@@ -1426,7 +1449,11 @@ Cem knows a coast guard officer — one who wasn't compromised — who can be co
 
 Bora is already on the last ferry. He'll be on the island by midnight. "Nobody threatens my friends and gets away with it," he says. "Nobody."
 
-The alliance isn't professional. It's a bartender, a ferry tea vendor, a private investigator, and two sisters. But it's enough. More than enough. Because Vedat Arslaner's power comes from secrecy, and secrets don't survive when this many people know them.`,
+The alliance isn't professional. It's a bartender, a ferry tea vendor, a private investigator, and two sisters. But it's enough. More than enough. Because Vedat Arslaner's power comes from secrecy, and secrets don't survive when this many people know them.
+
+But when you hang up, Defne is sitting on the cot, arms wrapped around herself. "You have an army now," she says. "Do you still need me here for the battle?"
+
+The question is quiet. Honest. She's not being dramatic — she's asking whether she can finally stop being the evidence and start being a person again.`,
     location: 'Büyükada — Servants\' Quarters',
     phase: 'climax',
     npcPresent: ['defne'],
@@ -1444,6 +1471,13 @@ The alliance isn't professional. It's a bartender, a ferry tea vendor, a private
         next: 'e3_alliance_morning',
         effects: {
           axisShift: { method: 0.1, trust: 0.1 },
+        },
+      },
+      {
+        text: '"Rüya can handle the evidence. Let\'s go — you and me. Tonight."',
+        next: 'e3_escape_leave',
+        effects: {
+          axisShift: { heart: 0.2, trust: 0.1 },
         },
       },
     ],
@@ -1541,15 +1575,21 @@ Vedat nods slowly. "And you have evidence?"
 
 "Enough."
 
-Another sip of brandy. "Evidence can be contested. Witnesses can be discredited. And paintings..." He gestures at the walls. "Paintings are very easy to move."
+Another sip of brandy. "Perhaps. But let me tell you what else you have." He sets down the glass. "Your sister faked her own death. That's insurance fraud, at minimum. Obstruction of a coast guard investigation. Filing a false death certificate carries a sentence of three to five years."
 
-He sets down the glass. "Let me offer you an alternative. Your sister comes home. Alive, free, her death certificate quietly corrected. No police. No scandal. The network ceases its... extracurricular activities. In exchange—" he fixes you with those cold, controlled eyes — "silence. Complete and permanent."`,
+He lets that settle.
+
+"If this goes to court, Defne doesn't walk away clean. She walks into a legal nightmare. The prosecution will take years. She'll be a witness and a defendant simultaneously. Filiz — the seventy-year-old woman who fed your sister — becomes an accessory. Is that what you want for them?"
+
+He straightens in his chair. "Or. Your sister comes home. Tomorrow. The death certificate is quietly corrected — I have contacts who handle these things. No police. No charges. Filiz keeps her job and her dignity. And Defne lives freely. Not hiding. Not testifying. Living."
+
+He fixes you with those cold, controlled eyes. "Silence. In exchange for everything you actually came here for."`,
     location: 'Büyükada — Vedat\'s Study',
     phase: 'climax',
     npcPresent: ['vedat', 'defne'],
     choices: [
       {
-        text: 'Accept the deal. Defne comes home. The network survives.',
+        text: 'He\'s right about Defne. About Filiz. Accept — and take your sister home.',
         next: 'ending_b1',
         effects: {
           axisShift: { approach: -0.2 },
@@ -1601,19 +1641,21 @@ Vedat is quiet for a long moment. The clock ticks. His brandy catches the lampli
   {
     id: 'e3_vedat_deal',
     episode: 3,
-    text: `Vedat considers this. The brandy swirls in his glass. "Freedom. That's reasonable." He looks between you and Defne. "Defne comes home. The death certificate is corrected. You both resume your lives. And the paintings..."
+    text: `Vedat considers this. The brandy swirls in his glass. "Freedom. That's reasonable." He looks between you and Defne. "Defne comes home. The death certificate is corrected — quietly, through proper channels. No charges. No investigation into the faked drowning. No insurance fraud case."
 
-He pauses. "The paintings stay with me. The collection is my life's work. Forty years of preservation. You may not believe me, but these paintings would be in foreign museums or rotting in government warehouses if not for me."
+He pauses. Looks at Filiz's apron hanging by the kitchen door. "And Filiz keeps her position. Her pension. Forty years of service honored, not prosecuted."
 
-He sets down the glass. "This is my offer. Take it, and by tomorrow you're on the ferry home. Refuse it, and..." He doesn't finish. He doesn't have to.
+He sets down the glass. "In exchange, the paintings stay with me. The collection is my life's work. I'm not a monster — I'm a collector who went too far. And I'm offering you the one thing courts can't guarantee: certainty. Tomorrow morning. The ferry home. Both of you."
 
-The study is silent. The paintings watch from the walls. Defne looks at you, and in her eyes you see exhaustion — two years of hiding, and the bone-deep weariness of someone who just wants it to be over.`,
+The study is silent. Defne looks at you, and what you see in her eyes isn't defeat — it's exhaustion so deep it's become its own kind of clarity. Two years in a room the size of a closet. She's done the math on justice already. She's been doing it every night for seven hundred nights.
+
+"Deniz," she says quietly. Just your name. But the way she says it — it sounds like "please."`,
     location: 'Büyükada — Vedat\'s Study',
     phase: 'climax',
     npcPresent: ['vedat', 'defne'],
     choices: [
       {
-        text: 'Accept. Take Defne home. Let the paintings keep their secrets.',
+        text: 'Look at Defne. She said your name like a prayer. Take the deal. Take her home.',
         next: 'ending_b1',
       },
       {

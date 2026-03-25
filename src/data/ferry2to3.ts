@@ -12,6 +12,10 @@ Kadıköy is behind you. Everything you learned there — Naz and her print shop
 
 No cars on Büyükada. No quick exits. Once you're there, you're there until the ferry comes back.
 
+Three days ago you were writing restaurant reviews in Beşiktaş. Now you're carrying a dead woman's envelope, a phone full of stolen evidence, and the name of a man who collects art and buries people. Somewhere between the first ferry and this one, you stopped being a journalist looking into a story and became someone the story is looking back at.
+
+You think about calling your mother. You think about not calling your mother. You think about the way Bora held that photograph — his thumb on the frame, gentle as grief.
+
 The same ferry characters are here. Kaptan İrfan at the wheel. The çay counter glowing. And somewhere below deck, the quiet woman with her book.`,
     location: 'Marmara Sea Ferry — Evening',
     phase: 'ferry',
@@ -210,17 +214,17 @@ The ferry horn sounds. The first lights of Büyükada are visible on the horizon
   {
     id: 'ferry2_ruya',
     episode: 2,
-    text: `She's in the same seat. Same book — no, a different one. She looks up when you sit down, and this time there's no pretense. She closes the book.
+    text: `She's in the same seat. Different book — Pamuk this time, The Black Book, its spine cracked in three places. The thermos is there, the reading glasses folded in her shirt pocket, the bag between her feet. But when you sit down, something is different. She closes the book immediately. No pretense. No waiting game.
 
-"You've been busy," she says. Not a question. "Kadıköy. The print shop. The meyhane." She watches your reaction. "I told you — we'll talk when I know you won't be reckless."
+"You've been busy," she says. Not a question. Her grey eyes take inventory of you — the tension in your shoulders, the way you keep glancing at the cabin door. "Kadıköy. The print shop. The meyhane." She watches your reaction. "I told you — we'll talk when I know you won't be reckless."
 
-She pulls a slim folder from her bag. Plain manila. "My name is Rüya. I'm a private investigator. I was hired eight months ago by an insurance company — they underwrote a policy on a collection of Ottoman paintings. The collection belongs to Vedat Arslaner."
+She pulls a slim folder from her bag — the motion practised, no wasted movement. Plain manila, unmarked. "My name is Rüya Korkmaz. I'm a licensed private investigator." She says it the way a doctor says their specialty — matter-of-fact, no drama. "I was hired eight months ago by an insurance company. They underwrote a policy on a collection of Ottoman paintings. The collection belongs to Vedat Arslaner."
 
-She opens the folder. Inside: photographs. The mansion on Büyükada. A bill of lading for art transport. A photocopy of a death certificate — Defne Karadağ.
+She opens the folder. Inside: photographs. The mansion on Büyükada. A bill of lading for art transport. A photocopy of a death certificate — Defne Karadağ. Her fingers arrange them on the table with the precision of someone who has done this briefing before, in other cabins, for other cases. But there's something in the way she lingers on the death certificate — a tightness at the corner of her mouth.
 
 "The insurance company became suspicious when Arslaner filed claims on three paintings that were supposedly destroyed in a water leak. But the restoration records didn't match. Someone had been working on those paintings — adding layers, not removing them. Hiding things inside them."
 
-She meets your eyes. "Your sister was the restorer. And I don't think she's dead."`,
+She meets your eyes. The grey is almost silver in the cabin light. "Your sister was the restorer. And I don't think she's dead."`,
     location: 'Ferry — Lower Cabin',
     phase: 'ferry',
     npcPresent: ['ruya'],
@@ -245,15 +249,15 @@ She meets your eyes. "Your sister was the restorer. And I don't think she's dead
   {
     id: 'ferry2_ruya_angry',
     episode: 2,
-    text: `Rüya takes the anger calmly. "I didn't know you existed until three weeks ago. I was investigating insurance fraud, not a disappearance. When I found the connection to your sister, I started watching the ferry — because ferry records showed she was a regular passenger. That's when I found you."
+    text: `Rüya takes the anger the way a sea wall takes a wave — absorbs it, doesn't move. Her thumb finds the scar on her left hand.
 
-She pauses. "I could have approached you immediately. But you were unpredictable. You confronted people. You asked loud questions. If I'd shown you my cards too early, we'd both have been burned."
+"I didn't know you existed until three weeks ago. I was investigating insurance fraud, not a disappearance. When I found the connection to your sister, I started watching the ferry — because ferry records showed she was a regular passenger. That's when I found you."
 
-Her voice softens, just slightly. "I understand your anger. But I'm showing you now. Because you've proven something in Kadıköy — you can follow a thread without pulling it apart. And because we're running out of time."
+She pauses, and for the first time you see something crack in the professional composure. "I've worked cases like this before. A family in Antakya — their grandfather's manuscripts, seized with forged paperwork. By the time I traced them, they were in a Swiss vault. I couldn't get them back." She looks at the death certificate on the table. "I don't want to be too late again."
 
 She slides the folder to you. "Arslaner is selling the mansion. The entire collection goes with it. Once that sale closes, the evidence — and your sister, if she's hiding on the island — disappears permanently."
 
-"I have a plan for the mansion. But I need someone Arslaner doesn't know about. He knows me — I've been surveilling him for months. He doesn't know you."`,
+She pours tea from her thermos, passes you the lid-cup. The gesture is becoming a language between you. "I have a plan for the mansion. But I need someone Arslaner doesn't know about. He knows me — I've been surveilling him for months. He doesn't know you."`,
     location: 'Ferry — Lower Cabin',
     phase: 'ferry',
     npcPresent: ['ruya'],
@@ -299,15 +303,17 @@ The implication hangs between you.`,
     episode: 2,
     text: `"I believe so," Rüya says. "Which means the priority is twofold: get to her safely, and get the evidence from the mansion before the sale goes through."
 
-She hands you a burner phone. "My number is the only one saved. Use this, not your regular phone. If Arslaner has contacts in the telecom industry — and old money usually does — your regular phone is compromised."
+She hands you a burner phone — pulls it from the bottom of her bag, wrapped in a felt cloth. "My number is the only one saved. Use this, not your regular phone. If Arslaner has contacts in the telecom industry — and old money usually does — your regular phone is compromised."
 
-The ferry horn sounds. Büyükada is visible now, a dark mass against the slightly lighter sky, dotted with a few golden lights.
+The ferry horn sounds. Büyükada is visible now, a dark mass against the slightly lighter sky, dotted with a few golden lights. Rüya stands and for a moment she's framed against the cabin window — the island behind her, the water black and vast.
 
 "When we dock, we separate. I'll approach from the east side — there's a back path through the pine forest. You take the main road. If anyone asks, you're a journalist covering the island's architecture."
 
-She stands, tucking the folder back into her bag. "Find Filiz first. She's the key to everything — to the mansion and to your sister. But be gentle with her. She's been protecting secrets for forty years. She won't give them up to someone who demands."
+She tucks the folder back into her bag and adjusts the tortoiseshell clip in her hair. The gesture is oddly intimate — a woman preparing herself, not a professional giving a briefing. "Find Filiz first. She's the key to everything — to the mansion and to your sister. But be gentle with her. She's been protecting secrets for forty years. She won't give them up to someone who demands."
 
-She extends her hand. Professional. Steady. "We end this on the island, Deniz. One way or another."`,
+She extends her hand. Professional. Steady. The scar on her thumb catches the light. "We end this on the island, Deniz. One way or another."
+
+You notice she takes the Pamuk novel and leaves it on the table. A book left behind — the first thing she's done on these ferries that wasn't calculated.`,
     location: 'Ferry — Lower Cabin',
     phase: 'ferry',
     npcPresent: ['ruya'],

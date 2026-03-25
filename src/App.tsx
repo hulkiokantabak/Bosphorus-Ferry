@@ -26,6 +26,7 @@ function App() {
     handleJournal,
     handleJournalBack,
     handleSummary,
+    startFromChapter,
   } = useGame();
 
   if (screen === 'intro') {
@@ -42,6 +43,7 @@ function App() {
         onNewGame={startNewGame}
         onContinue={continueGame}
         onJournal={handleJournal}
+        onChapterSelect={startFromChapter}
       />
     );
   }
@@ -55,6 +57,7 @@ function App() {
       <EpisodeTransition
         episode={transitionEpisode}
         onComplete={handleTransitionComplete}
+        state={gameState}
       />
     );
   }
@@ -100,6 +103,7 @@ function App() {
       onNewGame={startNewGame}
       onContinue={continueGame}
       onJournal={handleJournal}
+      onChapterSelect={startFromChapter}
     />
   );
 }
