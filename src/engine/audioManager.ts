@@ -84,7 +84,7 @@ let audioCtx: AudioContext | null = null;
 let masterGain: GainNode | null = null;
 let currentNodes: AudioNode[] = [];
 let currentAmbience: Ambience | null = null;
-let enabled = false;
+let enabled = true;
 
 const FADE_TIME = 2.0; // seconds
 
@@ -301,6 +301,9 @@ function resolveAmbience(location: string): Ambience {
   return 'indoor'; // default
 }
 
+// Queue the desired ambience so it can start on the next user gesture if needed
+let pendingAmbience: string | null = null;
+
 export function setAmbience(location: string) {
   if (!enabled) return;
 
@@ -309,9 +312,27 @@ export function setAmbience(location: string) {
 
   const ctx = getContext();
   if (ctx.state === 'suspended') {
-    ctx.resume();
+    // Browser blocks resume outside user gestures — queue it
+    pendingAmbience = location;
+    ctx.resume().then(() => {
+      // Context resumed successfully, play the pending ambience
+      if (pendingAmbience) {
+        const loc = pendingAmbience;
+        pendingAmbience = null;
+        playAmbience(resolveAmbience(loc), ctx);
+      }
+    }).catch(() => {
+      // Still suspended — will retry on next user gesture via resumeIfNeeded
+      pendingAmbience = location;
+    });
+    return;
   }
 
+  playAmbience(ambience, ctx);
+}
+
+function playAmbience(ambience: Ambience, ctx: AudioContext) {
+  if (ambience === currentAmbience) return;
   stopCurrent();
   currentAmbience = ambience;
 
@@ -327,6 +348,23 @@ export function setAmbience(location: string) {
   }
 }
 
+/**
+ * Call this from any user gesture (click, tap) to unblock the AudioContext.
+ * Browsers require a user interaction before audio can play.
+ */
+export function resumeIfNeeded() {
+  if (!enabled || !audioCtx) return;
+  if (audioCtx.state === 'suspended') {
+    audioCtx.resume().then(() => {
+      if (pendingAmbience) {
+        const loc = pendingAmbience;
+        pendingAmbience = null;
+        playAmbience(resolveAmbience(loc), audioCtx!);
+      }
+    });
+  }
+}
+
 export function setAudioEnabled(on: boolean) {
   enabled = on;
   if (!on) {
@@ -339,14 +377,12 @@ export function setAudioEnabled(on: boolean) {
 }
 
 export function isAudioEnabled(): boolean {
-  if (!enabled) {
-    try {
-      const stored = localStorage.getItem('bosphorus-ferry-audio');
-      if (stored === 'on') {
-        enabled = true;
-      }
-    } catch { /* noop */ }
-  }
+  try {
+    const stored = localStorage.getItem('bosphorus-ferry-audio');
+    if (stored === 'off') {
+      enabled = false;
+    }
+  } catch { /* noop */ }
   return enabled;
 }
 

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { isAudioEnabled, setAudioEnabled, setAmbience } from '../engine/audioManager';
+import { isAudioEnabled, setAudioEnabled, setAmbience, resumeIfNeeded } from '../engine/audioManager';
 
 interface LocationHeaderProps {
   location: string;
@@ -30,6 +30,7 @@ export default function LocationHeader({ location, episode, onMenuToggle, scenes
     setAudioOn(next);
     setAudioEnabled(next);
     if (next) {
+      resumeIfNeeded();
       setAmbience(location);
     }
   };

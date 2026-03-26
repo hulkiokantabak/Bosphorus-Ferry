@@ -8,6 +8,7 @@ import PauseMenu from './PauseMenu';
 import JournalScreen from './JournalScreen';
 import { Scene, Choice, GameState } from '../types';
 import { getAvailableChoices, getLockedChoices, getEpisodeSceneCount } from '../engine/gameEngine';
+import { resumeIfNeeded } from '../engine/audioManager';
 
 interface GameScreenProps {
   scene: Scene;
@@ -88,6 +89,9 @@ export default function GameScreen({ scene, state, onChoice, onSave, onMainMenu,
 
   const handleChoice = useCallback(
     (choice: Choice) => {
+      // User gesture — unblock AudioContext if needed
+      resumeIfNeeded();
+
       setShowChoices(false);
       setShowScrollHint(false);
       setSaveTrigger((n) => n + 1);

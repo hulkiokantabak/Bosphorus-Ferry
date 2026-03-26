@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState, useCallback } from 'react';
 import { useTypewriter, getSpeedMs } from '../hooks/useTypewriter';
 import { highlightText } from '../utils/textHighlighter';
 import { getNpcProfile } from '../data/npcProfiles';
+import { resumeIfNeeded } from '../engine/audioManager';
 
 interface NarrativeTextProps {
   text: string;
@@ -105,6 +106,7 @@ export default function NarrativeText({ text, onComplete }: NarrativeTextProps) 
   const seenNpcIds = useMemo(() => new Set<string>(), [text]);
 
   const handleClick = useCallback(() => {
+    resumeIfNeeded(); // Unblock audio on first tap/click
     if (!isComplete) {
       skip();
     } else if (!isLastPage) {
