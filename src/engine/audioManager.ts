@@ -84,9 +84,11 @@ let audioCtx: AudioContext | null = null;
 let masterGain: GainNode | null = null;
 let currentNodes: AudioNode[] = [];
 let currentAmbience: Ambience | null = null;
-let enabled = true;
+let enabled = false;
 
 const FADE_TIME = 2.0; // seconds
+const AMBIENCE_DURATION = 3.0; // seconds — short burst, not continuous
+let ambienceTimeout: ReturnType<typeof setTimeout> | null = null;
 
 function getContext(): AudioContext {
   if (!audioCtx) {
@@ -333,6 +335,13 @@ export function setAmbience(location: string) {
 
 function playAmbience(ambience: Ambience, ctx: AudioContext) {
   if (ambience === currentAmbience) return;
+
+  // Clear any pending auto-stop
+  if (ambienceTimeout) {
+    clearTimeout(ambienceTimeout);
+    ambienceTimeout = null;
+  }
+
   stopCurrent();
   currentAmbience = ambience;
 
@@ -345,6 +354,15 @@ function playAmbience(ambience: Ambience, ctx: AudioContext) {
     case 'crowd': createCrowdAmbience(ctx, masterGain); break;
     case 'night': createNightAmbience(ctx, masterGain); break;
     case 'silence': break;
+  }
+
+  // Auto-stop after AMBIENCE_DURATION — short atmospheric burst
+  if (ambience !== 'silence') {
+    ambienceTimeout = setTimeout(() => {
+      stopCurrent();
+      currentAmbience = null;
+      ambienceTimeout = null;
+    }, AMBIENCE_DURATION * 1000);
   }
 }
 
@@ -377,12 +395,14 @@ export function setAudioEnabled(on: boolean) {
 }
 
 export function isAudioEnabled(): boolean {
-  try {
-    const stored = localStorage.getItem('bosphorus-ferry-audio');
-    if (stored === 'off') {
-      enabled = false;
-    }
-  } catch { /* noop */ }
+  if (!enabled) {
+    try {
+      const stored = localStorage.getItem('bosphorus-ferry-audio');
+      if (stored === 'on') {
+        enabled = true;
+      }
+    } catch { /* noop */ }
+  }
   return enabled;
 }
 
