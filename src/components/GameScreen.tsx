@@ -148,6 +148,7 @@ export default function GameScreen({ scene, state, onChoice, onSave, onMainMenu,
         <LocationHeader
           location={scene.location}
           episode={scene.episode}
+          phase={scene.phase}
           onMenuToggle={() => setIsPaused(true)}
           scenesInEpisode={scenesInEpisode}
           totalScenesInEpisode={totalScenesInEpisode}

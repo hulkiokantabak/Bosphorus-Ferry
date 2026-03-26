@@ -4,6 +4,7 @@ import { isAudioEnabled, setAudioEnabled, setAmbience, resumeIfNeeded } from '..
 interface LocationHeaderProps {
   location: string;
   episode: number;
+  phase?: string;
   onMenuToggle?: () => void;
   scenesInEpisode?: number; // how many scenes visited in this episode
   totalScenesInEpisode?: number; // total scenes available in this episode
@@ -15,15 +16,15 @@ const episodeNames: Record<number, string> = {
   3: 'Büyükada',
 };
 
-export default function LocationHeader({ location, episode, onMenuToggle, scenesInEpisode, totalScenesInEpisode }: LocationHeaderProps) {
+export default function LocationHeader({ location, episode, phase, onMenuToggle, scenesInEpisode, totalScenesInEpisode }: LocationHeaderProps) {
   const [audioOn, setAudioOn] = useState(isAudioEnabled());
 
   // Update ambience when location changes
   useEffect(() => {
     if (audioOn) {
-      setAmbience(location);
+      setAmbience(location, { episode, phase });
     }
-  }, [location, audioOn]);
+  }, [location, audioOn, episode, phase]);
 
   const toggleAudio = () => {
     const next = !audioOn;
@@ -31,7 +32,7 @@ export default function LocationHeader({ location, episode, onMenuToggle, scenes
     setAudioEnabled(next);
     if (next) {
       resumeIfNeeded();
-      setAmbience(location);
+      setAmbience(location, { episode, phase });
     }
   };
 
