@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { getTextSpeed, setTextSpeed, TextSpeed } from '../hooks/useTypewriter';
 
 interface PauseMenuProps {
   onResume: () => void;
@@ -7,9 +8,19 @@ interface PauseMenuProps {
   onExit: () => void;
 }
 
+const SPEED_LABELS: Record<TextSpeed, string> = {
+  slow: 'Slow',
+  normal: 'Normal',
+  fast: 'Fast',
+  instant: 'Instant',
+};
+
+const SPEED_ORDER: TextSpeed[] = ['slow', 'normal', 'fast', 'instant'];
+
 export default function PauseMenu({ onResume, onSave, onJournal, onExit }: PauseMenuProps) {
   const [saved, setSaved] = useState(false);
   const [confirmExit, setConfirmExit] = useState(false);
+  const [currentSpeed, setCurrentSpeed] = useState<TextSpeed>(getTextSpeed());
 
   const handleSave = () => {
     onSave();
@@ -99,6 +110,46 @@ export default function PauseMenu({ onResume, onSave, onJournal, onExit }: Pause
           >
             Story Journal
           </button>
+
+          {/* Text Speed */}
+          <div
+            className="px-4 py-3 border rounded-sm"
+            style={{
+              borderColor: 'var(--border-subtle)',
+            }}
+          >
+            <p
+              className="text-xs uppercase tracking-widest mb-2 text-center"
+              style={{
+                fontFamily: "'Inter', sans-serif",
+                color: 'var(--text-secondary)',
+                letterSpacing: '0.15em',
+              }}
+            >
+              Text Speed
+            </p>
+            <div className="flex gap-1 justify-center">
+              {SPEED_ORDER.map(s => (
+                <button
+                  key={s}
+                  onClick={() => {
+                    setTextSpeed(s);
+                    setCurrentSpeed(s);
+                  }}
+                  className="px-3 py-1 text-xs uppercase tracking-wider border transition-all duration-200 rounded-sm"
+                  style={{
+                    fontFamily: "'Inter', sans-serif",
+                    borderColor: s === currentSpeed ? 'var(--accent-gold)' : 'var(--border-subtle)',
+                    color: s === currentSpeed ? 'var(--accent-gold)' : 'var(--text-secondary)',
+                    backgroundColor: s === currentSpeed ? 'rgba(201, 168, 76, 0.1)' : 'transparent',
+                    cursor: 'pointer',
+                  }}
+                >
+                  {SPEED_LABELS[s]}
+                </button>
+              ))}
+            </div>
+          </div>
 
           {/* Exit to Menu */}
           {!confirmExit ? (

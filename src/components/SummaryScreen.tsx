@@ -3,12 +3,14 @@ import { GameState } from '../types';
 import { EndingType, getEndingTitle } from '../engine/endingCalculator';
 import { getScene, getSceneCount } from '../engine/gameEngine';
 import { getDiscoveredEndings, recordEnding, markGameCompleted } from '../engine/stateManager';
+import { getDiscoveredClues } from '../data/clueDescriptions';
 
 interface SummaryScreenProps {
   state: GameState;
   ending: EndingType;
   onMainMenu: () => void;
   onPlayAgain: () => void;
+  onWhatIf?: () => void;
 }
 
 const NPC_DISPLAY: Record<string, string> = {
@@ -66,7 +68,7 @@ const ENDING_HINTS: Record<string, string> = {
   D2: 'Let instinct carry you when plans collapse',
 };
 
-export default function SummaryScreen({ state, ending, onMainMenu, onPlayAgain }: SummaryScreenProps) {
+export default function SummaryScreen({ state, ending, onMainMenu, onPlayAgain, onWhatIf }: SummaryScreenProps) {
   const [discoveredEndings, setDiscoveredEndings] = useState<string[]>([]);
 
   useEffect(() => {
@@ -100,6 +102,7 @@ export default function SummaryScreen({ state, ending, onMainMenu, onPlayAgain }
 
   // Key flags to display as narrative discoveries
   const activeFlags = Object.keys(state.flags).filter(f => state.flags[f]);
+  const discoveredClues = getDiscoveredClues(state.flags);
 
   // Determine character archetype from dominant axes
   const dominant = Object.entries(AXIS_LABELS).map(([key, labels]) => ({
@@ -333,7 +336,7 @@ export default function SummaryScreen({ state, ending, onMainMenu, onPlayAgain }
         )}
 
         {/* Key Discoveries */}
-        {activeFlags.length > 0 && (
+        {(discoveredClues.length > 0 || activeFlags.length > 0) && (
           <div
             className="fade-in mb-8 p-5 rounded"
             style={{
@@ -349,22 +352,47 @@ export default function SummaryScreen({ state, ending, onMainMenu, onPlayAgain }
             >
               Key Discoveries
             </h3>
-            <div className="flex flex-wrap gap-2">
-              {activeFlags.slice(0, 20).map(flag => (
-                <span
-                  key={flag}
-                  className="text-xs px-2 py-1 rounded"
-                  style={{
-                    fontFamily: "'Inter', sans-serif",
-                    color: 'var(--accent-gold)',
-                    backgroundColor: 'rgba(201, 168, 76, 0.1)',
-                    border: '1px solid var(--accent-gold-dim)',
-                  }}
-                >
-                  {flag.replace(/_/g, ' ')}
-                </span>
-              ))}
-            </div>
+            {discoveredClues.length > 0 ? (
+              <div className="space-y-3">
+                {discoveredClues.map(clue => (
+                  <div
+                    key={clue.flag}
+                    className="px-3 py-2 rounded"
+                    style={{ border: '1px solid var(--border-subtle)' }}
+                  >
+                    <p
+                      className="text-sm font-medium mb-0.5"
+                      style={{ fontFamily: "'Lora', Georgia, serif", color: 'var(--accent-gold)' }}
+                    >
+                      {clue.label}
+                    </p>
+                    <p
+                      className="text-xs"
+                      style={{ fontFamily: "'Lora', Georgia, serif", color: 'var(--text-secondary)' }}
+                    >
+                      {clue.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="flex flex-wrap gap-2">
+                {activeFlags.slice(0, 20).map(flag => (
+                  <span
+                    key={flag}
+                    className="text-xs px-2 py-1 rounded"
+                    style={{
+                      fontFamily: "'Inter', sans-serif",
+                      color: 'var(--accent-gold)',
+                      backgroundColor: 'rgba(201, 168, 76, 0.1)',
+                      border: '1px solid var(--accent-gold-dim)',
+                    }}
+                  >
+                    {flag.replace(/_/g, ' ')}
+                  </span>
+                ))}
+              </div>
+            )}
           </div>
         )}
 
@@ -469,6 +497,30 @@ export default function SummaryScreen({ state, ending, onMainMenu, onPlayAgain }
           >
             Play Again
           </button>
+          {onWhatIf && state.choiceHistory.length > 0 && (
+            <button
+              onClick={onWhatIf}
+              className="px-8 py-3 text-sm uppercase tracking-widest border transition-all duration-300"
+              style={{
+                fontFamily: "'Inter', sans-serif",
+                backgroundColor: 'transparent',
+                borderColor: 'var(--border-subtle)',
+                color: 'var(--text-secondary)',
+                letterSpacing: '0.15em',
+                borderRadius: '2px',
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.borderColor = 'var(--accent-gold-dim)';
+                e.currentTarget.style.color = 'var(--text-primary)';
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.borderColor = 'var(--border-subtle)';
+                e.currentTarget.style.color = 'var(--text-secondary)';
+              }}
+            >
+              What If?
+            </button>
+          )}
           <button
             onClick={onMainMenu}
             className="px-8 py-3 text-sm uppercase tracking-widest border transition-all duration-300"

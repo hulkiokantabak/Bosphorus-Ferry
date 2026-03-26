@@ -1,5 +1,34 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 
+const SPEED_KEY = 'bosphorus-ferry-text-speed';
+
+export type TextSpeed = 'slow' | 'normal' | 'fast' | 'instant';
+
+const SPEED_VALUES: Record<TextSpeed, number> = {
+  slow: 30,
+  normal: 22,
+  fast: 10,
+  instant: 0,
+};
+
+export function getTextSpeed(): TextSpeed {
+  try {
+    const stored = localStorage.getItem(SPEED_KEY);
+    if (stored && stored in SPEED_VALUES) return stored as TextSpeed;
+  } catch { /* noop */ }
+  return 'normal';
+}
+
+export function setTextSpeed(speed: TextSpeed) {
+  try {
+    localStorage.setItem(SPEED_KEY, speed);
+  } catch { /* noop */ }
+}
+
+export function getSpeedMs(): number {
+  return SPEED_VALUES[getTextSpeed()];
+}
+
 export function useTypewriter(text: string, speed: number = 25) {
   const [displayedText, setDisplayedText] = useState('');
   const [isComplete, setIsComplete] = useState(false);

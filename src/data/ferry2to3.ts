@@ -6,11 +6,11 @@ const ferry2to3Scenes: Scene[] = [
     episode: 2,
     text: `The Büyükada ferry is different. Longer. Slower. The city doesn't just recede — it dissolves, layer by layer, until the European and Asian shores are twin lines of light on the horizon and you're surrounded by the dark open water of the Marmara.
 
-You stand at the stern railing. The wind is stronger here, away from the strait's sheltered banks. Spray dots your jacket. The ferry is half-empty — off-season, the islands draw fewer visitors. The passengers who remain look like locals: groceries in bags, a tired purpose in their movements.
+You stand at the stern railing. The wind is stronger here, away from the sheltered shoreline. Spray dots your jacket. The ferry is half-empty — off-season, the islands draw fewer visitors. The passengers who remain look like locals: groceries in bags, a tired purpose in their movements.
 
 Kadıköy is behind you. Everything you learned there — Naz and her print shop, Bora's guilt-ravaged confession, the photographs, the name Vedat Arslaner — all of it points to the island ahead. The dark shape that will eventually rise from the water. Büyükada. The big island.
 
-No cars on Büyükada. No quick exits. Once you're there, you're there until the ferry comes back.
+No cars on Büyükada. No fast escapes. Once you're there, you're there until the ferry comes back.
 
 Three days ago you were writing restaurant reviews in Beşiktaş. Now you're carrying a dead woman's envelope, a phone full of stolen evidence, and the name of a man who collects art and buries people. Somewhere between the first ferry and this one, you stopped being a journalist looking into a story and became someone the story is looking back at.
 
@@ -40,7 +40,7 @@ The same ferry characters are here. Kaptan İrfan at the wheel. The çay counter
       {
         text: 'Go below. Find Rüya. If she\'s ever going to talk, it should be now.',
         next: 'ferry2_ruya',
-        condition: { flag: 'cultivated_ruya' },
+        condition: { flag: 'cultivated_ruya', npcTrust: { npc: 'ruya', min: 1 } },
         effects: {
           axisShift: { method: 0.1 },
         },
@@ -150,7 +150,7 @@ He drops his voice. "Listen. I've delivered tea to boats at Büyükada pier more
 
 He polishes a glass slowly. "The men on those boats weren't fishermen. They were... organized. Professional. And they always went up the hill. To the big house. The Arslaner place."
 
-He sets down the glass. "Here's what I want you to know: the island has eyes. The bakkal, the carriage drivers, the old women on their porches. Nothing happens there without someone seeing it. If you're going up that hill, you'll be noticed. So either go at night, or have a reason to be there that people will accept."`,
+He sets down the glass. "Here's what I want you to know: the island has eyes. The bakkal, the shuttle drivers, the old women on their porches. Nothing happens there without someone seeing it. If you're going up that hill, you'll be noticed. So either go at night, or have a reason to be there that people will accept."`,
     location: 'Ferry — Tea Counter',
     phase: 'ferry',
     npcPresent: ['cem'],
@@ -216,15 +216,15 @@ The ferry horn sounds. The first lights of Büyükada are visible on the horizon
     episode: 2,
     text: `She's in the same seat. Different book — Pamuk this time, The Black Book, its spine cracked in three places. The thermos is there, the reading glasses folded in her shirt pocket, the bag between her feet. But when you sit down, something is different. She closes the book immediately. No pretense. No waiting game.
 
-"You've been busy," she says. Not a question. Her grey eyes take inventory of you — the tension in your shoulders, the way you keep glancing at the cabin door. "Kadıköy. The print shop. The meyhane." She watches your reaction. "I told you — we'll talk when I know you won't be reckless."
+"You've been busy," she says. Not a question. Her gray eyes take inventory of you — the tension in your shoulders, the way you keep glancing at the cabin door. "Kadıköy. The print shop. The meyhane." She watches your reaction. "I told you — we'll talk when I know you won't be reckless."
 
-She pulls a slim folder from her bag — the motion practised, no wasted movement. Plain manila, unmarked. "My name is Rüya Korkmaz. I'm a licensed private investigator." She says it the way a doctor says their specialty — matter-of-fact, no drama. "I was hired eight months ago by an insurance company. They underwrote a policy on a collection of Ottoman paintings. The collection belongs to Vedat Arslaner."
+She pulls a slim folder from her bag — the motion practiced, no wasted movement. Plain manila, unmarked. "My name is Rüya Korkmaz. I'm a licensed private investigator." She says it the way a doctor says their specialty — matter-of-fact, no drama. "I was hired eight months ago by an insurance company. They underwrote a policy on a collection of Ottoman paintings. The collection belongs to Vedat Arslaner."
 
 She opens the folder. Inside: photographs. The mansion on Büyükada. A bill of lading for art transport. A photocopy of a death certificate — Defne Karadağ. Her fingers arrange them on the table with the precision of someone who has done this briefing before, in other cabins, for other cases. But there's something in the way she lingers on the death certificate — a tightness at the corner of her mouth.
 
 "The insurance company became suspicious when Arslaner filed claims on three paintings that were supposedly destroyed in a water leak. But the restoration records didn't match. Someone had been working on those paintings — adding layers, not removing them. Hiding things inside them."
 
-She meets your eyes. The grey is almost silver in the cabin light. "Your sister was the restorer. And I don't think she's dead."`,
+She meets your eyes. The gray is almost silver in the cabin light. "Your sister was the restorer. And I don't think she's dead."`,
     location: 'Ferry — Lower Cabin',
     phase: 'ferry',
     npcPresent: ['ruya'],
@@ -239,6 +239,7 @@ She meets your eyes. The grey is almost silver in the cabin light. "Your sister 
       {
         text: '"Show me everything you have. We need to work together."',
         next: 'ferry2_ruya_ally',
+        condition: { npcTrust: { npc: 'ruya', min: 2 } },
         effects: {
           axisShift: { trust: 0.2, method: 0.1 },
           npcTrust: { ruya: 1 },
@@ -249,7 +250,7 @@ She meets your eyes. The grey is almost silver in the cabin light. "Your sister 
   {
     id: 'ferry2_ruya_angry',
     episode: 2,
-    text: `Rüya takes the anger the way a sea wall takes a wave — absorbs it, doesn't move. Her thumb finds the scar on her left hand.
+    text: `Rüya takes the anger the way a sea wall takes a wave — absorbs it, doesn't move. Her fingers find the scar on her left thumb.
 
 "I didn't know you existed until three weeks ago. I was investigating insurance fraud, not a disappearance. When I found the connection to your sister, I started watching the ferry — because ferry records showed she was a regular passenger. That's when I found you."
 
@@ -426,7 +427,7 @@ The horn sounds. Büyükada pier, dead ahead.`,
     episode: 2,
     text: `The ferry horn sounds — three long blasts. The Büyükada pier emerges from the darkness: a handful of lights, a concrete jetty, the arched windows of the iskele building glowing amber.
 
-The island is darker than the city. Quieter. The absence of car engines is immediate and unsettling — just the wind in the pine trees, the creak of the ferry against the dock, the distant clip of a horse's hooves on pavement.
+The island is darker than the city. Quieter. The absence of combustion engines is immediate and unsettling — just the wind in the pine trees, the creak of the ferry against the dock, the quiet hum of an electric shuttle somewhere in the dark.
 
 You join the small stream of passengers moving toward the gangway. The air smells different here — pine resin, salt, something floral you can't name. The temperature has dropped.
 

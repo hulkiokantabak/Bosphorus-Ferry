@@ -38,14 +38,15 @@ export const LOCATION_NAMES: string[] = [
   // Multi-word locations first (longer matches take priority)
   'Büyükada İskelesi', 'Kadıköy İskelesi',
   'İskele Caddesi', 'Bahariye Caddesi',
-  'Princes\' Islands', 'Köşk Antik', 'Başkı Evi', 'Baski Evi',
+  'Princes\' Islands', 'Köşk Antik', 'Baskı Evi', 'Baski Evi',
   // Single-word / short locations
   'Arnavutköy', 'Kadıköy', 'Büyükada', 'Beşiktaş', 'Bosphorus',
   'Moda', 'Istanbul', 'İstanbul', 'Bahariye', 'Marmara',
   'Karaköy', 'Galata', 'Eminönü', 'Üsküdar', 'Beyoğlu', 'Topkapı',
   'Dimitriades', 'Bebek', 'Etiler', 'Erdek', 'Bursa',
   'Nişantaşı', 'Kabataş', 'Kız Kulesi', 'Avşa',
-  // ASCII variants used in some scene text
+  // ASCII variants (kept for backward compatibility with older saves)
   'Buyukada', 'Kadikoy', 'Arnavutkoy', 'Besiktas',
   'Nisantasi', 'Kabatas', 'Kiz Kulesi', 'Avsa',
+  'Carsi', 'Baski',
 ];

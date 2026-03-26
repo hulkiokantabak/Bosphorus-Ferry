@@ -39,7 +39,7 @@ You take your sister's hand and walk into the city. Istanbul closes around you l
     episode: 3,
     text: `You don't put your name on it. The evidence goes to the police in an anonymous package — photographs, documents, Rüya's insurance files, everything — delivered to the organized crime division by courier. No return address. No byline.
 
-The investigation takes longer this way. Without a journalist driving public pressure, the wheels of justice turn slowly. But they turn. Vedat Arslaner is questioned. Then questioned again. Then arrested, quietly, on a Thursday morning while the Bosphorus fog still clings to the islands.
+The investigation takes longer this way. Without a journalist driving public pressure, the wheels of justice turn slowly. But they turn. Vedat Arslaner is questioned. Then questioned again. Then arrested, quietly, on a Thursday morning while the Marmara fog still clings to the islands.
 
 The network unravels piece by piece. Selim. Naz. The private boat captains and the dock workers who looked the other way. The paintings are examined. The documents found. The truth, buried for years beneath layers of oil paint and Ottoman miniatures, surfaces at last.
 
@@ -57,7 +57,7 @@ She nods. For the first time in two years, she smiles. Small, careful, like some
 
 It works.
 
-Somewhere in Arnavutköy, Oğuz sits on his crate and watches the Bosphorus, the way he does every evening. He doesn't read newspapers. But the fish vendor tells him about the arrests, and the old man nods, threads his net, and says nothing. He said his piece two years ago. The water remembers.
+Somewhere in Arnavutköy, Oğuz sits on his crate and watches the Bosphorus, the way he does every evening. He doesn't read newspapers. But the fish vendor tells him about the arrests, and the old man nods, threads his net, and says nothing. He said his piece two years ago. The current carried it where it needed to go.
 
 Melis reopens the cafe at night for the first time in two years. She stays open until midnight, the way she used to when Defne was alive. She doesn't explain why. She doesn't need to.
 
@@ -105,38 +105,52 @@ But Defne is alive. And sometimes, that's the only truth that matters.`,
     choices: [],
   },
 
-  // === ENDING B2: The Deal — Refused ===
+  // === ENDING B2: The Deal — The Broker's Silence ===
   {
     id: 'ending_b2',
     episode: 3,
-    text: `"No."
+    text: `Vedat slides the envelope across the desk. Inside: photographs. Not of paintings — of Defne. Taken over months. Defne at the bakkal. Defne on the back path. Defne sleeping in the servants' quarters with the window cracked open, her face slack and unguarded.
 
-The word hangs in Vedat's study like smoke. He sets down his çay glass. His expression doesn't change — but something behind his eyes recalculates.
+"I've always known where she is," he says. "The question was never whether I could reach her. The question was whether it was worth the noise."
 
-"No," you say again. "Defne doesn't come home with conditions. She comes home free, or this doesn't end."
+He lets that settle. Then he opens a second envelope. Documents — Rüya's insurance files, yes, but also something else. Financial transfers. Your mother's pension. Payments from a shell company linked to Vedat's network, deposited monthly for two years into an account in your mother's name. Your mother, who told you she was managing fine. Your mother, who never once asked where the money came from.
 
-Vedat studies you. The silence stretches. Outside, through the tall windows, the Bosphorus glitters indifferently.
+"Your family has been living on my generosity," Vedat says. "Not a threat. A fact."
 
-"You're making a mistake," he says. Quiet. Not a threat — a diagnosis.
+The room tilts. You look at the documents. The amounts are modest — just enough to cover rent, medication, the small dignities of an aging woman alone in Beşiktaş. Just enough to make your mother complicit without her knowing it.
 
-"Maybe. But it's mine to make."
+"Here is my offer. Defne stays. She is safe here — genuinely safe, I have no reason to harm her. She continues her restoration work. The paintings she's been repairing are extraordinary; she has a gift. In return, you go home. You write nothing. And in two years, when the statute of limitations expires on certain... transactions, she comes home freely. No conditions then. No strings."
 
-You stand. He doesn't stop you. You walk out of his study, through the hallway lined with paintings that hold secrets like graves hold bones, and out into the cold island air.
+"Two years," you say.
 
-What follows is chaos. Tayfun is alerted. The mansion locks down. But you have a head start, and Rüya is waiting at the back path with a phone full of evidence already uploaded to a secure server. Bora is at the pier with a borrowed boat. Cem has alerted the coast guard — the real coast guard, not the compromised one.
+"She's already survived two. What's two more, with certainty at the end?"
 
-The network cracks. Not cleanly — there are confrontations, a chase through the pine forest, a moment on the back pier where Tayfun corners you and Defne, and you see him make a choice. He lowers his hand. Steps aside. Whatever Vedat pays him, it's not enough to silence his conscience entirely.
+You look at Defne's face in the photographs. Asleep. Unaware she was being watched. You think about your mother's pension statements, the money you never questioned, the quiet way complicity seeps into a life like damp into old stone.
 
-You make the ferry. The morning ferry, dawn light painting the Marmara gold. Defne sits beside you, shaking, thin, fierce. Behind you, the island shrinks. Ahead, Istanbul rises.
+You think about what Rüya told you: that the documents on the USB drive could bring down the network, but only if someone publishes them. And you think about the USB drive in your jacket pocket, and Vedat's eyes on your jacket, and the fact that he hasn't asked for it. He's waiting to see if you offer.
 
-It's messy. The prosecution will take years. Some of the evidence won't hold. Naz will argue cultural preservation. Selim will hire expensive lawyers. Vedat will fight with every weapon old money provides.
+You slide the USB drive across the desk.
 
-Bora is at the Kadıköy pier when the ferry arrives. He doesn't say anything. He just wraps Defne in a hug that lifts her off her feet, and for a moment the big man's shoulders shake. Then he sets her down, wipes his eyes with the back of his hand, and says: "I kept your stool warm."
+Vedat takes it. His expression doesn't change. He opens a drawer, places it inside, and closes the drawer with a sound like a coffin lid.
 
-The silence is broken. And Defne is on the ferry, heading home, the wind in her hair for the first time in two years.
+"You've made the right choice," he says.
 
-That's enough. For now, that's enough.`,
-    location: 'Büyükada — Morning Ferry',
+You leave the mansion in the blue hour before dawn. The electric shuttles are parked for the night. The pine trees creak. At the pier you wait for the first ferry alone, and when it comes you board without looking back at the island, at the mansion on the hill, at the room where your sister will wake up tomorrow morning and the morning after that and every morning for two more years in a house that is both sanctuary and prison.
+
+On the ferry, a vendor sells simit. The Marmara is calm. Istanbul rises ahead of you, its minarets catching the first light, and you realize you are going home to your mother's apartment where you will sit at her kitchen table and drink her çay and say nothing about the money, nothing about the photographs, nothing about the drawer.
+
+Melis asks about Defne when you return to the cafe. You tell her she's safe. Melis studies your face for a long time, then nods and pours your coffee without another word.
+
+You file a restaurant review that Thursday. It's your best work in months — vivid, precise, alive to every flavor. Your editor is pleased. Your readers leave comments. Life continues.
+
+Some nights you stand on the Beşiktaş waterfront and watch the ferries crossing to the islands, their lights tracking across the dark water like slow-moving stars. You count the days. You do the math. You tell yourself two years is not so long. You tell yourself she's safe.
+
+You don't think about the USB drive. You don't think about what was on it, or who else it might have saved, or what happens to the next person who stumbles into Vedat's network without a sister to trade.
+
+The Bosphorus carries everything eventually. That's what Oğuz told you. The current takes it all.
+
+You hope that's true. You are not sure it's a comfort.`,
+    location: 'Büyükada — Vedat\'s Study',
     phase: 'ending',
     choices: [],
   },
@@ -261,40 +275,50 @@ You're going home. Both of you. Finally, impossibly, both of you.`,
   {
     id: 'ending_d2',
     episode: 3,
-    text: `You miss the last ferry by four minutes. You hear the horn from the pine forest — two blasts, departure — and something in your chest breaks.
+    text: `You anchor in the cove and kill the engine. The silence is total — just the water lapping against the hull and the wind in the pines above. You sit together in the dark, waiting for dawn, waiting for the first ferry.
 
-"The boat," Defne says. "Filiz's boat. The back pier."
+Then the flashlights appear on the ridge. Two beams, sweeping the shoreline. Tayfun changed his mind — or someone overruled him. They're searching the coast.
 
-But when you reach the east jetty, the boat is gone. Cut loose, maybe. Or taken. The rope end trails in the water like a dead thing.
+"They'll find the boat," Defne says. Her voice is flat, certain. She's already pulling the USB drive from her coat, pressing it into your hand. "The evidence goes with you. I'll swim to the rocks on the east side. I know every hiding place on this island."
 
-You stand on the dark pier, the island behind you, the open Marmara ahead, and for a terrible moment you feel the weight of everything — two years of searching, three days of chasing shadows, and now this: stranded on an island with a man who's been sent to find you.
+"No — "
 
-"I know a place," Defne says. Her voice is calm. The calm of someone who's been hiding for two years, who knows every bolt-hole on this island.
+"Deniz. Listen to me." Her hands grip yours around the drive, her face close in the dark. Salt air and pine resin and something fierce in her eyes. "If they catch us both, it's over. If you get away with the drive, everything I did means something. Take the boat. Go now, while they're still on the ridge. Don't wait for me."
 
-She leads you through the back streets, past shuttered summer houses and locked gates, to a small stone building half-hidden by wisteria. An old church, deconsecrated, used for storage now. The door is unlocked — Defne has a key.
+She slips over the side before you can stop her — a quiet splash, then nothing. A shadow cutting through black water toward the rocks, toward the island she knows better than anyone alive. She can disappear in ways Tayfun will never unravel. She's done it for two years.
 
-Inside: darkness, dust, the smell of old stone and dried flowers. Wooden crates stacked along one wall. A narrow window facing east.
+Or she can't. Not this time. You don't know. That's the thing you will live with.
 
-"We wait," she says. "First ferry is at six. Dawn."
+You start the engine. The flashlight beams swing toward the sound, but you're already moving, the throttle wide open, the hull slapping the waves. The cove falls behind. The island falls behind. The Marmara is flat and vast and empty, the city a band of orange light on the far horizon. You drive toward it with the USB drive in your fist like a coal.
 
-You sit in the darkness together. Hour after hour. You hear footsteps once — boots on cobblestone, slow and methodical, Tayfun's patrol passing within twenty meters. You hold your breath. The footsteps fade.
+You reach the Kabataş pier at three in the morning. A night fisherman watches you tie up to the wrong bollard and says nothing. Istanbul receives you the way it receives everything — indifferently, immensely, without judgment.
 
-In the darkness, Defne talks. Not about the network. About before. About the summers when you were children, the ferry to the islands with your parents, the taste of dondurma from the pier vendor. Her voice is a thread in the dark, pulling you both back to a time before paintings and conspiracies and faked deaths.
+Cem meets you at the safe house. You give him the drive. He copies it three times, uploads it to the secure server Rüya set up, and locks the original in a fireproof box. By dawn the files are mirrored across four countries.
 
-Dawn comes slowly. Gray first, then gold. Through the narrow window, the Marmara appears, flat and pale. And there — moving toward the island from the direction of the city — the first ferry. Its lights like a constellation on the water.
+"Defne?" he asks.
 
-You slip out of the church. The streets are empty — even Tayfun sleeps eventually. You walk to the pier as the sun clears the horizon, painting the Victorian mansions gold and the water diamond-white.
+"I don't know."
 
-The ferry docks. The gangway drops. You board with the first passengers — bakers, shopkeepers, early commuters. Nobody looks twice at two tired women with pine needles in their hair.
+He doesn't press. He makes you çay. You sit in the gray light of his apartment in Cihangir and watch the Bosphorus through the window. Ferries are already running — the early ones, carrying bakers and fishermen and people who slept through the night without running from anyone.
 
-The horn sounds. The ferry pulls away. Büyükada shrinks behind you, its hilltop mansion catching the first sunlight like a beacon.
+The story breaks three days later. An international wire service picks it up. Vedat's name is everywhere. The network is exposed — the paintings, the documents, the decades of forgery and smuggling. Interpol issues notices. Turkish police raid the mansion. Naz is arrested at her print shop. Selim at the docks. Hakan Reis's boat is impounded.
 
-"It's over," Defne says.
+But Defne is not found.
 
-It isn't, not really. There will be police, lawyers, the long unwinding of a two-year disappearance. But standing on the ferry at dawn, the Bosphorus gilded and gleaming, your sister beside you for the first time in two years — it feels like it could be. It feels like a beginning, disguised as an ending.
+Not on the island. Not at the mansion. Not in any of the hiding places the police search based on your testimony. The servants' quarters are empty. The stone church is empty. Filiz says nothing — sits in her kitchen with her hands folded and her mouth a sealed line and says nothing to anyone.
 
-The ferry carries you west. Toward the city. Toward home.`,
-    location: 'Büyükada — Dawn Ferry',
+Weeks pass. Bora keeps Defne's stool at the Kadıköy meyhane. Melis keeps her table at the cafe. Oğuz sits on his crate in Arnavutköy and watches the water the way he always has, as if the current might carry an answer if you wait long enough.
+
+You file a missing persons report. The police are sympathetic but confused — she was already dead, officially, for two years. The bureaucracy of searching for someone who doesn't legally exist is its own kind of labyrinth.
+
+One night in November, three months after the island, your phone buzzes. An unknown number. No voice — just the sound of water, and wind, and a ferry horn in the distance. The call lasts eleven seconds. Then it ends.
+
+You stand on the Beşiktaş waterfront and watch the last ferry of the night cross toward Kadıköy, its lights trembling on the black water. You hold the phone against your chest. The evidence is published. The network is dismantled. Justice, or something shaped like it, has been done.
+
+But the Bosphorus keeps its own counsel. The current moves in two directions at once — fresh water flowing south on the surface, salt water pushing north below, and between them a layer where nothing moves at all. The fishermen call it the undertow. Things caught there don't surface. They don't sink either. They just drift.
+
+You go home. You leave the light on.`,
+    location: 'Istanbul — November',
     phase: 'ending',
     choices: [],
   },

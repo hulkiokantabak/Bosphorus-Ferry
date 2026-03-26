@@ -9,7 +9,7 @@ const episode3Scenes: Scene[] = [
 
 You step off the gangway onto solid ground. The pier is small, almost quaint compared to the industrial concrete of Kadıköy or Eminönü. A handful of passengers disperse — islanders, groceries in hand, moving with the unhurried purpose of people who live where time runs differently.
 
-İskele Caddesi stretches ahead, the island's main street. Horse-drawn carriages wait in a row, the horses stamping impatiently. A few electric vehicles hum past. No cars. No exhaust. The air smells of pine resin, salt, and something floral — wisteria, maybe, climbing the facade of a shuttered hotel.
+İskele Caddesi stretches ahead, the island's main street. Small electric vehicles hum past — the island's quiet replacements for the horse-drawn carriages of old. No combustion engines. No exhaust. The air smells of pine resin, salt, and something floral — wisteria, maybe, climbing the facade of a shuttered hotel.
 
 And there, above the town, visible from the pier: the hill. At its crown, lit by a single exterior lamp, a Victorian mansion sits against the darkening sky. Even from here, it looks like a place that holds things. Secrets. Art. People.
 
@@ -51,9 +51,9 @@ A feeling prickles at the back of your neck — the one your mother always said 
 
 A bakkal — one of those corner shops that sells everything from bread to batteries — sits at the first intersection, its fluorescent light spilling onto the cobblestones. An older man leans in the doorway, watching the street with the territorial patience of someone who's been watching it for decades.
 
-Further along, a horse-carriage driver adjusts his horse's bridle, speaking softly in the animal's ear. The carriage is empty — waiting for a fare that probably won't come tonight.
+Further along, an electric shuttle driver leans against his vehicle, scrolling his phone. The shuttle is empty — waiting for a fare that probably won't come tonight.
 
-Both look like people who know things. The bakkal owner sees everyone who passes. The carriage driver goes everywhere on the island. Between them, you might map the whole hilltop before setting foot on it.`,
+Both look like people who know things. The bakkal owner sees everyone who passes. The shuttle driver goes everywhere on the island. Between them, you might map the whole hilltop before setting foot on it.`,
     location: 'İskele Caddesi',
     phase: 'exploration',
     choices: [
@@ -62,8 +62,8 @@ Both look like people who know things. The bakkal owner sees everyone who passes
         next: 'e3_bakkal',
       },
       {
-        text: 'Approach the carriage driver. He knows the roads — and the hill.',
-        next: 'e3_carriage',
+        text: 'Approach the shuttle driver. He knows the roads — and the hill.',
+        next: 'e3_shuttle',
       },
       {
         text: 'Walk past both. Head toward the hill road on your own.',
@@ -81,7 +81,7 @@ Both look like people who know things. The bakkal owner sees everyone who passes
 
 From here, you can see the street, the pier road, and a slice of the hill above the rooftops. You watch.
 
-People move differently on this island. Slower, but more purposeful. Everyone knows everyone. A woman with a shopping basket stops to talk to the horse-carriage driver. A boy on a bicycle delivers bread. Two men in dark coats walk up the hill road — not tourists, not locals. Something about their bearing says professional.
+People move differently on this island. Slower, but more purposeful. Everyone knows everyone. A woman with a shopping basket stops to talk to the shuttle driver. A boy on a bicycle delivers bread. Two men in dark coats walk up the hill road — not tourists, not locals. Something about their bearing says professional.
 
 The tea garden owner watches you watching. After a few minutes, she speaks. "You're not a tourist," she says. Not unfriendly. Just observant. "Tourists look at the houses. You're looking at the people."`,
     location: 'Büyükada Tea Garden',
@@ -115,7 +115,7 @@ The tea garden owner watches you watching. After a few minutes, she speaks. "You
     episode: 3,
     text: `The owner nods slowly. "The mansions. Everyone wants to write about the mansions." She refills your glass. "The big one on the hill — Arslaner's place — that's the one they all want to see. But Vedat Bey is private. Very private. Doesn't receive visitors."
 
-She leans against the table edge. "Though lately, he's had more visitors than usual. Cars — well, electric cars — going up the hill road at odd hours. Men who don't look like art collectors. My husband says they look like lawyers. I say they look like trouble."
+She leans against the table edge. "Though lately, he's had more visitors than usual. Electric vehicles going up the hill road at odd hours. Men who don't look like art collectors. My husband says they look like lawyers. I say they look like trouble."
 
 She gives you directions to the hill road and mentions that Filiz Hanım — "the housekeeper, been there forever" — sometimes comes to the bakkal in the morning. "If you want to see the mansion, Filiz is the one to ask. She's the gate. Nothing gets in or out without her knowing."`,
     location: 'Büyükada Tea Garden',
@@ -162,7 +162,7 @@ She refills your çay. "Start with Filiz Hanım. The housekeeper at the big mans
     episode: 3,
     text: `The owner respects the silence. She refills your çay, wipes down a neighboring table, and lets the evening settle around you both.
 
-You watch the hill road. A horse-drawn carriage climbs slowly, its lantern swaying. Two figures walk down — a tall man in a dark jacket, moving with military precision, and a smaller figure behind him. The tall man scans the street with professional attention.
+You watch the hill road. An electric shuttle climbs slowly, its headlights cutting the dusk. Two figures walk down — a tall man in a dark jacket, moving with military precision, and a smaller figure behind him. The tall man scans the street with professional attention.
 
 Vedat's security, you think. Even from here, the tall man has the bearing of someone trained to watch for threats.
 
@@ -206,6 +206,7 @@ But the look in her eyes says she doesn't believe that. And neither do you.`,
       {
         text: 'Go directly to the Dimitriades servants\' quarters. Defne might be there.',
         next: 'e3_servants_approach',
+        condition: { npcTrust: { npc: 'filiz', min: 1 } },
         effects: {
           axisShift: { approach: 0.2, heart: 0.1 },
         },
@@ -219,7 +220,7 @@ But the look in her eyes says she doesn't believe that. And neither do you.`,
       },
     ],
   },
-  // === BAKKAL & CARRIAGE ===
+  // === BAKKAL & SHUTTLE DRIVER ===
   {
     id: 'e3_bakkal',
     episode: 3,
@@ -229,7 +230,7 @@ But the look in her eyes says she doesn't believe that. And neither do you.`,
 
 You buy a bottle of water and a simit, establishing yourself as a customer before anything else. Mehmet warms up — he's chatty once the transaction is made.
 
-"The big house? Arslaner's?" He adjusts his glasses. "Strange times up there. More visitors than I've seen in years. Usually it's quiet — just Filiz Hanım coming for supplies and that security man of his. But last two weeks, cars going up, cars coming down. Lawyers, I think. Or buyers."
+"The big house? Arslaner's?" He adjusts his glasses. "Strange times up there. More visitors than I've seen in years. Usually it's quiet — just Filiz Hanım coming for supplies and that security man of his. But last two weeks, people going up the hill, people coming down. Lawyers, I think. Or buyers."
 
 He leans on the counter. "Between you and me? I think he's selling. The mansion, the whole thing. Filiz Hanım was in here yesterday, and she looked..." He searches for the word. "Troubled. Forty years she's worked in that house. If it sells, where does she go?"
 
@@ -302,30 +303,30 @@ Something to remember. Even enforcers have their limits.`,
     ],
   },
   {
-    id: 'e3_carriage',
+    id: 'e3_shuttle',
     episode: 3,
-    text: `The carriage driver is feeding his horse an apple, the animal's breath steaming in the cool air. He's in his fifties, weathered, with the thick hands of someone who's held reins for a living.
+    text: `The shuttle driver is leaning against his electric vehicle, drinking çay from a paper cup. He's in his fifties, weathered, with the calloused hands of someone who spent decades holding reins before the island switched to these quiet machines.
 
-"Where to?" he asks, already reaching for the bridle.
+"Where to?" he asks, already reaching for the door handle.
 
 "The hill," you say. "The Arslaner mansion."
 
-His hand pauses. "Arslaner's place." He gives the horse another apple slice, deliberate and slow. "I can take you to the bottom of the hill road. I don't go up. The road is private after the stone wall, and Vedat Bey..." He trails off. "He doesn't welcome visitors."
+His hand pauses. "Arslaner's place." He takes a slow sip of his çay. "I can take you to the bottom of the hill road. I don't go up. The road is private after the stone wall, and Vedat Bey..." He trails off. "He doesn't welcome visitors."
 
-He studies you. "You're not a buyer. Buyers come with briefcases and suits. You're not a lawyer. You look like someone looking for something." He pats the horse's neck. "This island is small. People come here to find things or to hide from them. Which is it for you?"`,
-    location: 'Büyükada — Carriage Stand',
+He studies you. "You're not a buyer. Buyers come with briefcases and suits. You're not a lawyer. You look like someone looking for something." He sets down his cup. "This island is small. People come here to find things or to hide from them. Which is it for you?"`,
+    location: 'Büyükada — Shuttle Stand',
     phase: 'exploration',
     choices: [
       {
         text: '"Both. I\'m looking for someone who\'s hiding."',
-        next: 'e3_carriage_honest',
+        next: 'e3_shuttle_honest',
         effects: {
           axisShift: { trust: 0.2 },
         },
       },
       {
         text: '"I\'m a journalist covering the island\'s architectural heritage."',
-        next: 'e3_carriage_cover',
+        next: 'e3_shuttle_cover',
         effects: {
           axisShift: { approach: -0.1 },
         },
@@ -337,17 +338,17 @@ He studies you. "You're not a buyer. Buyers come with briefcases and suits. You'
     ],
   },
   {
-    id: 'e3_carriage_honest',
+    id: 'e3_shuttle_honest',
     episode: 3,
-    text: `The driver looks at you for a long time. The horse stamps impatiently.
+    text: `The driver looks at you for a long time. The shuttle idles silently.
 
-"Someone hiding." He climbs onto the carriage seat and gestures for you to get in. "I've been driving this island for twenty-five years. I know who lives here, who visits, who comes and goes at odd hours."
+"Someone hiding." He opens the passenger door and gestures for you to get in. "I've been driving this island for twenty-five years — first with horses, now with these." He pats the dashboard. "Quieter, but I miss the sound of hooves. I know who lives here, who visits, who comes and goes at odd hours."
 
-The carriage jolts into motion. Hooves on cobblestone, the creak of old wood, the jingle of the bridle. He drives slowly, keeping his voice low.
+The shuttle hums up the road, almost silent. Pine branches brush the roof. He drives slowly, keeping his voice low.
 
-"There's a woman. I've seen her a few times — always at dusk, always on the back paths. She wears a headscarf pulled low, walks fast, head down. Like someone who doesn't want to be recognized." He flicks the reins. "She comes from the direction of the old servants' quarters behind the Dimitriades house. Filiz Hanım — the housekeeper at Arslaner's — I've seen her going the same direction with bags."
+"There's a woman. I've seen her a few times — always at dusk, always on the back paths. She wears a headscarf pulled low, walks fast, head down. Like someone who doesn't want to be recognized." He adjusts the mirror. "She comes from the direction of the old servants' quarters behind the Dimitriades house. Filiz Hanım — the housekeeper at Arslaner's — I've seen her going the same direction with bags."
 
-He stops the carriage at the base of the hill road. "That's as far as I go. The stone wall is a hundred meters up. Beyond that, it's Arslaner's territory." He tips his hat. "Be careful. And be kind to Filiz if you meet her. She's a good woman carrying more than she should."`,
+He stops the shuttle at the base of the hill road. "That's as far as I go. The stone wall is a hundred meters up. Beyond that, it's Arslaner's territory." He tips his cap. "Be careful. And be kind to Filiz if you meet her. She's a good woman carrying more than she should."`,
     location: 'Büyükada — Hill Road',
     phase: 'exploration',
     choices: [
@@ -365,15 +366,15 @@ He stops the carriage at the base of the hill road. "That's as far as I go. The 
     ],
   },
   {
-    id: 'e3_carriage_cover',
+    id: 'e3_shuttle_cover',
     episode: 3,
     text: `"Architectural heritage." The driver doesn't quite smile. "Sure. The Arslaner mansion is the finest example of late Ottoman Victorian on the island. Four stories, wraparound veranda, original ironwork. Built in 1887 for an Armenian merchant."
 
-He climbs onto the seat and takes you up the lower road, narrating like a tour guide. The act is transparent, but he plays it well.
+He starts the shuttle and takes you up the lower road, narrating like a tour guide. The act is transparent, but he plays it well.
 
 "The house next door — the Dimitriades place — is Greek. Similar period, different style. It's been empty for years." He pauses. "Officially."
 
-He drops you at the base of the hill road. "The housekeeper is Filiz Hanım. She's the one who can give you access to the mansion — if she decides to. She doesn't warm to everyone." He tips his hat. "Good luck with your article, journalist."`,
+He drops you at the base of the hill road. "The housekeeper is Filiz Hanım. She's the one who can give you access to the mansion — if she decides to. She doesn't warm to everyone." He tips his cap. "Good luck with your article, journalist."`,
     location: 'Büyükada — Hill Road',
     phase: 'exploration',
     choices: [
@@ -451,6 +452,15 @@ He stands between you and the gate, arms at his sides but posture tense. His eye
         next: 'e3_tayfun_filiz',
         effects: {
           axisShift: { trust: 0.1 },
+        },
+      },
+      {
+        text: 'You\'ve pushed past harder walls than this. Hold your ground and lock eyes with Tayfun. "I\'m not leaving until I see what\'s in that house."',
+        next: 'e3_tayfun_journalist',
+        condition: { axis: { name: 'approach', min: 0.3 } },
+        effects: {
+          axisShift: { approach: 0.2 },
+          setFlags: ['tayfun_alert'],
         },
       },
       {
@@ -532,7 +542,7 @@ But Filiz has already set down the watering can. She comes to the veranda railin
 
 The name hits like a stone dropped in still water. Filiz's hand grips the railing. Even from this distance, you see her knuckles whiten. She knows that name. She's been waiting for that name.
 
-"Tayfun," she says quietly. "Let them in."
+"Tayfun," she says quietly. "Let her in."
 
 Tayfun looks like he wants to argue, but forty years of authority outweigh five years of employment. He steps aside. You walk through the gate, aware that you've just announced yourself to the entire property.`,
     location: 'Büyükada — Mansion Gate',
@@ -840,6 +850,7 @@ The key disappears back into her apron.
         next: 'e3_to_defne',
         effects: {
           npcTrust: { filiz: 1 },
+          setFlags: ['filiz_trusted'],
         },
       },
     ],
@@ -982,7 +993,15 @@ Defne stands across from you. She's thinner — her collarbones sharp under a fa
 
 "I figured it out."
 
-"I know." A breath that might be a laugh. "I know you did." Then, quieter: "I wanted to call you. Every day for two years, I wanted to pick up a phone and hear your voice. But if they traced the call..." She stops. "I couldn't risk you."
+"I know." A breath that might be a laugh. "I know you did." Then, quieter: "I wanted to call you every day. But they were watching your phone. They were watching Melis. They were watching everyone. One call and you'd have come looking — and they'd have followed you straight to me."
+
+She sits on the edge of the cot and wraps her arms around herself. The gesture is new — Defne never used to fold inward like that.
+
+"I painted the same view of the Bosphorus forty times from memory. Each one a little less accurate. That's what hiding does — it erases you in increments. First the details go. Then the colors shift. Then one morning you wake up and you can't remember which side of the strait the sun rises on, and you realize you're disappearing."
+
+Her voice hardens. "Sometimes I think about what would have happened if I'd just let Vedat have the paintings. Kept my mouth shut. Gone back to my studio and restored other people's art and never looked behind the canvas." She meets your eyes. "I'd still have a life. You'd still have a sister who answers the phone. Mom wouldn't have buried an empty coffin."
+
+The anger in her voice isn't directed at you. It's directed at the version of herself who chose truth over safety — and at the world that made those two things opposites.
 
 The silence fills with two years of absence. The anger comes — you feel it rise in your chest like something swallowed wrong.`,
     location: 'Büyükada — Servants\' Quarters',
@@ -1133,6 +1152,190 @@ She staged the drowning a week later. Faked a solo sailing trip. Left the boat a
           axisShift: { approach: 0.2 },
         },
       },
+      {
+        text: 'You don\'t answer yet. You look around the room — at everything she lived with.',
+        next: 'e3_defne_quiet',
+        effects: {
+          axisShift: { heart: 0.1 },
+          npcTrust: { defne: 1 },
+        },
+      },
+    ],
+  },
+  {
+    id: 'e3_defne_quiet',
+    episode: 3,
+    text: `You don't answer yet. Instead, you look.
+
+The room is smaller than you first realized. A single window, salt-fogged, faces west toward the Marmara. Beneath it, leaning against the wall in uneven rows, are the paintings. Forty of them — she wasn't exaggerating. Forty views of the Bosphorus, rendered on scraps of canvas, cardboard, the backs of food packaging. Some are tight and precise, the water rendered in the careful blues of someone who still remembered. Others are looser, the colors wrong — greens where there should be gray, the Asian shore drifting too far south, the ferries shrunk to white scratches.
+
+The most recent ones are barely paintings at all. Shapes. Light on water that might be any water. A smudge where Maiden's Tower should be.
+
+Defne watches you looking. She doesn't explain. She's past the point where explanation helps.
+
+On the table beside the cot: a journal, its spine split from use. Not a diary — you can see that from the pages left open. No dates, no dear-diary. Drawings. Floor plans of the mansion from memory. Tidal charts copied from an old almanac. Lists of ferry departure times she could hear from the harbor but never take. A page near the back is just a single word, written over and over in deteriorating script: *home*.
+
+A clothesline runs corner to corner, hung not with laundry but with dried herbs — thyme, mint, a sprig of something you don't recognize. The smell cuts through the room's staleness like a window cracked open. On the sill, three glass jars hold paintbrush water in graduating shades of blue — Monday's water, Tuesday's water, Wednesday's water. A calendar of color. A way to mark time when time has stopped meaning anything.
+
+She kept routines. You can see it in the wear patterns: the spot on the floor where she stood to paint, the dent in the cot where she sat to read, the clean rectangle on the table where the journal lives. She built a life the size of this room and lived it with the discipline of someone who understood that discipline was the only thing between her and the dark.
+
+You sit on the floor beside the paintings. The concrete is cold through your jeans. Defne stays on the cot. The distance between you is three feet and two years.`,
+    location: 'Büyükada — Servants\' Quarters',
+    phase: 'climax',
+    npcPresent: ['defne'],
+    choices: [
+      {
+        text: 'Pick up the earliest painting — the one where the colors are still right — and hold it up to the window light.',
+        next: 'e3_defne_quiet_paintings',
+        effects: {
+          axisShift: { heart: 0.1 },
+          npcTrust: { defne: 1 },
+        },
+      },
+      {
+        text: 'Open the journal. Read the ferry times she memorized but never used.',
+        next: 'e3_defne_quiet_journal',
+        effects: {
+          axisShift: { method: 0.1 },
+          npcTrust: { defne: 1 },
+        },
+      },
+      {
+        text: 'Your careful eye catches it — the mansion floor plans in the journal have annotations that don\'t match Defne\'s handwriting. Someone else has been updating them. Study the differences.',
+        next: 'e3_defne_quiet_journal',
+        condition: { axis: { name: 'method', min: 0.3 } },
+        effects: {
+          axisShift: { method: 0.2 },
+          npcTrust: { defne: 1 },
+          setFlags: ['noticed_filiz_notes'],
+        },
+      },
+      {
+        text: 'Say nothing. Lean your head against the wall and breathe the thyme-scented air with her.',
+        next: 'e3_defne_quiet_silence',
+        effects: {
+          axisShift: { heart: 0.2, trust: 0.1 },
+          npcTrust: { defne: 2 },
+        },
+      },
+    ],
+  },
+  {
+    id: 'e3_defne_quiet_paintings',
+    episode: 3,
+    text: `You find it near the bottom of the stack — the first one, or close to it. The Bosphorus from Üsküdar, late afternoon. The light is right. The proportions are right. You can almost hear the ferry horns, smell the corn vendors on the waterfront. She painted this when the memory was still sharp, still hers.
+
+You hold it up to the window. The real light — dim, island evening, nothing like the Istanbul afternoon in the painting — passes through the thin canvas and makes it glow.
+
+Defne comes off the cot and kneels beside you. She takes the painting from your hands and holds it next to the most recent one — the smudged, uncertain thing that barely resembles water.
+
+"Forty paintings," she says quietly. "Forty attempts to hold onto a city I couldn't see." She places them side by side on the floor. "The first one is technically better. But the last one is more honest. I stopped painting what I remembered and started painting what I felt." She touches the edge of the later canvas. "That's what disappearing looks like from the inside."
+
+You sit together in the diminishing light, the paintings spread around you like a tide chart of grief.`,
+    location: 'Büyükada — Servants\' Quarters',
+    phase: 'climax',
+    npcPresent: ['defne'],
+    choices: [
+      {
+        text: '"When this is over, you\'ll paint the real thing again. I promise."',
+        next: 'e3_plan_expose',
+        effects: {
+          axisShift: { heart: 0.1 },
+        },
+      },
+      {
+        text: '"We need to make sure this room isn\'t the last room you live in. What\'s the plan?"',
+        next: 'e3_plan_escape',
+        effects: {
+          axisShift: { method: 0.1 },
+        },
+      },
+    ],
+  },
+  {
+    id: 'e3_defne_quiet_journal',
+    episode: 3,
+    text: `You open the journal carefully. The spine protests — it's been opened and closed a thousand times, always to the same pages.
+
+The ferry times are written in columns. Büyükada to Kabataş: 06:50, 08:30, 10:15, 14:00, 17:30, 20:00. Büyükada to Kadıköy: 07:20, 09:45, 13:30, 16:00, 19:00. She's updated them — crossed out old times, written new schedules in different ink. She tracked every revision IDO published, though she could never board.
+
+Further in, the floor plans. Vedat's mansion, rendered with a restorer's eye for structural detail — load-bearing walls, window dimensions, the gallery's exact proportions. Notes in the margins: *Tayfun patrols 21:00-22:00. Filiz leaves kitchen door unlocked Tuesdays. Guard dog was retired in March.*
+
+She was mapping her prison and its warden from a room she couldn't leave.
+
+"I listened," Defne says from the cot. She's watching you read. "Every morning, the six-fifty ferry horn. Every evening, the eight o'clock. I knew the schedule better than the passengers. I'd hear the horn and think: that one could take me home." A pause. "But home was where they'd look first."
+
+You close the journal and set it down. The ferry times stare up from the page like a prayer repeated until the words lose meaning.`,
+    location: 'Büyükada — Servants\' Quarters',
+    phase: 'climax',
+    npcPresent: ['defne'],
+    choices: [
+      {
+        text: '"These floor plans — they\'re good. We can use them tonight."',
+        next: 'e3_plan_expose',
+        effects: {
+          axisShift: { method: 0.2 },
+        },
+      },
+      {
+        text: '"Tomorrow morning. The six-fifty ferry. You and me. We\'re going home."',
+        next: 'e3_plan_escape',
+        effects: {
+          axisShift: { heart: 0.2 },
+        },
+      },
+    ],
+  },
+  {
+    id: 'e3_defne_quiet_silence',
+    episode: 3,
+    text: `You lean your head against the wall. The plaster is cool and slightly damp. The thyme smell drifts down from the clothesline — sharp, clean, alive. Outside, the island settles. A dog barks twice and stops. The harbor bell rings the quarter hour. Somewhere below, pine branches creak in a wind you can't feel in this sealed room.
+
+Defne doesn't speak. Neither do you.
+
+The silence is different from the one downstairs, when you first saw each other and the years pressed the air out of the room. This silence has space in it. Room to breathe. Two people sitting with the wreckage and not yet deciding what to build from it.
+
+After a while, Defne shifts on the cot. Her foot nudges the nearest painting — the smudged one, the last attempt. She looks at it, then at you. Something in her face loosens. Not a smile. Not yet. But the muscles around her eyes release, the way a fist unclenches when you realize you're safe enough to set the thing down.
+
+"You smell like the ferry," she says. "Salt and diesel and that terrible çay they serve from the machine." Her voice cracks on the last word, and she laughs — a small, broken sound, the first laugh in this room in God knows how long. "I missed that smell. I missed that stupid ferry çay."
+
+"It's still terrible."
+
+"Good." She wipes her eyes with the heel of her hand. "Some things should stay the same."
+
+The quarter-hour bell rings again. The night is moving. Whatever you came to do on this island, the doing of it is close.`,
+    location: 'Büyükada — Servants\' Quarters',
+    phase: 'climax',
+    npcPresent: ['defne'],
+    choices: [
+      {
+        text: '"Defne. The paintings in the mansion. We end this tonight."',
+        next: 'e3_plan_expose',
+        effects: {
+          axisShift: { method: 0.1 },
+        },
+      },
+      {
+        text: '"First ferry tomorrow. Six-fifty. You\'re getting on it."',
+        next: 'e3_plan_escape',
+        effects: {
+          axisShift: { heart: 0.1 },
+        },
+      },
+      {
+        text: '"We confront him. Together. He should see your face when it falls apart."',
+        next: 'e3_plan_confront',
+        effects: {
+          axisShift: { approach: 0.2 },
+        },
+      },
+      {
+        text: 'You don\'t decide. You close your eyes and let everything you\'ve done — every choice, every trust earned and broken — decide for you.',
+        next: 'ending_calculate',
+        effects: {
+          axisShift: { heart: 0.1 },
+        },
+      },
     ],
   },
   {
@@ -1181,7 +1384,7 @@ The plan is clean. Simple. The kind of plan that works until it doesn't.`,
       {
         text: 'Go to the mansion tonight. Use Filiz\'s key. Get the evidence.',
         next: 'e3_stealth_begin',
-        condition: { flag: 'found_filiz' },
+        condition: { flag: 'found_filiz', npcTrust: { npc: 'filiz', min: 1 } },
         effects: {
           axisShift: { method: 0.2 },
         },
@@ -1189,7 +1392,7 @@ The plan is clean. Simple. The kind of plan that works until it doesn't.`,
       {
         text: 'You have allies — Rüya, Bora, Cem. Coordinate with them first.',
         next: 'e3_alliance_plan',
-        condition: { flag: 'cultivated_ruya' },
+        condition: { flag: 'cultivated_ruya', npcTrust: { npc: 'ruya', min: 1 } },
         effects: {
           axisShift: { trust: 0.2 },
         },
@@ -1314,12 +1517,58 @@ Inside: a service corridor, dim, smelling of wood polish and old plaster. Filiz 
           setFlags: ['entered_mansion'],
         },
       },
+      {
+        text: 'A door on the left is ajar — a private study. Peek inside first.',
+        next: 'e3_vedat_study',
+        effects: {
+          setFlags: ['entered_mansion', 'saw_vedat_study'],
+        },
+      },
+    ],
+  },
+  {
+    id: 'e3_vedat_study',
+    episode: 3,
+    text: `The door opens onto a small room that smells of leather and cedar. Not the main study where Vedat receives guests — this is something older, more private. A room he keeps for himself.
+
+A desk sits beneath the window, its surface bare except for a magnifying glass and a framed letter. You lean in. The letter is handwritten in careful, youthful script — a proposal addressed to the Istanbul Museum of Archaeology, dated 1981. In it, a twenty-three-year-old Vedat Arslaner proposes a partnership: private collectors funding museum restorations, in exchange for exhibition rights and scholarly access. "The art belongs to Turkey," the young Vedat wrote. "We are merely its custodians."
+
+The idealism is startling. This is not the Vedat you came to confront.
+
+A bookshelf lines the opposite wall — restoration manuals, conservation chemistry, Ottoman art history. You pull one down and find marginalia in a hand you recognize instantly: Defne's. Neat annotations in pencil, correcting a technique here, adding a reference there. She worked from these books. She learned in this room, before she learned what the room's owner really was.
+
+Above the shelf, a photograph in a tarnished silver frame: a young man in dusty field clothes, kneeling at an excavation trench somewhere in Anatolia. He's holding a fragment of tile, and his face — Vedat's face, decades younger — wears an expression of unguarded wonder. The kind of face that hasn't yet learned to calculate.
+
+You look from the photograph to the letter to Defne's handwriting in the margins. The story is legible: a man who loved this work, who believed in preservation, who somewhere along the way decided that keeping things meant owning them, and owning them meant controlling everyone who touched them. A fallen idealist is more dangerous than a cynic. Cynics never believed in anything. Vedat believed — and when the belief curdled, it curdled into empire.
+
+You close the book and return it to the shelf. The gallery is waiting.`,
+    location: 'Büyükada — Vedat\'s Private Study',
+    phase: 'climax',
+    choices: [
+      {
+        text: 'Move on to the gallery. You have what you came for.',
+        next: 'e3_gallery',
+      },
+      {
+        text: 'Take the 1981 letter. It might be useful.',
+        next: 'e3_gallery',
+        effects: {
+          setFlags: ['has_vedat_letter'],
+          axisShift: { method: 0.1 },
+        },
+      },
     ],
   },
   {
     id: 'e3_gallery',
     episode: 3,
     text: `The gallery takes your breath away despite everything. Twenty-three Ottoman miniatures line the walls, each in a heavy gilt frame, each lit by a small brass fixture now dark. In the thin light from your phone, the paintings glow — Bosphorus scenes, court life, gardens, battles. Centuries of beauty, weaponized.
+
+You move along the wall, phone raised, and then you stop. One painting holds you — a miniature no larger than a dinner plate, its gilding so fine it catches even this pale digital light and throws it back in threads of gold. It depicts Istanbul from the water. The Bosphorus in the sixteenth century, rendered in lapis and vermillion and leaf upon leaf of hammered gold. Caiques crowd the strait. Minarets rise thin as needles against a sky the painter made from crushed sapphire. Along the shore, figures no bigger than eyelashes carry baskets, mend nets, live their ordinary lives — four hundred years of ordinary, made eternal by someone whose name was never recorded. The detail is staggering. You can see the grain of wood on a fisherman's oar. You can see the ripple where his blade breaks the surface.
+
+You stand there too long. You know you stand there too long. But something about the painting won't release you — the intimacy of it, the way it insists on beauty as a matter of fact rather than argument. This is what was stolen. Not a commodity, not an asset to be hidden behind forged provenance papers and shell-company receipts. Someone poured years of their life into this. It belonged to a culture, to a city, to the people who walked those same shores today without knowing that this record of their ancestors hung in a criminal's private gallery, unseen, unshared, reduced to a wall decoration between a brandy cabinet and a window overlooking the sea it depicted. The forgery wasn't just legal. It was spiritual. A severing of people from their own memory.
+
+And then the thought you've been holding back all night: Defne stood here. Your sister stood in this same darkness, phone in hand, and saw exactly what you're seeing now. She understood what it meant — that the theft was not merely of objects but of continuity, of the thread connecting a city to its own past. She understood, and she tried to do something about it, and it cost her everything. Your hand is shaking. You lower the phone for a moment, breathe, raise it again.
 
 You begin with the painting Defne described — a Bosphorus scene, the one that started everything. Your hands shake as you carefully lift the frame from the wall. It's heavy. Behind it, mounted to the wall with museum-grade brackets, the back of the canvas is exposed.
 
@@ -1402,6 +1651,13 @@ Now the question: what do you do with them?`,
           axisShift: { heart: 0.2 },
         },
       },
+      {
+        text: 'Stand in the garden and breathe the pine air. You\'ve come this far — let the journey decide.',
+        next: 'ending_calculate',
+        effects: {
+          setFlags: ['has_evidence_package'],
+        },
+      },
     ],
   },
   {
@@ -1449,7 +1705,7 @@ Cem knows a coast guard officer — one who wasn't compromised — who can be co
 
 Bora is already on the last ferry. He'll be on the island by midnight. "Nobody threatens my friends and gets away with it," he says. "Nobody."
 
-The alliance isn't professional. It's a bartender, a ferry tea vendor, a private investigator, and two sisters. But it's enough. More than enough. Because Vedat Arslaner's power comes from secrecy, and secrets don't survive when this many people know them.
+The alliance isn't professional. It's a meyhane owner, a ferry tea vendor, a private investigator, and two sisters. But it's enough. More than enough. Because Vedat Arslaner's power comes from secrecy, and secrets don't survive when this many people know them.
 
 But when you hang up, Defne is sitting on the cot, arms wrapped around herself. "You have an army now," she says. "Do you still need me here for the battle?"
 
@@ -1514,6 +1770,13 @@ She's right. This isn't a confrontation. It's a reckoning.`,
         next: 'ending_a2',
         effects: {
           setFlags: ['has_evidence_package'],
+        },
+      },
+      {
+        text: 'Sit quietly while they plan. You\'ve earned this — let the story you\'ve lived write its own ending.',
+        next: 'ending_calculate',
+        effects: {
+          setFlags: ['has_evidence_package', 'found_defne'],
         },
       },
     ],
@@ -1600,6 +1863,13 @@ He fixes you with those cold, controlled eyes. "Silence. In exchange for everyth
         next: 'e3_vedat_refuse',
         effects: {
           axisShift: { approach: 0.2 },
+        },
+      },
+      {
+        text: 'Look at Defne. Look at Vedat. Let everything you\'ve learned guide this moment.',
+        next: 'ending_calculate',
+        effects: {
+          setFlags: ['found_defne'],
         },
       },
     ],
@@ -1723,6 +1993,13 @@ She's quiet for a long time. "Many," she says. "But not this one."`,
         text: 'Board the plane. Leave Turkey. Leave everything.',
         next: 'ending_c1',
       },
+      {
+        text: 'Hesitate at the gate. Everything you\'ve done, everyone you\'ve met — let it guide what comes next.',
+        next: 'ending_calculate',
+        effects: {
+          axisShift: { heart: 0.1 },
+        },
+      },
     ],
   },
   {
@@ -1748,6 +2025,13 @@ You'll be back. Not in person — in print. But it will take time.`,
       {
         text: 'Go. Build the case from safety. This isn\'t over — it\'s just beginning.',
         next: 'ending_c2',
+      },
+      {
+        text: 'Pause at the shore. Look back at the island one last time. Let your instincts choose the path.',
+        next: 'ending_calculate',
+        effects: {
+          setFlags: ['found_defne', 'has_evidence_package'],
+        },
       },
     ],
   },
@@ -1812,6 +2096,14 @@ Ahead, across the black water, the distant lights of the city shimmer on the hor
         text: 'Chase the ferry. Flag it down. Make the last crossing.',
         next: 'ending_d1',
       },
+      {
+        text: 'Cut the engine. Drift. Let the water and the night decide where you wash up.',
+        next: 'ending_calculate',
+        effects: {
+          setFlags: ['found_defne'],
+          axisShift: { heart: 0.1 },
+        },
+      },
     ],
   },
   {
@@ -1829,7 +2121,7 @@ You wait five minutes. Then ten. Then you untie the boat, push off, and drift in
 
 But the last ferry is gone. Its lights are distant, already nearing the city. You're on the water in a small boat with no destination.
 
-"There's a cove," Defne says. "On the back of the island. We can wait until dawn. First ferry at six."`,
+"There's a cove," Defne says. "On the back of the island. We can wait until dawn. First ferry at six-fifty."`,
     location: 'Büyükada — Back Pier',
     phase: 'climax',
     npcPresent: ['defne'],
@@ -1837,6 +2129,14 @@ But the last ferry is gone. Its lights are distant, already nearing the city. Yo
       {
         text: 'Hide in the cove until dawn. Take the first ferry home.',
         next: 'ending_d2',
+      },
+      {
+        text: 'Sit in the boat with Defne, watching the stars. Whatever happens next — let it come.',
+        next: 'ending_calculate',
+        effects: {
+          setFlags: ['found_defne'],
+          axisShift: { heart: 0.1 },
+        },
       },
     ],
   },

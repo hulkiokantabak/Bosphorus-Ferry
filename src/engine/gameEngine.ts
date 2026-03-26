@@ -1,5 +1,5 @@
 import { Scene, Choice, GameState } from '../types';
-import { checkCondition } from './conditionChecker';
+import { checkCondition, getConditionHint } from './conditionChecker';
 import { applyAxisShift, applyNpcTrust, saveGame } from './stateManager';
 
 // Scene registry
@@ -19,10 +19,33 @@ export function getSceneCount(): number {
   return sceneRegistry.size;
 }
 
+export function getEpisodeSceneCount(episode: number): number {
+  const prefix = `e${episode}_`;
+  let count = 0;
+  for (const scene of sceneRegistry.values()) {
+    if (scene.id.startsWith(prefix)) count++;
+  }
+  return count;
+}
+
 export function getAvailableChoices(scene: Scene, state: GameState): Choice[] {
   return scene.choices.filter((choice) =>
     checkCondition(choice.condition, state)
   );
+}
+
+export interface LockedChoice {
+  text: string;
+  hint: string;
+}
+
+export function getLockedChoices(scene: Scene, state: GameState): LockedChoice[] {
+  return scene.choices
+    .filter((choice) => !checkCondition(choice.condition, state))
+    .map((choice) => ({
+      text: choice.text,
+      hint: getConditionHint(choice.condition, state) || 'Locked',
+    }));
 }
 
 export function makeChoice(

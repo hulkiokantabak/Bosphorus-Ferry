@@ -114,6 +114,29 @@ export function hasSave(): boolean {
   }
 }
 
+export interface SavePreview {
+  episode: number;
+  scenesVisited: number;
+  choicesMade: number;
+}
+
+export function getSavePreview(): SavePreview | null {
+  try {
+    const saved = localStorage.getItem(SAVE_KEY);
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      if (parsed && typeof parsed.currentEpisode === 'number') {
+        return {
+          episode: parsed.currentEpisode,
+          scenesVisited: Array.isArray(parsed.visitedScenes) ? parsed.visitedScenes.length : 0,
+          choicesMade: Array.isArray(parsed.choiceHistory) ? parsed.choiceHistory.length : 0,
+        };
+      }
+    }
+  } catch { /* noop */ }
+  return null;
+}
+
 // ============================================================
 // ENDING TRACKER — persists across playthroughs
 // ============================================================

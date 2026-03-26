@@ -76,7 +76,7 @@ function buildRecap(episode: number, state?: GameState): string | null {
       lines.push('Bora held an envelope from Defne, addressed to you. "For Deniz. If."');
     }
     if (flags.has_sude_photos) {
-      lines.push('Sude risked everything to photograph midnight deliveries at Baski Evi.');
+      lines.push('Sude risked everything to photograph midnight deliveries at the print shop.');
     }
     if (flags.spotted_by_tayfun) {
       lines.push('You were followed. They know your face now.');
@@ -101,7 +101,7 @@ function buildRecap(episode: number, state?: GameState): string | null {
       lines.push('Every scrap of evidence is catalogued. Methodical. Ready.');
     }
     if (state.npcTrust.bora >= 2) {
-      lines.push('Bora is with you. His meyhane is your safe harbour.');
+      lines.push('Bora is with you. His meyhane is your safe harbor.');
     }
 
     if (lines.length === 1) {

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { hasSave, hasCompletedGame } from '../engine/stateManager';
+import { hasSave, hasCompletedGame, getSavePreview } from '../engine/stateManager';
 
 interface MainMenuProps {
   onNewGame: () => void;
@@ -11,6 +11,8 @@ interface MainMenuProps {
 export default function MainMenu({ onNewGame, onContinue, onJournal, onChapterSelect }: MainMenuProps) {
   const savedExists = hasSave();
   const hasCompleted = hasCompletedGame();
+  const savePreview = savedExists ? getSavePreview() : null;
+  const episodeNames: Record<number, string> = { 1: 'Arnavutköy', 2: 'Kadıköy', 3: 'Büyükada' };
   const [showChapters, setShowChapters] = useState(false);
 
   const secondaryButtonStyle = {
@@ -108,6 +110,19 @@ export default function MainMenu({ onNewGame, onContinue, onJournal, onChapterSe
               }}
             >
               Continue
+              {savePreview && (
+                <span
+                  className="block mt-1 normal-case"
+                  style={{
+                    fontSize: '0.65rem',
+                    letterSpacing: '0.05em',
+                    color: 'var(--accent-gold-dim)',
+                    opacity: 0.7,
+                  }}
+                >
+                  Episode {savePreview.episode} — {episodeNames[savePreview.episode] || 'Istanbul'} · {savePreview.scenesVisited} scenes
+                </span>
+              )}
             </button>
           )}
 

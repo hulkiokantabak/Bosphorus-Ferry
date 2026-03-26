@@ -7,6 +7,7 @@ import IntroScreen from './components/IntroScreen';
 import JournalScreen from './components/JournalScreen';
 import BriefingScreen from './components/BriefingScreen';
 import SummaryScreen from './components/SummaryScreen';
+import WhatIfViewer from './components/WhatIfViewer';
 
 function App() {
   const {
@@ -26,6 +27,8 @@ function App() {
     handleJournal,
     handleJournalBack,
     handleSummary,
+    handleWhatIf,
+    handleWhatIfBack,
     startFromChapter,
   } = useGame();
 
@@ -73,6 +76,10 @@ function App() {
     );
   }
 
+  if (screen === 'whatif') {
+    return <WhatIfViewer state={gameState} onBack={handleWhatIfBack} />;
+  }
+
   if (screen === 'summary' && ending) {
     return (
       <SummaryScreen
@@ -80,6 +87,7 @@ function App() {
         ending={ending}
         onMainMenu={handleMainMenu}
         onPlayAgain={startNewGame}
+        onWhatIf={handleWhatIf}
       />
     );
   }

@@ -8,8 +8,8 @@ const episode1: Scene[] = [
     id: 'e1_opening',
     episode: 1,
     phase: 'arrival',
-    location: 'Besiktas-Arnavutkoy Ferry',
-    text: `The vapur shudders as it pulls away from Beşiktaş iskele. Diesel fumes and salt air roll across the lower deck where you stand gripping the railing, phone in hand. The Bosphorus stretches ahead — dark water catching the last copper light of evening, tankers drifting south like slow grey ghosts.
+    location: 'Beşiktaş-Arnavutköy Ferry',
+    text: `The vapur shudders as it pulls away from Beşiktaş iskele. Diesel fumes and salt air roll across the lower deck where you stand gripping the railing, phone in hand. The Bosphorus stretches ahead — dark water catching the last copper light of evening, tankers drifting south like slow gray ghosts.
 
 You read the message again. Unknown number, received forty minutes ago while you sat at your desk pretending to write a column about municipal corruption.
 
@@ -30,7 +30,7 @@ You pocket the phone. Your hands are trembling. Not from cold.`,
         },
       },
       {
-        text: 'Walk the waterfront first. Get a feel for the neighbourhood before showing your hand.',
+        text: 'Walk the waterfront first. Get a feel for the neighborhood before showing your hand.',
         next: 'e1_waterfront_arrive',
         effects: {
           axisShift: { method: 0.2 },
@@ -53,7 +53,7 @@ You pocket the phone. Your hands are trembling. Not from cold.`,
     id: 'e1_waterfront_arrive',
     episode: 1,
     phase: 'exploration',
-    location: 'Arnavutkoy Waterfront',
+    location: 'Arnavutköy Waterfront',
     text: `You step off the ferry and the crowd swallows you — commuters heading home, a woman balancing a tray of simit on her head, two boys chasing a football across the cobbles. The iskele empties fast. Within minutes you're standing alone on the promenade, the Bosphorus lapping at stone steps black with algae.
 
 The waterfront stretches in both directions. To your left, a row of fish restaurants hums with early dinner service — white tablecloths, candles in glass jars, waiters calling out to passersby. To your right, the promenade narrows past shuttered boathouses and a small park where plane trees drop their leaves into the wind.
@@ -80,7 +80,7 @@ But the old man has looked up. He's watching you with eyes that miss nothing.`,
         },
       },
       {
-        text: 'Linger at the fish restaurants. Eavesdrop, pick up the rhythm of the neighbourhood.',
+        text: 'Linger at the fish restaurants. Eavesdrop, pick up the rhythm of the neighborhood.',
         next: 'e1_restaurants_listen',
         effects: {
           axisShift: { method: 0.2 },
@@ -93,12 +93,12 @@ But the old man has looked up. He's watching you with eyes that miss nothing.`,
     id: 'e1_observe_first',
     episode: 1,
     phase: 'exploration',
-    location: 'Arnavutkoy Waterfront',
+    location: 'Arnavutköy Waterfront',
     text: `You find a plastic chair outside a cramped çay ocağı wedged between a barbershop and a hardware store. The owner — a heavyset man with a soup-strainer moustache — sets a tulip glass of dark çay in front of you without being asked. Two lira. You pay and settle in.
 
 From here you can see the mosque, the line of shops beyond it, and the waterfront promenade. People move through the amber streetlight in familiar patterns — the after-work drift, bags of bread, phone calls, a dog trotting purposefully toward some private appointment.
 
-You spot the blue house. Faded Ottoman facade, two storeys, a hand-lettered sign you can't quite read from here. The lights are on inside. Someone moves behind the glass.
+You spot the blue house. Faded Ottoman facade, two stories, a hand-lettered sign you can't quite read from here. The lights are on inside. Someone moves behind the glass.
 
 Down by the water, an old fisherman sits mending nets, alone. A woman steps out of the cafe next to the blue house, shakes a tablecloth into the street, goes back inside.
 
@@ -135,7 +135,7 @@ You sip your çay. It's bitter and perfect. The anonymous text said nothing abou
     id: 'e1_restaurants_listen',
     episode: 1,
     phase: 'exploration',
-    location: 'Arnavutkoy Waterfront',
+    location: 'Arnavutköy Waterfront',
     text: `You take a seat at the nearest fish restaurant and order an Efes. The waiter doesn't care that you're alone — half the tables are occupied by solitary men watching the water and thinking whatever men think when they watch the Bosphorus at dusk.
 
 You listen. Most of the conversation is mundane — football, the price of levrek, someone's cousin's wedding in Bursa. But at the table behind you, two men are arguing in low voices about a shop. Something about rent increases, a landlord who "thinks he's a pasha." One of them mentions Köşk Antik.
@@ -144,7 +144,7 @@ You listen. Most of the conversation is mundane — football, the price of levre
 
 "Selim Bey can afford anything. Question is where it all comes from."
 
-They laugh and change the subject. You finish your beer slowly, letting the name settle. Selim. The blue house is an antique shop, then. And its owner has money that makes the neighbours curious.
+They laugh and change the subject. You finish your beer slowly, letting the name settle. Selim. The blue house is an antique shop, then. And its owner has money that makes the neighbors curious.
 
 The old fisherman is still down by the water. The blue house glows past the mosque.`,
     choices: [
@@ -173,7 +173,7 @@ The old fisherman is still down by the water. The blue house glows past the mosq
     id: 'e1_oguz_intro',
     episode: 1,
     phase: 'exploration',
-    location: 'Arnavutkoy Waterfront',
+    location: 'Arnavutköy Waterfront',
     npcPresent: ['oguz'],
     text: `"Merhaba, amca."
 
@@ -193,7 +193,7 @@ The hands stop. Just for a moment. Then resume.
 
 "Journalist," he says. It's not a question.
 
-"Her brother."
+"Her sister."
 
 He looks at you again. Something shifts in those pale eyes.`,
     choices: [
@@ -203,6 +203,7 @@ He looks at you again. Something shifts in those pale eyes.`,
         effects: {
           axisShift: { trust: 0.2, method: 0.1 },
           npcTrust: { oguz: 1 },
+          setFlags: ['talked_to_oguz'],
         },
       },
       {
@@ -211,6 +212,7 @@ He looks at you again. Something shifts in those pale eyes.`,
         effects: {
           axisShift: { approach: 0.2, heart: 0.1 },
           npcTrust: { oguz: -1 },
+          setFlags: ['talked_to_oguz'],
         },
       },
       {
@@ -218,7 +220,7 @@ He looks at you again. Something shifts in those pale eyes.`,
         next: 'e1_oguz_show_text',
         effects: {
           axisShift: { trust: 0.2 },
-          setFlags: ['showed_oguz_text'],
+          setFlags: ['showed_oguz_text', 'talked_to_oguz'],
         },
       },
     ],
@@ -228,7 +230,7 @@ He looks at you again. Something shifts in those pale eyes.`,
     id: 'e1_oguz_patience',
     episode: 1,
     phase: 'exploration',
-    location: 'Arnavutkoy Waterfront',
+    location: 'Arnavutköy Waterfront',
     npcPresent: ['oguz'],
     text: `You wait. The Bosphorus murmurs against the stones. A gull cries somewhere above. The old man ties three more knots before he speaks.
 
@@ -280,7 +282,7 @@ His pale eyes fix on yours.
     id: 'e1_oguz_direct',
     episode: 1,
     phase: 'exploration',
-    location: 'Arnavutkoy Waterfront',
+    location: 'Arnavutköy Waterfront',
     npcPresent: ['oguz'],
     text: `The old man's face closes like a shutter. He sets his net down and picks up the thermos, pouring himself çay with the deliberate slowness of a man who has already decided the conversation is over.
 
@@ -297,7 +299,7 @@ You pushed too hard, too fast. He knows something — you can see it in the rigi
 You might get another chance. But not tonight. Not like this.`,
     choices: [
       {
-        text: 'Apologise. Sit down nearby and just be quiet for a while.',
+        text: 'Apologize. Sit down nearby and just be quiet for a while.',
         next: 'e1_oguz_recover',
         effects: {
           axisShift: { trust: 0.2, approach: -0.1 },
@@ -318,7 +320,7 @@ You might get another chance. But not tonight. Not like this.`,
     id: 'e1_oguz_show_text',
     episode: 1,
     phase: 'exploration',
-    location: 'Arnavutkoy Waterfront',
+    location: 'Arnavutköy Waterfront',
     npcPresent: ['oguz'],
     text: `You hold out your phone. The old man squints at the screen, lips moving slightly as he reads. Then he leans back on his crate and lets out a long breath through his nose.
 
@@ -360,11 +362,11 @@ He studies your face.
     id: 'e1_oguz_recover',
     episode: 1,
     phase: 'exploration',
-    location: 'Arnavutkoy Waterfront',
+    location: 'Arnavutköy Waterfront',
     npcPresent: ['oguz'],
     text: `"Özür dilerim, amca. I'm sorry. I've been — it's been a long two years."
 
-You sit down on the stone wall a few metres away. You don't say anything else. The Bosphorus fills the silence — water, wind, the distant thrum of a ferry engine. A cat appears from under the dock and winds itself around the old man's ankles. He reaches down absently and scratches its ears.
+You sit down on the stone wall a few meters away. You don't say anything else. The Bosphorus fills the silence — water, wind, the distant thrum of a ferry engine. A cat appears from under the dock and winds itself around the old man's ankles. He reaches down absently and scratches its ears.
 
 Five minutes pass. Maybe ten. The radio plays on. The old man finishes his çay, rinses the glass in the sea, pours another.
 
@@ -405,11 +407,11 @@ Until now.`,
     id: 'e1_oguz_details',
     episode: 1,
     phase: 'exploration',
-    location: 'Arnavutkoy Waterfront',
+    location: 'Arnavutköy Waterfront',
     npcPresent: ['oguz'],
     text: `The old man speaks slowly, choosing words like he's picking stones from a net.
 
-"The first boat was small — a tender, maybe four metres. White hull, outboard motor. One man driving, one standing at the bow. The second was bigger, a cabin cruiser, maybe ten metres. Dark hull — blue or black, hard to tell. Also two men visible, though there could have been more inside."
+"The first boat was small — a tender, maybe four meters. White hull, outboard motor. One man driving, one standing at the bow. The second was bigger, a cabin cruiser, maybe ten meters. Dark hull — blue or black, hard to tell. Also two men visible, though there could have been more inside."
 
 "Faces?"
 
@@ -417,11 +419,11 @@ He shakes his head. "Too far. But the man on the small boat — he moved like a 
 
 "What were they transferring?"
 
-"Flat things. Rectangular. Wrapped in something dark — cloth or plastic. Maybe this big." He holds his hands about a metre apart. "Four or five of them. They were careful. Passed them hand to hand like they were afraid of dropping them."
+"Flat things. Rectangular. Wrapped in something dark — cloth or plastic. Maybe this big." He holds his hands about a meter apart. "Four or five of them. They were careful. Passed them hand to hand like they were afraid of dropping them."
 
 Paintings. The shape is right. The care is right.
 
-"They headed south," he continues. "Past Bebek, toward the islands. The moon was behind clouds by then but I could see their wake. They were running fast."
+"They headed south," he continues. "Past Ortaköy, toward the open water. The moon was behind clouds by then but I could see their wake. They were running fast."
 
 He sets down his unlit cigarette and reaches for a fresh one.
 
@@ -451,7 +453,7 @@ He sets down his unlit cigarette and reaches for a fresh one.
     id: 'e1_oguz_dock',
     episode: 1,
     phase: 'exploration',
-    location: 'Arnavutkoy Waterfront',
+    location: 'Arnavutköy Waterfront',
     npcPresent: ['oguz'],
     text: `He gestures with his chin — south along the waterfront, past where the streetlights end.
 
@@ -490,7 +492,7 @@ He picks up his net again.
     id: 'e1_oguz_who_knows',
     episode: 1,
     phase: 'exploration',
-    location: 'Arnavutkoy Waterfront',
+    location: 'Arnavutköy Waterfront',
     npcPresent: ['oguz'],
     text: `He laughs — a dry, papery sound. "Who have I told? Everyone. Nobody. I told the police. I told the muhtar. I told the women at the bakkal. They all nod and smile and say 'Oğuz amca, you were probably dreaming.' Seventy years old, you see. I must be senile."
 
@@ -504,7 +506,7 @@ This is useful. Melis could be an ally — or at least a source.
 
 "Anyone else?"
 
-"Nobody who matters. Nobody who'd help." He meets your eyes. "Be careful who you trust in this neighbourhood. The walls are thin and people talk."`,
+"Nobody who matters. Nobody who'd help." He meets your eyes. "Be careful who you trust in this neighborhood. The walls are thin and people talk."`,
     choices: [
       {
         text: 'Go talk to Melis at the cafe. She knew Defne — she might know what Defne found.',
@@ -539,11 +541,11 @@ This is useful. Melis could be an ally — or at least a source.
     id: 'e1_oguz_about_melis',
     episode: 1,
     phase: 'exploration',
-    location: 'Arnavutkoy Waterfront',
+    location: 'Arnavutköy Waterfront',
     npcPresent: ['oguz'],
     text: `"Melis Hanım." The old man's expression softens. "Good woman. Makes the best menemen in Arnavutköy — don't tell her I said that, she'll raise the price." He almost smiles, then it fades. "She was close with your sister. They'd sit in the cafe after hours, drinking wine and talking. When Defne disappeared, Melis took it hard. Shut the cafe for a week."
 
-He lowers his voice, though there's no one within fifty metres.
+He lowers his voice, though there's no one within fifty meters.
 
 "She's scared of something. I see it in the way she watches the street. The way she locks up early. She lives alone — no husband, no family here. And she's right next door to Selim Bey." He threads a final knot and bites the line. "If your sister found something she shouldn't have, Melis might know what it was. But she won't talk easily. She's been burned."
 
@@ -612,10 +614,10 @@ Time to go.`,
     id: 'e1_walk_to_shop',
     episode: 1,
     phase: 'exploration',
-    location: 'Arnavutkoy Side Street',
+    location: 'Arnavutköy Side Street',
     text: `You walk past the mosque — its minaret a pale finger against the darkening sky — and there it is. The blue house.
 
-Faded cerulean paint over Ottoman timber, two storeys, bay windows with iron lattice. A brass sign reads KÖŞK ANTİK in elegant serif letters. Through the ground-floor windows you can see a warm interior: antique furniture, brass lamps, the glint of framed artwork on the walls.
+Faded cerulean paint over Ottoman timber, two stories, bay windows with iron lattice. A brass sign reads KÖŞK ANTİK in elegant serif letters. Through the ground-floor windows you can see a warm interior: antique furniture, brass lamps, the glint of framed artwork on the walls.
 
 Next door, a smaller cafe — Melis'in Yeri, handwritten on a chalkboard by the door — is still open. A single customer nurses coffee at a window table. The woman inside is wiping down the counter, her back to you.
 
@@ -643,12 +645,12 @@ Or might have kept her alive.`,
     id: 'e1_direct_to_shop',
     episode: 1,
     phase: 'arrival',
-    location: 'Arnavutkoy Side Street',
+    location: 'Arnavutköy Side Street',
     text: `You don't wait. The moment the ferry bumps the iskele, you're off, shouldering through the commuters, ignoring the fish restaurants and the beckoning waiters, walking fast up the waterfront toward the mosque. The anonymous text said Arnavutköy, the blue house past the mosque. You're here. You're done waiting.
 
 The mosque appears — white stone, slim minaret, a courtyard where pigeons scatter at your approach. Past it, the shops begin: a carpet dealer, a dusty kitchenware store, and then — blue.
 
-Faded Ottoman facade, two storeys, bay windows with iron lattice. KÖŞK ANTİK in brass letters. The lights are on. Through the glass you see antique furniture, oil paintings, a man at a desk in the back.
+Faded Ottoman facade, two stories, bay windows with iron lattice. KÖŞK ANTİK in brass letters. The lights are on. Through the glass you see antique furniture, oil paintings, a man at a desk in the back.
 
 You don't hesitate. You push open the heavy oak door. A brass bell chimes overhead.
 
@@ -688,11 +690,11 @@ The shop smells of lemon oil and old wood. Silk carpets on the floor, ikons on t
     id: 'e1_selim_enter',
     episode: 1,
     phase: 'complication',
-    location: 'Kosk Antik',
+    location: 'Köşk Antik',
     npcPresent: ['selim'],
     text: `The brass bell chimes as you push through the door. The smell hits you first — lemon polish, old leather, a trace of sandalwood incense. The shop is a cabinet of wonders: Ottoman calligraphy in gilded frames, Iznik tiles under glass, a rosewood writing desk that probably cost more than your apartment.
 
-The silver-haired man rises from his desk. He's tall, well-dressed — linen shirt, cashmere vest, the kind of man who looks like he was born in a library. His smile is warm, practised, and immediate.
+The silver-haired man rises from his desk. He's tall, well-dressed — linen shirt, cashmere vest, the kind of man who looks like he was born in a library. His smile is warm, practiced, and immediate.
 
 "Hoş geldiniz. Welcome to Köşk Antik." His Turkish is Istanbul-educated, with a trace of something else — French schooling, maybe. "I'm Selim. Please, look around. If anything catches your eye, I'm happy to tell you its story."
 
@@ -707,6 +709,7 @@ His eyes are on you. Reading you.`,
         next: 'e1_selim_ask_painting',
         effects: {
           axisShift: { approach: 0.2 },
+          setFlags: ['talked_to_selim'],
         },
       },
       {
@@ -714,6 +717,7 @@ His eyes are on you. Reading you.`,
         next: 'e1_selim_browse',
         effects: {
           axisShift: { method: 0.2 },
+          setFlags: ['talked_to_selim'],
         },
       },
       {
@@ -721,6 +725,7 @@ His eyes are on you. Reading you.`,
         next: 'e1_selim_collector',
         effects: {
           axisShift: { method: 0.1, approach: -0.1 },
+          setFlags: ['talked_to_selim'],
         },
       },
     ],
@@ -730,7 +735,7 @@ His eyes are on you. Reading you.`,
     id: 'e1_selim_ask_painting',
     episode: 1,
     phase: 'complication',
-    location: 'Kosk Antik',
+    location: 'Köşk Antik',
     npcPresent: ['selim'],
     text: `Something flickers across Selim's face — a micro-expression, gone in a heartbeat. Surprise? Fear? Calculation? His smile doesn't waver but his posture shifts, weight moving to the balls of his feet. A man preparing for something.
 
@@ -748,7 +753,7 @@ He's smooth. Genuinely smooth. You've interviewed politicians who couldn't defle
 
 The name lands like a stone in still water. Selim's hand pauses on a frame. One second. Two. Then he turns back to you with an expression of polite puzzlement that is absolutely, unmistakably rehearsed.
 
-"I'm sorry, I don't recognise the name. Is she a collector?"
+"I'm sorry, I don't recognize the name. Is she a collector?"
 
 He's lying. You're certain of it.`,
     choices: [
@@ -783,7 +788,7 @@ He's lying. You're certain of it.`,
     id: 'e1_selim_browse',
     episode: 1,
     phase: 'complication',
-    location: 'Kosk Antik',
+    location: 'Köşk Antik',
     npcPresent: ['selim'],
     text: `You move through the shop slowly, taking inventory. Selim watches from his desk, making a show of returning to his paperwork while tracking your reflection in a glass-fronted cabinet.
 
@@ -818,7 +823,7 @@ His smile is perfect. Impenetrable. But he closed that door very quickly.`,
         },
       },
       {
-        text: 'Thank him and leave. You\'ve seen enough — time to talk to the neighbour.',
+        text: 'Thank him and leave. You\'ve seen enough — time to talk to the neighbor.',
         next: 'e1_melis_cafe_arrive',
         effects: {
           setFlags: ['saw_back_room', 'visited_selim'],
@@ -832,7 +837,7 @@ His smile is perfect. Impenetrable. But he closed that door very quickly.`,
     id: 'e1_selim_collector',
     episode: 1,
     phase: 'complication',
-    location: 'Kosk Antik',
+    location: 'Köşk Antik',
     npcPresent: ['selim'],
     text: `Selim's eyes brighten — the gleam of a dealer scenting money. He leads you to a small oil study in a wooden frame: a woman reading by a window, light falling across her face in warm amber tones.
 
@@ -878,7 +883,7 @@ There it is — the tiny crack. He said it a beat too emphatically, like someone
     id: 'e1_selim_reveal_identity',
     episode: 1,
     phase: 'complication',
-    location: 'Kosk Antik',
+    location: 'Köşk Antik',
     npcPresent: ['selim'],
     text: `"My name is Deniz Karadağ. Defne was my sister."
 
@@ -892,7 +897,7 @@ Selim removes his reading glasses and polishes them with a cloth from his breast
 
 "She came in once or twice. Browsed, asked about Ottoman-era pieces. A lovely young woman — I remember she was quite knowledgeable about art history." He pauses. "But I wouldn't say I knew her. We were acquaintances at most."
 
-Every word is calibrated. He's not denying contact — that would be checkable — but he's minimising it, flattening it, draining it of significance.
+Every word is calibrated. He's not denying contact — that would be checkable — but he's minimizing it, flattening it, draining it of significance.
 
 "She was a journalist," you say. "She was investigating something. Something connected to this shop."
 
@@ -906,6 +911,16 @@ Now his expression hardens. Just slightly. The warmth drains from his eyes like 
         effects: {
           axisShift: { approach: 0.2 },
           npcTrust: { selim: -1 },
+        },
+      },
+      {
+        text: 'Your instinct says push harder — step into his space, drop your voice. "I know what you did, Selim. And so did she."',
+        next: 'e1_selim_press_harder',
+        condition: { axis: { name: 'approach', min: 0.3 } },
+        effects: {
+          axisShift: { approach: 0.2 },
+          npcTrust: { selim: -2 },
+          setFlags: ['revealed_identity_to_selim'],
         },
       },
       {
@@ -931,7 +946,7 @@ Now his expression hardens. Just slightly. The warmth drains from his eyes like 
     id: 'e1_selim_cay_talk',
     episode: 1,
     phase: 'complication',
-    location: 'Kosk Antik',
+    location: 'Köşk Antik',
     npcPresent: ['selim'],
     text: `The çay is excellent — loose-leaf, properly brewed, served in crystal tulip glasses with silver holders. Selim pours with the precision of a tea master. You sit in a pair of leather armchairs near the front window.
 
@@ -968,7 +983,7 @@ You file this away. A man who talks this much about his integrity is often shori
     id: 'e1_selim_press_journalist',
     episode: 1,
     phase: 'complication',
-    location: 'Kosk Antik',
+    location: 'Köşk Antik',
     npcPresent: ['selim'],
     text: `"Oh, the occasional culture reporter, that sort of thing." He waves a hand. "Istanbul's art scene makes good copy. I've been quoted in Hürriyet, The Art Newspaper, even the Financial Times once." He smiles. "But I suspect you're asking about someone specific."
 
@@ -980,7 +995,7 @@ The man is sharp. Uncomfortably sharp.
 
 The handshake is firm and dry. His eyes hold yours a moment too long.
 
-At the door, he adds: "Arnavutköy is a wonderful neighbourhood. Very safe. But the streets get dark at night. Do take care."
+At the door, he adds: "Arnavutköy is a wonderful neighborhood. Very safe. But the streets get dark at night. Do take care."
 
 It might be courtesy. It might be a warning.
 
@@ -1009,7 +1024,7 @@ The brass bell chimes as the door closes behind you. Through the glass, you see 
     id: 'e1_selim_confront_pieces',
     episode: 1,
     phase: 'complication',
-    location: 'Kosk Antik',
+    location: 'Köşk Antik',
     npcPresent: ['selim'],
     text: `Selim's smile freezes. For the first time you see something raw behind it — not quite fear, but alertness. The alertness of a man who knows he's been seen.
 
@@ -1053,7 +1068,7 @@ Through the window, as you step into the street, you see him reach for his phone
     id: 'e1_selim_press_harder',
     episode: 1,
     phase: 'complication',
-    location: 'Kosk Antik',
+    location: 'Köşk Antik',
     npcPresent: ['selim'],
     text: `Selim sets down his glasses. The warmth is gone completely now. What's left is something cold and hard and very, very controlled.
 
@@ -1061,7 +1076,7 @@ Through the window, as you step into the street, you see him reach for his phone
 
 "I'm not accusing you of anything. I'm asking questions."
 
-"You're making insinuations in my place of business based on a text message from an unknown source. That's not asking questions. That's harassment." He stands. "I've been very patient, Mr. Karadağ, but I think this conversation is over."
+"You're making insinuations in my place of business based on a text message from an unknown source. That's not asking questions. That's harassment." He stands. "I've been very patient, Ms. Karadağ, but I think this conversation is over."
 
 He moves to the door and opens it. The brass bell chimes — a mocking little sound.
 
@@ -1095,7 +1110,7 @@ Through the glass, Selim picks up his phone and makes a call. His face is tight,
     id: 'e1_selim_emotional_appeal',
     episode: 1,
     phase: 'complication',
-    location: 'Kosk Antik',
+    location: 'Köşk Antik',
     npcPresent: ['selim'],
     text: `Something shifts in Selim's face. For a moment — just a moment — the mask slips and you see something that might be genuine discomfort. Maybe even guilt.
 
@@ -1107,7 +1122,7 @@ He polishes his glasses again. Puts them back on. Takes them off.
 
 "And then?"
 
-"And then I didn't see her again. And then I heard what happened." He looks at you directly. "I'm sorry, Mr. Karadağ. I truly am. But I don't know what happened to your sister. I wish I did."
+"And then I didn't see her again. And then I heard what happened." He looks at you directly. "I'm sorry, Ms. Karadağ. I truly am. But I don't know what happened to your sister. I wish I did."
 
 It's the most honest he's been. But it's still not the truth — not the whole truth. You can feel it in the gaps, in the things he's choosing not to say.
 
@@ -1117,7 +1132,7 @@ He offers his hand. "Please. If there's anything I can do — legitimately — d
         text: 'Take his hand. Leave on good terms. You might need to come back.',
         next: 'e1_leave_selim_shop',
         effects: {
-          setFlags: ['visited_selim', 'selim_partial_truth'],
+          setFlags: ['visited_selim', 'selim_partial_truth', 'selim_confessed'],
           npcTrust: { selim: 1 },
           axisShift: { heart: 0.1 },
         },
@@ -1126,7 +1141,7 @@ He offers his hand. "Please. If there's anything I can do — legitimately — d
         text: '"The piece she was interested in — do you still have it?"',
         next: 'e1_selim_tactical_retreat',
         effects: {
-          setFlags: ['visited_selim', 'selim_partial_truth'],
+          setFlags: ['visited_selim', 'selim_partial_truth', 'selim_confessed'],
           axisShift: { method: 0.1 },
         },
       },
@@ -1137,17 +1152,17 @@ He offers his hand. "Please. If there's anything I can do — legitimately — d
     id: 'e1_selim_tactical_retreat',
     episode: 1,
     phase: 'complication',
-    location: 'Kosk Antik',
+    location: 'Köşk Antik',
     npcPresent: ['selim'],
     text: `You pull back. Let the tension drain from the conversation. Selim visibly relaxes — the rigid line of his shoulders softens, his breathing slows. He thinks you've accepted his deflection.
 
-"Of course," he says, recovering his charm. "If you're interested in Ottoman art, I have some lovely pieces. And the neighbourhood itself is worth exploring — the waterfront restaurants, the old yalıs." He's steering you toward the door with the practiced grace of a man who has ended a thousand conversations on his own terms.
+"Of course," he says, recovering his charm. "If you're interested in Ottoman art, I have some lovely pieces. And the neighborhood itself is worth exploring — the waterfront restaurants, the old yalıs." He's steering you toward the door with the practiced grace of a man who has ended a thousand conversations on his own terms.
 
 At the door, you pause. "One more thing — the cafe next door. Is it any good?"
 
 "Melis'in Yeri? Wonderful. Best menemen in Arnavutköy. Melis Hanım is a dear friend." His smile is back to full warmth. "Tell her Selim sent you."
 
-You file this away: Selim and Melis are neighbours. He calls her a friend. But does she feel the same way?
+You file this away: Selim and Melis are neighbors. He calls her a friend. But does she feel the same way?
 
 The evening air is cool after the shop's warmth. The blue facade glows under a streetlight. You've been inside the wolf's den and come out with a few threads of his coat between your fingers.
 
@@ -1175,10 +1190,10 @@ Not enough. But a start.`,
     id: 'e1_leave_selim_shop',
     episode: 1,
     phase: 'complication',
-    location: 'Arnavutkoy Side Street',
+    location: 'Arnavutköy Side Street',
     text: `The night air cools your face as you step out. The brass bell gives its little farewell chime. Behind you, the blue house glows. Ahead, the street narrows between old Ottoman facades, their paint peeling in the salt air.
 
-You've met Selim Köşker. You've seen his shop, his wrapped paintings, his practised smile. He's hiding something — you're certain of it. But he's good. Very good. Breaking through that polish will take more than one visit.
+You've met Selim Köşker. You've seen his shop, his wrapped paintings, his practiced smile. He's hiding something — you're certain of it. But he's good. Very good. Breaking through that polish will take more than one visit.
 
 The cafe next door is still lit. Through the window, Melis moves behind the counter — a woman in her forties, dark hair pulled back, strong hands. The last customer has left. She'll close soon.
 
@@ -1214,7 +1229,7 @@ And somewhere, three streets back, Defne's old apartment waits in the dark.`,
     id: 'e1_watch_selim_call',
     episode: 1,
     phase: 'complication',
-    location: 'Arnavutkoy Side Street',
+    location: 'Arnavutköy Side Street',
     text: `You step into the shadow of a doorway across the narrow street. Through the shop window, Selim paces behind his desk, phone pressed to his ear. His face is illuminated by the desk lamp — tight, tense, nothing like the smiling host of five minutes ago.
 
 You can't hear words. But you can read body language. He's reporting to someone. The gestures are deferential — one hand raised, palm up, explaining. Then he stops pacing and listens. Nods twice. Says something short. Hangs up.
@@ -1250,7 +1265,7 @@ The cafe next door is still open. A thin line of light under the door. Melis is 
     id: 'e1_follow_car_fail',
     episode: 1,
     phase: 'complication',
-    location: 'Arnavutkoy Side Street',
+    location: 'Arnavutköy Side Street',
     text: `You step out of the doorway and walk quickly in the direction the Mercedes went. But the street curves and climbs — this is Arnavutköy, where every lane twists like a fishing line — and by the time you reach the corner, the taillights are gone. Swallowed by the hill.
 
 You stand in the dark street, breathing hard. Above you, old wooden houses lean together like conspirators. A cat watches from a windowsill, its eyes catching the distant streetlight.
@@ -1282,7 +1297,7 @@ A woman's voice carries from the lit cafe back down the hill. Melis, calling som
     npcPresent: ['melis'],
     text: `The cafe is small and warm — six tables, mismatched chairs, walls covered in framed photographs and hand-drawn menus. It smells of fresh bread, basil, and strong coffee. A radio plays low — some Turkish jazz station, piano and saxophone drifting like smoke.
 
-Melis stands behind the counter, drying glasses. She's forty or so — dark hair streaked with early grey, pulled back in a loose knot. Her face is handsome rather than pretty, with deep brown eyes that carry the particular alertness of someone who has learned to watch for trouble. She wears a flour-dusted apron over a dark sweater.
+Melis stands behind the counter, drying glasses. She's forty or so — dark hair streaked with early gray, pulled back in a loose knot. Her face is handsome rather than pretty, with deep brown eyes that carry the particular alertness of someone who has learned to watch for trouble. She wears a flour-dusted apron over a dark sweater.
 
 "We're closing soon," she says, not unkindly. "But I can do you a coffee if you're quick."
 
@@ -1295,7 +1310,7 @@ A framed photo behind the counter catches your eye. Two women at a table, laughi
         next: 'e1_melis_reveal',
         effects: {
           axisShift: { heart: 0.2 },
-          setFlags: ['told_melis_identity'],
+          setFlags: ['told_melis_identity', 'talked_to_melis'],
         },
       },
       {
@@ -1303,13 +1318,15 @@ A framed photo behind the counter catches your eye. Two women at a table, laughi
         next: 'e1_melis_slow_approach',
         effects: {
           axisShift: { method: 0.1, trust: 0.1 },
+          setFlags: ['talked_to_melis'],
         },
       },
       {
-        text: '"A friend recommended your menemen. And told me you might know about art in the neighbourhood."',
+        text: '"A friend recommended your menemen. And told me you might know about art in the neighborhood."',
         next: 'e1_melis_indirect',
         effects: {
           axisShift: { method: 0.2 },
+          setFlags: ['talked_to_melis'],
         },
       },
     ],
@@ -1327,7 +1344,7 @@ A framed photo behind the counter catches your eye. Two women at a table, laughi
 
 "She talked about me?"
 
-"All the time." Her voice cracks. She presses both hands flat on the counter, steadying herself. "She said if anything ever happened to her, her brother would come looking. She said you were stubborn like a Karadeniz mule and twice as smart."
+"All the time." Her voice cracks. She presses both hands flat on the counter, steadying herself. "She said if anything ever happened to her, her sister would come looking. She said you were stubborn like a Karadeniz mule and twice as smart."
 
 That sounds like Defne. Your throat tightens.
 
@@ -1345,6 +1362,7 @@ She takes a shaking breath.
         effects: {
           npcTrust: { melis: 1 },
           axisShift: { heart: 0.1, trust: 0.1 },
+          setFlags: ['melis_photo'],
         },
       },
       {
@@ -1353,6 +1371,7 @@ She takes a shaking breath.
         effects: {
           npcTrust: { melis: 1 },
           axisShift: { approach: 0.1 },
+          setFlags: ['melis_photo'],
         },
       },
     ],
@@ -1364,9 +1383,9 @@ She takes a shaking breath.
     phase: 'complication',
     location: 'Melisin Yeri Cafe',
     npcPresent: ['melis'],
-    text: `She makes you a Turkish coffee — proper, in a copper cezve, with a dusting of cardamom. Her movements are practised and precise. She sets the cup before you with a small glass of water on the side.
+    text: `She makes you a Turkish coffee — proper, in a copper cezve, with a dusting of cardamom. Her movements are practiced and precise. She sets the cup before you with a small glass of water on the side.
 
-"You're not from the neighbourhood," she says. Not hostile — just observant.
+"You're not from the neighborhood," she says. Not hostile — just observant.
 
 "Beşiktaş. I'm exploring. Someone told me Arnavutköy was worth seeing."
 
@@ -1407,7 +1426,7 @@ She's picking her words like someone walking through a minefield.`,
     phase: 'complication',
     location: 'Melisin Yeri Cafe',
     npcPresent: ['melis'],
-    text: `"Art in the neighbourhood." She gives you a look — shrewd, appraising. "My menemen is famous but my art expertise is limited. You should talk to Selim next door, or Levent at the gallery up the hill."
+    text: `"Art in the neighborhood." She gives you a look — shrewd, appraising. "My menemen is famous but my art expertise is limited. You should talk to Selim next door, or Levent at the gallery up the hill."
 
 "I was in Selim's shop just now. Interesting man."
 
@@ -1421,7 +1440,7 @@ The coffee cup stops halfway to her mouth. She looks at you — really looks at 
 
 The photo of Defne is right there, behind her shoulder. You and Defne have the same eyes, the same jawline.
 
-"She told me about you," Melis whispers. "The brother. The stubborn one."`,
+"She told me about you," Melis whispers. "The sister. The stubborn one."`,
     choices: [
       {
         text: '"I\'m Deniz. Defne was my sister. Please — help me understand what happened to her."',
@@ -1455,7 +1474,7 @@ She points to the table by the window. A small table for two.
 
 Your breath catches. She sees it. Her eyes widen.
 
-"You know her," Melis says. Then, looking at your face in the light: "Oh God. You're him. You're the brother."
+"You know her," Melis says. Then, looking at your face in the light: "Oh God. You're her. You're the sister."
 
 She comes around the counter, locks the door, pulls the blinds.
 
@@ -1566,7 +1585,7 @@ She reaches under the counter and pulls out a small envelope. Inside is a single
 
 She sets it on the table between you like an offering.
 
-"She said, 'If anything happens to me, give this to my brother.' I said, 'What could happen to you?' And she smiled — you know that smile she had, where she looked like she knew more than she was telling — and she said, 'Probably nothing. But just in case.'"
+"She said, 'If anything happens to me, give this to my sister.' I said, 'What could happen to you?' And she smiled — you know that smile she had, where she looked like she knew more than she was telling — and she said, 'Probably nothing. But just in case.'"
 
 Melis pushes the key toward you.
 
@@ -1619,7 +1638,7 @@ She grips your wrist.
 
 "Be careful, Deniz. Selim is charming but he's not soft. The people he works with — they're not soft either. Your sister found out and look what happened."
 
-She presses the key into your hand if she hasn't already.
+She presses the key into your hand.
 
 "Go to the apartment. Find what Defne left. And then get out of Arnavutköy. Come back when you have a plan."`,
     choices: [
@@ -1688,7 +1707,7 @@ She stands and begins to clear the table.
     phase: 'exploration',
     location: 'Levent Gallery',
     npcPresent: ['levent'],
-    text: `One block inland, up a cobbled hill that makes your calves burn, a converted warehouse bears a discreet sign: SAHİN GALERI. Through the plate-glass window, white walls display large contemporary canvases — bold colours, abstract forms. A different world from Selim's Ottoman antiques.
+    text: `One block inland, up a cobbled hill that makes your calves burn, a converted warehouse bears a discreet sign: SAHİN GALERI. Through the plate-glass window, white walls display large contemporary canvases — bold colors, abstract forms. A different world from Selim's Ottoman antiques.
 
 Inside, a young man in a black turtleneck and paint-splattered jeans is rearranging a spotlight. He's thirty-five or so, lean, with an expressive face currently crumpled in concentration. When you enter, he lights up like a bulb.
 
@@ -1745,7 +1764,7 @@ He hesitates. "I don't like to name names. But if you look at who's selling Otto
 
 He's looking at the wall. The direction of Köşk Antik.
 
-"There's a woman you should talk to, if you're serious about this. Naz Yılmaz. She runs a gallery in Kadıköy — specialises in authentication. If anyone knows where the bodies are buried, metaphorically speaking, it's Naz."`,
+"There's a woman you should talk to, if you're serious about this. Naz Yılmaz. She runs a print shop in Kadıköy — specializes in bookbinding and authentication. If anyone knows where the bodies are buried, metaphorically speaking, it's Naz."`,
     choices: [
       {
         text: '"Naz Yılmaz in Kadıköy. Thank you — I\'ll remember that." Take your leave.',
@@ -1820,7 +1839,7 @@ His voice breaks slightly.
 
 "Do you get along?"
 
-"Selim and I?" He laughs. "We're cordial. He thinks contemporary art is meaningless splatter. I think half his inventory should be in a museum. We agree on wine." He pauses. "He's a strange man, Selim. Very charming. Very private. The shop does well — impossibly well, for this neighbourhood. His clients are international. Private jets and armoured cars."
+"Selim and I?" He laughs. "We're cordial. He thinks contemporary art is meaningless splatter. I think half his inventory should be in a museum. We agree on wine." He pauses. "He's a strange man, Selim. Very charming. Very private. The shop does well — impossibly well, for this neighborhood. His clients are international. Private jets and armored cars."
 
 He refills your wine.
 
@@ -1858,7 +1877,7 @@ His eyes meet yours with sudden, unguarded sincerity. "That always bothered me."
 
 He snaps his fingers.
 
-"Actually — she mentioned a name once. Naz Yılmaz. A gallery owner and authenticator in Kadıköy. She said Naz knew things about the underground market that nobody else did. I got the impression she was going to meet with Naz."
+"Actually — she mentioned a name once. Naz Yılmaz. A bookbinder and authenticator in Kadıköy. She said Naz knew things about the underground market that nobody else did. I got the impression she was going to meet with Naz."
 
 He finishes his wine.
 
@@ -1884,12 +1903,12 @@ His jaw sets with quiet determination.
     id: 'e1_levent_depart',
     episode: 1,
     phase: 'exploration',
-    location: 'Arnavutkoy Side Street',
+    location: 'Arnavutköy Side Street',
     text: `You step back into the night. The hill drops away toward the water, the Bosphorus a black mirror flecked with running lights. Levent's gallery goes dark behind you as he closes up.
 
-The night is getting late. Arnavutköy grows quieter — the restaurants are still serving but the streets are emptying, the neighbourhood retreating behind its shuttered windows and locked doors.
+The night is getting late. Arnavutköy grows quieter — the restaurants are still serving but the streets are emptying, the neighborhood retreating behind its shuttered windows and locked doors.
 
-You have threads now. Selim, Melis, the boats Oğuz saw, the painting Defne found, a name — Naz Yılmaz — and a destination: Kadıköy. But the most immediate lead is the closest: Defne's apartment, three streets back, second floor.
+You have threads now. Selim, Melis, the painting Defne found, a name — Naz Yılmaz — and a destination: Kadıköy. But the most immediate lead is the closest: Defne's apartment, three streets back, second floor.
 
 The key — if you have it — is warm in your pocket. If you don't, there might be other ways in.`,
     choices: [
@@ -1925,13 +1944,13 @@ The key — if you have it — is warm in your pocket. If you don't, there might
     episode: 1,
     phase: 'complication',
     location: 'Defne Apartment Exterior',
-    text: `Three streets back from the waterfront, the tourist veneer falls away. These are residential lanes — laundry lines between balconies, motorcycles chained to drainpipes, the blue flicker of televisions behind curtains. Number 14 is a narrow stone building, three storeys, the ground floor occupied by a tailor's workshop long since closed.
+    text: `Three streets back from the waterfront, the tourist veneer falls away. These are residential lanes — laundry lines between balconies, motorcycles chained to drainpipes, the blue flicker of televisions behind curtains. Number 14 is a narrow stone building, three stories, the ground floor occupied by a tailor's workshop long since closed.
 
 The second-floor windows are dark. A balcony with a wrought-iron railing holds two dead plants in ceramic pots. The paint on the window frames is peeling.
 
 Two years. Your sister lived behind those windows. Drank her morning coffee on that balcony, looked out at that same slice of sky. Wrote her stories, made her phone calls, pieced together the investigation that would erase her from the world.
 
-The street door is unlocked — this is still a neighbourhood where people trust their neighbours. A dim stairwell, tiles cracked, a fuse box humming. The second-floor landing has two doors. The one on the left has a faded nameplate: KARADAĞ.`,
+The street door is unlocked — this is still a neighborhood where people trust their neighbors. A dim stairwell, tiles cracked, a fuse box humming. The second-floor landing has two doors. The one on the left has a faded nameplate: KARADAĞ.`,
     choices: [
       {
         text: 'Use Melis\'s key to open the door.',
@@ -1969,7 +1988,7 @@ The street door is unlocked — this is still a neighbourhood where people trust
 
 Through the gap at the bottom of the door, you can smell the apartment: dust, old paper, a trace of perfume that makes your chest ache. Defne's perfume. Still lingering after two years in a sealed room.
 
-You could force the door, but the neighbour behind the other door would hear. You could try the balcony — but it's a straight climb up a stone facade with no handholds. You could come back with a key.
+You could force the door, but the neighbor behind the other door would hear. You could try the balcony — but it's a straight climb up a stone facade with no handholds. You could come back with a key.
 
 Melis has a key. You remember seeing a photo of Defne in her cafe.`,
     choices: [
@@ -2054,7 +2073,7 @@ The room is dim — you find a lamp and switch it on. The investigation board fl
     location: 'Defne Apartment',
     text: `You work through the board systematically, photographing everything with your phone.
 
-The centre is a photograph of a painting — a small Ottoman miniature, jewel-toned, depicting a sultan receiving foreign ambassadors. Defne has circled it in red and written: "İstanbul Şehir Müzesi - STOLEN 2003. Last seen: Selim K."
+The center is a photograph of a painting — a small Ottoman miniature, jewel-toned, depicting a sultan receiving foreign ambassadors. Defne has circled it in red and written: "İstanbul Şehir Müzesi - STOLEN 2003. Last seen: Selim K."
 
 Radiating outward: names, dates, locations. Selim Köşker is mentioned repeatedly. Lines connect him to numbered items — other artworks, you think. Buyers are listed by code: "Gulf-1," "Asia-3," "EU-7." A logistics chain sketched in blue pen shows a route: Istanbul → "The Island" → various destinations.
 
@@ -2088,11 +2107,11 @@ The board is a map of your sister's mind in its last weeks. Brilliant, obsessive
     location: 'Defne Apartment',
     text: `You search the way Defne would have hidden things — systematically, cleverly, in places only someone who knew her would think to look.
 
-Inside the spine of a hollowed-out copy of Orhan Pamuk's "Kara Kitap," you find a folded receipt from a print shop in Kadıköy Çarşı — Güneş Fotokopi. Dated two days before Defne disappeared. The receipt lists: "4x A3 colour prints, 1x USB copy." She made copies of something. Photographs of the painting, probably. And those copies might still be at the print shop — or wherever she sent them.
+Inside the spine of a hollowed-out copy of Orhan Pamuk's "Kara Kitap," you find a folded receipt from a print shop in Kadıköy Çarşı — Baskı Evi. Dated two days before Defne disappeared. The receipt lists: "4x A3 color prints, 1x USB copy." She made copies of something. Photographs of the painting, probably. And those copies might still be at the print shop — or wherever she sent them.
 
 In the pocket of her winter coat, a pencil sketch on tracing paper: a painting — the miniature from the board — with small markings at the edges. Numbers. They look like coordinates, but not quite — more like catalogue references. Museum inventory numbers, maybe.
 
-Under the mattress (the oldest hiding place in the world, but Defne was sometimes endearingly old-fashioned): nothing. But taped to the underside of the bedside table drawer, a business card: NAZ YILMAZ — YILMAZ GALERİ — Kadıköy. A phone number on the back, handwritten.
+Under the mattress (the oldest hiding place in the world, but Defne was sometimes endearingly old-fashioned): nothing. But taped to the underside of the bedside table drawer, a business card: NAZ YILMAZ — BASKI EVİ — Kadıköy. A phone number on the back, handwritten.
 
 Your sister left a trail. Fragmented, hidden, but real.`,
     choices: [
@@ -2102,6 +2121,15 @@ Your sister left a trail. Fragmented, hidden, but real.`,
         effects: {
           setFlags: ['found_receipt', 'found_sketch', 'found_naz_card'],
           axisShift: { method: 0.1 },
+        },
+      },
+      {
+        text: 'You\'ve been careful enough to notice — the sketch has faint indentations from a second page. Hold it to the light and trace the hidden writing.',
+        next: 'e1_climax_choice',
+        condition: { axis: { name: 'method', min: 0.3 } },
+        effects: {
+          setFlags: ['found_receipt', 'found_sketch', 'found_naz_card', 'found_hidden_writing'],
+          axisShift: { method: 0.2 },
         },
       },
     ],
@@ -2148,8 +2176,8 @@ Time to search.`,
     id: 'e1_climax_choice',
     episode: 1,
     phase: 'climax',
-    location: 'Arnavutkoy Side Street',
-    text: `You stand in the dark street outside Defne's apartment building, phone heavy with photographs, pockets full of evidence. The night is deep now — past ten, the neighbourhood settling into silence. The Bosphorus mutters at the end of the street, black and restless.
+    location: 'Arnavutköy Side Street',
+    text: `You stand in the dark street outside Defne's apartment building, phone heavy with photographs, pockets full of evidence. The night is deep now — past ten, the neighborhood settling into silence. The Bosphorus mutters at the end of the street, black and restless.
 
 You know enough to be dangerous. Selim is the handler. Stolen art moves through Köşk Antik, out via the dock to "the island," and into the hands of international buyers. Naz Yılmaz is a connection in Kadıköy. Your sister found proof and paid for it.
 
@@ -2191,15 +2219,15 @@ Three paths. Each one trades something for something.`,
     id: 'e1_climax_confront',
     episode: 1,
     phase: 'climax',
-    location: 'Kosk Antik',
+    location: 'Köşk Antik',
     npcPresent: ['selim'],
     text: `You push open the door. The brass bell chimes. Selim looks up from his desk, and for one unguarded second you see something in his face that might be fear.
 
-"Mr. Karadağ. I thought we'd finished our conversation."
+"Ms. Karadağ. I thought we'd finished our conversation."
 
 "We hadn't started it." You walk to his desk and place your phone on it, screen up, showing a photograph of Defne's investigation board. "My sister knew about the paintings. The stolen pieces from the Şehir Müzesi. She knew you were the handler. She was going to prove it."
 
-The colour drains from his face. He stands slowly.
+The color drains from his face. He stands slowly.
 
 "And now you've come here to — what? Accuse me? Threaten me?" His voice is controlled but his hands grip the edge of the desk. "You have a dead woman's conspiracy board. That's not evidence. That's grief."
 
@@ -2232,12 +2260,12 @@ You're on their radar now. For better or worse.`,
     id: 'e1_climax_stealth',
     episode: 1,
     phase: 'climax',
-    location: 'Kosk Antik Rear',
+    location: 'Köşk Antik Rear',
     text: `You circle the block, moving through dark residential lanes until you reach the back of Köşk Antik. The garden wall is high but there's a dumpster you can stand on. From there, you can see over the wall into a small courtyard — and, critically, the back room window.
 
 The window is lit. Through it, you can see the workbench, the restoration tools, and — propped against the wall — the wrapped paintings. One of them has been partially unwrapped.
 
-You balance on the dumpster and raise your phone. The zoom catches it: a small painting, jewel-bright colours, a sultan receiving ambassadors. The same image from Defne's sketch. The stolen miniature from the Şehir Müzesi.
+You balance on the dumpster and raise your phone. The zoom catches it: a small painting, jewel-bright colors, a sultan receiving ambassadors. The same image from Defne's sketch. The stolen miniature from the Şehir Müzesi.
 
 You take twelve photographs. Different angles, different zooms. The painting. The wrapping. The room. A clear shot of the workbench with restoration chemicals and Selim's monogrammed tools.
 
@@ -2264,7 +2292,7 @@ The evidence is in your phone. And Selim doesn't know.`,
     id: 'e1_climax_alliance',
     episode: 1,
     phase: 'climax',
-    location: 'Arnavutkoy Side Street',
+    location: 'Arnavutköy Side Street',
     npcPresent: ['melis'],
     text: `Melis answers on the second ring, her voice thick with sleep.
 
@@ -2278,7 +2306,7 @@ Silence. Then Melis's voice, sharper now, fully awake.
 
 You meet in the dark kitchen behind the cafe. Melis in a coat over pyjamas, her hair loose, her face tight with fear and determination. You show her everything. She studies the photos, the receipt, the sketch.
 
-"Deniz, listen to me. I've heard something else. Something I didn't tell you before because I wasn't sure." She grips the counter. "Last week, through the wall, I heard Selim say 'the collection has to move before spring.' And he mentioned an island — Büyükada, I think. The big one, the Princes' Island. That's where they're storing the paintings."
+"Deniz, listen to me. I've heard something else. Something I didn't tell you before because I wasn't sure." She grips the counter. "Last week, through the wall, I heard Selim say 'the collection has to move before spring.' And he mentioned an island — Büyükada, I think. The biggest of the Princes' Islands. That's where they're storing the paintings."
 
 She looks at you with fierce eyes.
 
@@ -2302,7 +2330,7 @@ She looks at you with fierce eyes.
     id: 'e1_ferry_transition',
     episode: 1,
     phase: 'ferry',
-    location: 'Arnavutkoy Iskele',
+    location: 'Arnavutköy Iskele',
     text: `The last ferry is in ten minutes. You walk to the iskele through empty streets, your footsteps loud on the cobbles. The Bosphorus stretches ahead, black silk under a half-moon. On the Asian shore, Kadıköy glitters — your next destination.
 
 You stand at the water's edge and take stock.

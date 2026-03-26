@@ -50,7 +50,7 @@ const CLUE_DESCRIPTIONS: ClueDescription[] = [
     flag: 'heard_midnight_packages',
     episode: 1,
     label: 'Midnight deliveries',
-    description: 'Levent reported strange packages being delivered to the neighbourhood at night.',
+    description: 'Reports of suspicious packages delivered to Baskı Evi at night.',
   },
   {
     flag: 'cultivated_ruya',
@@ -100,7 +100,7 @@ const CLUE_DESCRIPTIONS: ClueDescription[] = [
     flag: 'has_sude_photos',
     episode: 2,
     label: 'Photographic evidence',
-    description: 'Sude risked everything to photograph midnight deliveries at Başkı Evi.',
+    description: 'Sude risked everything to photograph midnight deliveries at Baskı Evi.',
   },
   {
     flag: 'sude_appointment',
@@ -118,7 +118,7 @@ const CLUE_DESCRIPTIONS: ClueDescription[] = [
     flag: 'knows_vedat_name',
     episode: 2,
     label: 'The collector\'s name',
-    description: 'Vedat Arslaner — patron of Anatolian heritage. The network\'s centre.',
+    description: 'Vedat Arslaner — patron of Anatolian heritage. The network\'s center.',
   },
   {
     flag: 'hakan_deal',
@@ -157,6 +157,18 @@ const CLUE_DESCRIPTIONS: ClueDescription[] = [
     episode: 3,
     label: 'Vedat\'s personal ledger',
     description: 'A hidden ledger behind painting 19 in the gallery. Every transaction recorded.',
+  },
+  {
+    flag: 'has_vedat_letter',
+    episode: 3,
+    label: 'The 1981 letter',
+    description: 'A young Vedat proposed museums and collectors as partners. Before the idealism curdled.',
+  },
+  {
+    flag: 'saw_vedat_study',
+    episode: 3,
+    label: 'Vedat\'s private study',
+    description: 'A room with Defne\'s marginalia in restoration books. The evidence of a fallen idealist.',
   },
 ];
 

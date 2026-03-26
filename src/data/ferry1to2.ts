@@ -135,7 +135,7 @@ It's not much. But it's the first time someone has acknowledged that the officia
   {
     id: 'ferry1_irfan_press',
     episode: 1,
-    text: `İrfan's jaw tightens. "I saw what I saw. A boat without lights, moving fast toward the islands. And I heard the coast guard radio — they were told to focus their search south, toward Marmara. Away from the islands."
+    text: `İrfan's jaw tightens. "I saw what I saw. A boat without lights, moving fast toward the islands. And I heard the coast guard radio — they were told to focus their search north, up the strait toward the Black Sea. Away from the islands."
 
 He grips the wheel. "I filed a report. Nobody read it. Or if they did, they decided it wasn't worth pursuing."
 
@@ -366,6 +366,7 @@ He straightens up. "I told her I might know someone. Hakan Reis, operates out of
       {
         text: '"What else do you hear on these ferries? About the islands, about art?"',
         next: 'ferry1_cem_more',
+        condition: { npcTrust: { npc: 'cem', min: 1 } },
         effects: {
           npcTrust: { cem: 1 },
         },
@@ -403,7 +404,7 @@ He pours you çay, taking his time. "Shipments. After hours. Yes, I've seen them
 
 He leans in. "Now. My turn. What's your interest? Police? Journalist? Personal?"
 
-The way he asks suggests the answer matters to him. Cem is grey economy — he survives by knowing who to talk to and who to avoid.`,
+The way he asks suggests the answer matters to him. Cem is gray economy — he survives by knowing who to talk to and who to avoid.`,
     location: 'Ferry — Tea Counter',
     phase: 'ferry',
     npcPresent: ['cem'],
@@ -514,11 +515,11 @@ Her Turkish is clean, almost accentless — the kind of deliberate neutrality th
   {
     id: 'ferry1_ruya_confront',
     episode: 1,
-    text: `Her eyes lift from the book. Grey eyes, steady, evaluating — the colour of the Bosphorus in winter. "That's a bold statement."
+    text: `Her eyes lift from the book. Gray eyes, steady, evaluating — the color of the Bosphorus in winter. "That's a bold statement."
 
 "I'm a journalist. Bold statements are occupational."
 
-A flicker — not quite a smile. She closes the book and her thumb finds the scar on her left hand, rubbing it absently. A tell, you think. Something she does when she's deciding how much to reveal.
+A flicker — not quite a smile. She closes the book and her thumb finds the scar on her left thumb, rubbing it absently. A tell, you think. Something she does when she's deciding how much to reveal.
 
 "I'm a reader. I ride ferries and read books. There's no conspiracy in that." But she doesn't look away. The cabin is empty except for the two of you and the hum of the engine. She pours tea from her thermos into the lid-cup, takes a sip, and the gesture is so domestic it almost breaks the tension. Almost.
 
@@ -548,7 +549,7 @@ After seven minutes — you count — she speaks without looking up.
 
 "Yaşar Kemal understood something about this country." She taps the open page of İnce Memed with her pencil stub. "That the truth is always buried. Not lost — buried. By people who benefit from the burial." She turns a page. "If you're digging, you should know that the people who did the burying are still alive. And they notice when the earth starts to move."
 
-She looks at you then. A long, measured look. Her thumb finds the scar on her left hand. "We'll talk again. Not tonight. Not until I know you won't do something reckless with what I have."
+She looks at you then. A long, measured look. Her thumb finds the scar on her left thumb. "We'll talk again. Not tonight. Not until I know you won't do something reckless with what I have."
 
 It's a promise and a test. She's offering information — later, if you earn it. The price is patience. The price is proving you can be trusted with something fragile.
 
@@ -596,6 +597,12 @@ The anonymous text glows in your memory: "Your sister didn't drown."
 If that's true — if she's alive — then two years of grief have been a lie. Not your lie. Someone else's. And lies that big don't just happen. They're built, carefully, by people with something to protect.
 
 The Kadıköy lights grow closer. The meyhane music drifts across the water. A new shore. A new set of questions.
+
+You close your eyes and for a moment you're back in your apartment in Beşiktaş — the one-bedroom above the bakkal, where the morning call to prayer from Sinan Paşa Mosque drifts through the cracked window and the smell of simit rises from the street before your alarm goes off. The stack of half-read novels on the nightstand. The running shoes by the door that you lace up at six a.m. because the Bosphorus path is empty at that hour and the water doesn't ask you questions. The French press you bought yourself the year Defne disappeared, because ritual is what you build when grief strips everything else away. That apartment is the life you assembled from what was left — small, deliberate, yours. A life that made sense until a text message at eleven p.m. unmade it.
+
+Your mother will be lighting a candle tomorrow morning. She does it every Sunday at Panayia Evangelistria, the Greek church in Kurtuluş — has done it every Sunday since the funeral. She is not Greek, not Christian, but a colleague took her once and she said the silence helped. She lights one for Defne and one for you. You asked her once why you got a candle too. She said, "Because I lost both my daughters that night. One to the water and one to the search." You didn't argue. She wasn't wrong.
+
+Defne was the luminous one — the one who walked into rooms and rearranged the gravity. People remembered her name, her laugh, the way she argued about Orhan Pamuk at dinner parties. You were the one who filed the police reports, who called the coast guard every week for six months, who sat across from a detective in Beşiktaş station and refused to leave until he reopened the file. Defne started fires. You tended them, or put them out. And now you're on a midnight ferry, doing both — tending the ember she left behind and chasing the smoke.
 
 Behind you, the ferry's wake is a white line dissolving into darkness. Arnavutköy is gone. Whatever you found there — the blue house, the painting, Selim's polished lies, Melis's frightened eyes, Oğuz's steady memory — it's all in your head now. Carried forward into whatever comes next.`,
     location: 'Ferry — Upper Deck',

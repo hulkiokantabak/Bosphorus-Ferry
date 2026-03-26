@@ -3,6 +3,7 @@ export interface ChoiceCondition {
   flagFalse?: string;
   npcTrust?: { npc: string; min: number };
   axis?: { name: keyof CharacterAxes; min?: number; max?: number };
+  or?: ChoiceCondition[];
 }
 
 export interface ChoiceEffects {
@@ -51,4 +52,4 @@ export interface GameState {
   choiceHistory: ChoiceHistoryEntry[];
 }
 
-export type GameScreen = 'intro' | 'menu' | 'briefing' | 'playing' | 'transition' | 'ending' | 'journal' | 'summary';
+export type GameScreen = 'intro' | 'menu' | 'briefing' | 'playing' | 'transition' | 'ending' | 'journal' | 'summary' | 'whatif';

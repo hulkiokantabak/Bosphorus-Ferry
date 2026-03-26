@@ -3,10 +3,11 @@ import NarrativeText from './NarrativeText';
 import ChoicePanel from './ChoicePanel';
 import LocationHeader from './LocationHeader';
 import SaveIndicator from './SaveIndicator';
+import ConsequenceToast, { ConsequenceMessage, buildConsequenceMessages } from './ConsequenceToast';
 import PauseMenu from './PauseMenu';
 import JournalScreen from './JournalScreen';
 import { Scene, Choice, GameState } from '../types';
-import { getAvailableChoices } from '../engine/gameEngine';
+import { getAvailableChoices, getLockedChoices, getEpisodeSceneCount } from '../engine/gameEngine';
 
 interface GameScreenProps {
   scene: Scene;
@@ -23,6 +24,8 @@ export default function GameScreen({ scene, state, onChoice, onSave, onMainMenu,
   const [isPaused, setIsPaused] = useState(false);
   const [showJournal, setShowJournal] = useState(false);
   const [showScrollHint, setShowScrollHint] = useState(false);
+  const [consequences, setConsequences] = useState<ConsequenceMessage[]>([]);
+  const consequenceCounter = useRef({ current: 0 });
   const scrollRef = useRef<HTMLDivElement>(null);
   const choicesRef = useRef<HTMLDivElement>(null);
   const prevSceneRef = useRef(scene.id);
@@ -88,6 +91,13 @@ export default function GameScreen({ scene, state, onChoice, onSave, onMainMenu,
       setShowChoices(false);
       setShowScrollHint(false);
       setSaveTrigger((n) => n + 1);
+
+      // Build consequence messages from choice effects
+      const msgs = buildConsequenceMessages(choice.effects, consequenceCounter.current);
+      if (msgs.length > 0) {
+        setConsequences(msgs);
+      }
+
       onChoice(choice);
     },
     [onChoice]
@@ -105,6 +115,11 @@ export default function GameScreen({ scene, state, onChoice, onSave, onMainMenu,
   }, []);
 
   const availableChoices = getAvailableChoices(scene, state);
+  const lockedChoices = getLockedChoices(scene, state);
+
+  // Count scenes visited in current episode for progress indicator
+  const scenesInEpisode = state.visitedScenes.filter(id => id.startsWith(`e${scene.episode}_`)).length;
+  const totalScenesInEpisode = getEpisodeSceneCount(scene.episode);
 
   return (
     <div
@@ -130,6 +145,8 @@ export default function GameScreen({ scene, state, onChoice, onSave, onMainMenu,
           location={scene.location}
           episode={scene.episode}
           onMenuToggle={() => setIsPaused(true)}
+          scenesInEpisode={scenesInEpisode}
+          totalScenesInEpisode={totalScenesInEpisode}
         />
 
         <NarrativeText
@@ -141,6 +158,7 @@ export default function GameScreen({ scene, state, onChoice, onSave, onMainMenu,
         <div ref={choicesRef}>
           <ChoicePanel
             choices={availableChoices}
+            lockedChoices={lockedChoices}
             onChoose={handleChoice}
             visible={showChoices}
           />
@@ -151,6 +169,7 @@ export default function GameScreen({ scene, state, onChoice, onSave, onMainMenu,
       </div>
 
       <SaveIndicator trigger={saveTrigger} />
+      <ConsequenceToast messages={consequences} />
 
       {/* Scroll-down hint when choices are below the fold */}
       {showScrollHint && (

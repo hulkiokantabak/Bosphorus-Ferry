@@ -166,6 +166,14 @@ export function useGame() {
     setScreen('summary');
   }, []);
 
+  const handleWhatIf = useCallback(() => {
+    setScreen('whatif');
+  }, []);
+
+  const handleWhatIfBack = useCallback(() => {
+    setScreen('summary');
+  }, []);
+
   const startFromChapter = useCallback((episode: 1 | 2 | 3) => {
     clearSave();
     const initial = createInitialState();
@@ -174,8 +182,63 @@ export function useGame() {
       2: 'e2_opening',
       3: 'e3_opening',
     };
+
+    // Canonical checkpoint states for Episode 2 and 3
+    // Represent a "typical" playthrough up to that point
+    const checkpoints: Record<number, Partial<GameState>> = {
+      1: {},
+      2: {
+        flags: {
+          talked_to_selim: true,
+          talked_to_melis: true,
+          talked_to_oguz: true,
+          talked_to_irfan: true,
+          heard_midnight_packages: true,
+          cultivated_ruya: true,
+          cultivated_cem: true,
+          oguz_full_account: true,
+        },
+        npcTrust: {
+          ...initial.npcTrust,
+          selim: 1, melis: 1, oguz: 2, levent: 1,
+          irfan: 1, ayse: 1, cem: 1, ruya: 1,
+        },
+        axes: { approach: 0.2, trust: 0.2, heart: 0.1, method: 0.1 },
+      },
+      3: {
+        flags: {
+          talked_to_selim: true,
+          talked_to_melis: true,
+          talked_to_oguz: true,
+          talked_to_irfan: true,
+          heard_midnight_packages: true,
+          cultivated_ruya: true,
+          cultivated_cem: true,
+          oguz_full_account: true,
+          met_naz: true,
+          naz_confessed: true,
+          naz_mentioned_island: true,
+          met_bora: true,
+          bora_allied: true,
+          has_sude_photos: true,
+          knows_vedat_name: true,
+          hakan_deal: true,
+          ruya_press_contact: true,
+        },
+        npcTrust: {
+          ...initial.npcTrust,
+          selim: 1, melis: 1, oguz: 2, levent: 1,
+          irfan: 2, ayse: 1, cem: 2, ruya: 2,
+          naz: 1, bora: 2, sude: 1, hakan: 1,
+        },
+        axes: { approach: 0.3, trust: 0.3, heart: 0.2, method: 0.2 },
+      },
+    };
+
+    const checkpoint = checkpoints[episode] || {};
     const chapterState: GameState = {
       ...initial,
+      ...checkpoint,
       currentEpisode: episode,
       currentScene: sceneMap[episode],
     };
@@ -204,6 +267,8 @@ export function useGame() {
     handleJournal,
     handleJournalBack,
     handleSummary,
+    handleWhatIf,
+    handleWhatIfBack,
     startFromChapter,
   };
 }
