@@ -1,8 +1,9 @@
-import { NPC_NAMES, LOCATION_NAMES } from '../data/highlightData';
+import { NPC_NAMES, LOCATION_NAMES, NPC_NAME_TO_ID } from '../data/highlightData';
 
 export interface TextSegment {
   text: string;
   type: 'plain' | 'npc' | 'location';
+  npcId?: string;
 }
 
 function escapeRegex(str: string): string {
@@ -41,7 +42,8 @@ export function highlightText(text: string): TextSegment[] {
 
     // Determine type from the name part
     const type = npcSet.has(nameMatch) ? 'npc' : locationSet.has(nameMatch) ? 'location' : 'plain';
-    segments.push({ text: fullMatch, type });
+    const npcId = type === 'npc' ? NPC_NAME_TO_ID[nameMatch] : undefined;
+    segments.push({ text: fullMatch, type, npcId });
 
     lastIndex = matchIndex + fullMatch.length;
   }

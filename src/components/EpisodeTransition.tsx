@@ -48,6 +48,16 @@ function buildRecap(episode: number, state?: GameState): string | null {
       lines.push('A quiet woman on the ferry — Rüya — offered trust through silence.');
     }
 
+    // Trust/axis flavor
+    if (state.axes.approach > 0.3) {
+      lines.push('You pushed hard for answers — and Arnavutköy pushed back.');
+    } else if (state.axes.approach < -0.3) {
+      lines.push('You moved carefully, listening more than asking.');
+    }
+    if (state.npcTrust.melis >= 2) {
+      lines.push('Melis trusts you now. That matters.');
+    }
+
     if (lines.length === 1) {
       lines.push('The European shore gave you fragments. Now the Asian side waits.');
     }
@@ -79,6 +89,19 @@ function buildRecap(episode: number, state?: GameState): string | null {
     }
     if (flags.ruya_press_contact) {
       lines.push('Rüya gave you a lifeline — contacts at the press, in case you don\'t come back.');
+    }
+
+    // Trust/axis flavor for E3
+    if (state.axes.trust > 0.3) {
+      lines.push('You\'ve opened yourself to others. That\'s either wisdom or a liability.');
+    } else if (state.axes.trust < -0.3) {
+      lines.push('You trust no one completely. On this island, that may keep you alive.');
+    }
+    if (state.axes.method > 0.5) {
+      lines.push('Every scrap of evidence is catalogued. Methodical. Ready.');
+    }
+    if (state.npcTrust.bora >= 2) {
+      lines.push('Bora is with you. His meyhane is your safe harbour.');
     }
 
     if (lines.length === 1) {

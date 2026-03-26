@@ -65,7 +65,7 @@ export default function LocationHeader({ location, episode, onMenuToggle }: Loca
           {/* Audio toggle */}
           <button
             onClick={toggleAudio}
-            className="audio-toggle p-2"
+            className="audio-toggle p-2 flex items-center justify-center"
             style={{
               color: audioOn ? 'var(--accent-gold-dim)' : 'var(--text-secondary)',
               opacity: audioOn ? 1 : 0.4,
@@ -94,7 +94,7 @@ export default function LocationHeader({ location, episode, onMenuToggle }: Loca
           {onMenuToggle && (
             <button
               onClick={onMenuToggle}
-              className="p-2 transition-colors duration-200"
+              className="menu-toggle p-2 transition-colors duration-200 flex items-center justify-center"
               style={{ color: 'var(--text-secondary)' }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.color = 'var(--accent-gold)';

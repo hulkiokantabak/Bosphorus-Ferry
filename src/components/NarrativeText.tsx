@@ -1,6 +1,7 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useTypewriter } from '../hooks/useTypewriter';
 import { highlightText } from '../utils/textHighlighter';
+import { getNpcProfile } from '../data/npcProfiles';
 
 interface NarrativeTextProps {
   text: string;
@@ -16,6 +17,9 @@ export default function NarrativeText({ text, onComplete }: NarrativeTextProps) 
       onComplete();
     }
   }, [isComplete, onComplete]);
+
+  // Track which NPCs have had their monogram shown (per full text, not per displayed chunk)
+  const seenNpcIds = useMemo(() => new Set<string>(), [text]);
 
   const paragraphs = displayedText.split('\n\n');
 
@@ -47,9 +51,27 @@ export default function NarrativeText({ text, onComplete }: NarrativeTextProps) 
           >
             {segments.map((seg, j) => {
               if (seg.type === 'npc') {
+                const showMonogram = seg.npcId && !seenNpcIds.has(seg.npcId);
+                if (seg.npcId) seenNpcIds.add(seg.npcId);
+                const profile = showMonogram && seg.npcId ? getNpcProfile(seg.npcId) : null;
                 return (
-                  <span key={j} style={{ color: 'var(--accent-gold)', fontWeight: 500 }}>
-                    {seg.text}
+                  <span key={j}>
+                    {profile && (
+                      <span
+                        className="npc-monogram-inline"
+                        style={{
+                          backgroundColor: `${profile.color}22`,
+                          color: profile.color,
+                          borderColor: `${profile.color}44`,
+                        }}
+                        aria-hidden="true"
+                      >
+                        {profile.monogram}
+                      </span>
+                    )}
+                    <span style={{ color: 'var(--accent-gold)', fontWeight: 500 }}>
+                      {seg.text}
+                    </span>
                   </span>
                 );
               }

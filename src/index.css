@@ -124,16 +124,68 @@ body {
 /* ============================================================
    MOBILE TYPOGRAPHY — more breathing room on small screens
    ============================================================ */
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   body {
-    line-height: 2;
-    font-size: 15px;
+    line-height: 2.1;
+    font-size: 16px; /* prevents iOS auto-zoom on inputs */
   }
 
-  /* Narrative paragraphs get extra spacing on mobile */
+  .narrative-mobile p {
+    margin-bottom: 1.25rem;
+  }
+
+  /* Larger tap targets for choice buttons */
+  .choice-enter {
+    min-height: 48px;
+    padding-top: 0.875rem;
+    padding-bottom: 0.875rem;
+    font-size: 0.95rem;
+  }
+
+  /* Header buttons need 44px minimum tap area */
+  .audio-toggle,
+  .menu-toggle {
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    line-height: 2.2;
+  }
+
   .narrative-mobile p {
     margin-bottom: 1.5rem;
   }
+
+  .choice-enter {
+    min-height: 52px;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    font-size: 1rem;
+  }
+}
+
+/* NPC inline monogram — small circle shown in narrative text */
+.npc-monogram-inline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.5rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  vertical-align: middle;
+  margin-right: 3px;
+  border: 1px solid;
+  flex-shrink: 0;
 }
 
 /* NPC monogram avatar */
