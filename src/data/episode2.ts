@@ -633,9 +633,9 @@ She pours çay without asking -- from a double-stacked çaydanlık on a hotplate
     phase: 'exploration',
     location: 'Baskı Evi',
     npcPresent: ['naz'],
-    text: `Naz Yılmaz looks at the receipt in your hand. Her expression doesn\'t change -- not a twitch, not a blink. She takes it between two fingers and examines it the way a jeweller examines a stone.
+    text: `Naz Yılmaz looks at the receipt in your hand. Her expression doesn\'t change -- not a twitch, not a blink. She takes it between two fingers and examines it the way a jeweler examines a stone.
 
-"Please, sit." She gestures to a stool by the workbench. Cay appears. The ritual is automatic. "Your sister. You said Defne?"
+"Please, sit." She gestures to a stool by the workbench. Çay appears. The ritual is automatic. "Your sister. You said Defne?"
 
 She places the receipt on the counter, perfectly aligned with the wood grain. "She came here for document research. Ottoman-era provenance papers -- how they were constructed, what inks were used, the binding techniques." Naz\'s tone is clinical, professorial. "She was very talented. Very serious."
 
