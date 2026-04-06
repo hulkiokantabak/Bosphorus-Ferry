@@ -1,27 +1,30 @@
-# Bosphorus Ferry — A Bosphorus Mystery
+# Bosphorus Ferry
 
-A choice-driven text adventure set in Istanbul — 3 episodes, 16 NPCs, 8 endings.
+A choice-driven text adventure set in Istanbul. 3 episodes. 16 NPCs. 8 endings.
 
 ## [>>> PLAY NOW <<<](https://hulkiokantabak.github.io/Bosphorus-Ferry/)
 
-No download needed — runs in your browser.
+No download needed — runs in your browser on desktop and mobile.
 
-## About
+## How to Play
 
-Board a ferry crossing the Bosphorus and find yourself drawn into a mystery unfolding across Istanbul. Talk to strangers, make choices, and discover where the story takes you. Your decisions shape the narrative across three episodes, leading to one of eight possible endings.
+- You are aboard the ferry crossing the Bosphorus
+- Read the scene, meet the characters, make choices
+- Each decision shapes your character axes — the values built through who you choose to be
+- Character axes unlock or close paths throughout the journey
+- Reach one of 8 distinct endings across 3 episodes
 
 ## Features
 
-- 3 episodes of branching narrative
-- 16 NPCs to interact with
-- 8 different endings
-- Choice-driven storytelling — your decisions matter
-- Ambient audio system with 13 ambience types
-- Mood and atmosphere shifts based on story beats
-- Works on desktop and mobile
+- 3 episodes with continuous narrative across ferry crossings
+- 16 NPCs with distinct voices and relationships
+- Character axis system — choices build underlying values rather than scores
+- Full save / load via localStorage
+- Typewriter text animation
+- Works on mobile, tablet, and desktop
 
 ## Play It
 
 **https://hulkiokantabak.github.io/Bosphorus-Ferry/**
 
-Built with React + TypeScript + Vite.
+Built with React 19, TypeScript, and Vite. Auto-deploys to GitHub Pages on push to `main`.
