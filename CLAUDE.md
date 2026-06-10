@@ -10,6 +10,8 @@ Choice-driven text adventure game set in Istanbul. 3 episodes, 16 NPCs, 8 ending
 - `npm run dev` — start dev server
 - `npm run build` — typecheck + production build
 - `npm run preview` — preview production build locally
+- `node playtest.mjs` — automated playtest script (simulates play-throughs without the browser)
+- `start-game.bat` — Windows launcher (starts dev server and opens the game in a browser)
 
 ## Deployment
 - GitHub repo: https://github.com/hulkiokantabak/Bosphorus-Ferry
@@ -20,7 +22,7 @@ Choice-driven text adventure game set in Istanbul. 3 episodes, 16 NPCs, 8 ending
 ## Architecture
 - `src/engine/` — game engine (scene registry, state manager, condition checker, ending calculator)
 - `src/data/` — narrative content (episode1-3, ferry transitions, endings)
-- `src/components/` — React UI (14 components)
+- `src/components/` — React UI (15 components)
 - `src/hooks/` — useGame (main game logic), useTypewriter (text animation)
 - Save key: `bosphorus-ferry-save` in localStorage
 
