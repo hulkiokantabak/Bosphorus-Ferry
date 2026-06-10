@@ -10,6 +10,7 @@ import {
   registerScenes,
   getScene,
   makeChoice,
+  applyChoiceEffects,
 } from '../engine/gameEngine';
 import { calculateEnding, EndingType } from '../engine/endingCalculator';
 import { trackSceneVisit, trackChoice, trackEnding, trackGameStart, recordLocalPlaythrough } from '../engine/analytics';
@@ -81,12 +82,16 @@ export function useGame() {
 
       // Check if this leads to an ending
       if (choice.next === 'ending_calculate') {
-        const endingType = calculateEnding(gameState);
+        // Apply the chosen choice's effects BEFORE scoring the ending, so flags
+        // like has_evidence_package / found_defne and heart axisShifts the
+        // calculator depends on are reflected in the final score.
+        const postChoiceState = applyChoiceEffects(gameState, choice);
+        const endingType = calculateEnding(postChoiceState);
         setEnding(endingType);
         // Navigate to the ending scene
         const endingSceneId = `ending_${endingType.toLowerCase()}`;
         const newState = {
-          ...gameState,
+          ...postChoiceState,
           currentScene: endingSceneId,
           visitedScenes: [...gameState.visitedScenes, gameState.currentScene],
           choiceHistory: [
@@ -99,7 +104,9 @@ export function useGame() {
           ],
         };
         setGameState(newState);
-        saveGame(newState);
+        // Game complete: clear the save so Continue does not dead-end on the
+        // choice-less ending scene.
+        clearSave();
         setScreen('ending');
         trackEnding(endingType, newState.visitedScenes.length, newState.choiceHistory.length);
         recordLocalPlaythrough(endingType, newState.visitedScenes.length, newState.choiceHistory.length);
@@ -112,6 +119,9 @@ export function useGame() {
         setEnding(endingType);
         const newState = makeChoice(gameState, choice);
         setGameState(newState);
+        // Game complete: clear the save (makeChoice auto-saved the ending scene)
+        // so Continue does not dead-end on the choice-less ending scene.
+        clearSave();
         setScreen('ending');
         trackEnding(endingType, newState.visitedScenes.length, newState.choiceHistory.length);
         recordLocalPlaythrough(endingType, newState.visitedScenes.length, newState.choiceHistory.length);
@@ -155,6 +165,16 @@ export function useGame() {
 
   const handleJournal = useCallback(() => {
     previousScreenRef.current = screen === 'playing' ? 'playing' : 'menu';
+    // When opening the journal from the menu on a fresh page load, hydrate from
+    // the saved game first so the notebook reflects the player's actual progress
+    // instead of the empty initial state.
+    if (screen !== 'playing') {
+      const saved = loadGame();
+      if (saved) {
+        setGameState(saved);
+        setLastEpisode(saved.currentEpisode);
+      }
+    }
     setScreen('journal');
   }, [screen]);
 

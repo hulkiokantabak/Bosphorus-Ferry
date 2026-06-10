@@ -48,25 +48,12 @@ export function getLockedChoices(scene: Scene, state: GameState): LockedChoice[]
     }));
 }
 
-export function makeChoice(
+export function applyChoiceEffects(
   state: GameState,
   choice: Choice
 ): GameState {
-  const newState: GameState = {
-    ...state,
-    currentScene: choice.next,
-    visitedScenes: [...state.visitedScenes, state.currentScene],
-    choiceHistory: [
-      ...state.choiceHistory,
-      {
-        scene: state.currentScene,
-        choice: choice.text,
-        episode: state.currentEpisode,
-      },
-    ],
-  };
+  const newState: GameState = { ...state };
 
-  // Apply effects
   if (choice.effects) {
     if (choice.effects.setFlags) {
       const newFlags = { ...newState.flags };
@@ -87,6 +74,30 @@ export function makeChoice(
       );
     }
   }
+
+  return newState;
+}
+
+export function makeChoice(
+  state: GameState,
+  choice: Choice
+): GameState {
+  let newState: GameState = {
+    ...state,
+    currentScene: choice.next,
+    visitedScenes: [...state.visitedScenes, state.currentScene],
+    choiceHistory: [
+      ...state.choiceHistory,
+      {
+        scene: state.currentScene,
+        choice: choice.text,
+        episode: state.currentEpisode,
+      },
+    ],
+  };
+
+  // Apply effects
+  newState = applyChoiceEffects(newState, choice);
 
   // Detect episode transitions
   const nextScene = getScene(choice.next);
