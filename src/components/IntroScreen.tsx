@@ -1,13 +1,24 @@
 import { useState, useEffect, useCallback } from 'react';
+import { prefersReducedMotion } from '../utils/motion';
 
 interface IntroScreenProps {
   onComplete: () => void;
 }
 
 export default function IntroScreen({ onComplete }: IntroScreenProps) {
-  const [phase, setPhase] = useState<'dark' | 'creator' | 'title' | 'tagline' | 'fade'>('dark');
+  // Reduced-motion players see the full title card immediately (no animated
+  // build-up) and move on quickly, instead of waiting out a 7.5s sequence
+  // whose animations have been disabled anyway.
+  const reduceMotion = prefersReducedMotion();
+  const [phase, setPhase] = useState<'dark' | 'creator' | 'title' | 'tagline' | 'fade'>(
+    reduceMotion ? 'tagline' : 'dark'
+  );
 
   useEffect(() => {
+    if (reduceMotion) {
+      const timer = setTimeout(() => onComplete(), 1600);
+      return () => clearTimeout(timer);
+    }
     const timers = [
       setTimeout(() => setPhase('creator'), 600),
       setTimeout(() => setPhase('title'), 2400),
@@ -16,7 +27,7 @@ export default function IntroScreen({ onComplete }: IntroScreenProps) {
       setTimeout(() => onComplete(), 7500),
     ];
     return () => timers.forEach(clearTimeout);
-  }, [onComplete]);
+  }, [onComplete, reduceMotion]);
 
   const skip = useCallback(() => {
     onComplete();
@@ -109,7 +120,7 @@ export default function IntroScreen({ onComplete }: IntroScreenProps) {
               fontFamily: "'Inter', sans-serif",
               color: 'var(--text-secondary)',
               opacity: 0,
-              animationDelay: '1s',
+              animationDelay: '0.2s',
             }}
           >
             Click anywhere to skip

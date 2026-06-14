@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
+import { prefersReducedMotion } from '../utils/motion';
 
 const SPEED_KEY = 'bosphorus-ferry-text-speed';
 
@@ -41,6 +42,14 @@ export function useTypewriter(text: string, speed: number = 25) {
     indexRef.current = 0;
 
     if (!text) {
+      setIsComplete(true);
+      return;
+    }
+
+    // Respect the user's motion preference (and the 'instant' text speed):
+    // reveal the whole passage at once instead of animating it.
+    if (speed <= 0 || prefersReducedMotion()) {
+      setDisplayedText(text);
       setIsComplete(true);
       return;
     }

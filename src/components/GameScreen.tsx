@@ -7,7 +7,7 @@ import ConsequenceToast, { ConsequenceMessage, buildConsequenceMessages } from '
 import PauseMenu from './PauseMenu';
 import JournalScreen from './JournalScreen';
 import { Scene, Choice, GameState } from '../types';
-import { getAvailableChoices, getLockedChoices, getEpisodeSceneCount } from '../engine/gameEngine';
+import { getAvailableChoices, getLockedChoices } from '../engine/gameEngine';
 import { resumeIfNeeded } from '../engine/audioManager';
 
 interface GameScreenProps {
@@ -121,10 +121,6 @@ export default function GameScreen({ scene, state, onChoice, onSave, onMainMenu,
   const availableChoices = getAvailableChoices(scene, state);
   const lockedChoices = getLockedChoices(scene, state);
 
-  // Count scenes visited in current episode for progress indicator
-  const scenesInEpisode = state.visitedScenes.filter(id => id.startsWith(`e${scene.episode}_`)).length;
-  const totalScenesInEpisode = getEpisodeSceneCount(scene.episode);
-
   return (
     <div
       ref={scrollRef}
@@ -150,8 +146,6 @@ export default function GameScreen({ scene, state, onChoice, onSave, onMainMenu,
           episode={scene.episode}
           phase={scene.phase}
           onMenuToggle={() => setIsPaused(true)}
-          scenesInEpisode={scenesInEpisode}
-          totalScenesInEpisode={totalScenesInEpisode}
         />
 
         <NarrativeText

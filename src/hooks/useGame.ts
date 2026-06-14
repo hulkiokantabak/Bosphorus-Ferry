@@ -66,11 +66,16 @@ export function useGame() {
 
   const continueGame = useCallback(() => {
     const saved = loadGame();
-    if (saved) {
+    // Guard against a save that points at a scene this build no longer ships
+    // (e.g. a scene renamed/removed in a content update). Without this, the
+    // current scene resolves to undefined and the player is silently dumped to
+    // the menu with no save. Better to discard cleanly and start fresh.
+    if (saved && getScene(saved.currentScene)) {
       setGameState(saved);
       setLastEpisode(saved.currentEpisode);
       setScreen('playing');
     } else {
+      if (saved) clearSave(); // stale/incompatible — remove it
       startNewGame();
     }
   }, [startNewGame]);

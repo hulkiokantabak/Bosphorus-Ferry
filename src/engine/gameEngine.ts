@@ -39,9 +39,23 @@ export interface LockedChoice {
   hint: string;
 }
 
+/**
+ * A choice gated by a `flagFalse` that is now true is *expired*, not *locked*:
+ * the player already did the thing that removes it, and nothing they do can
+ * bring it back. Showing it with a padlock reads as a bug ("why can I never
+ * pick this?"), so such choices are hidden rather than surfaced as locked.
+ * (Mirrors conditionChecker: a top-level `or` short-circuits `flagFalse`, so
+ * this only applies when there is no `or` branch offering another path.)
+ */
+function isExpiredChoice(choice: Choice, state: GameState): boolean {
+  const c = choice.condition;
+  return !!c && !c.or && !!c.flagFalse && state.flags[c.flagFalse] === true;
+}
+
 export function getLockedChoices(scene: Scene, state: GameState): LockedChoice[] {
   return scene.choices
     .filter((choice) => !checkCondition(choice.condition, state))
+    .filter((choice) => !isExpiredChoice(choice, state))
     .map((choice) => ({
       text: choice.text,
       hint: getConditionHint(choice.condition, state) || 'Locked',

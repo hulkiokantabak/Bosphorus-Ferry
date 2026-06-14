@@ -4,6 +4,12 @@ const SAVE_KEY = 'bosphorus-ferry-save';
 const ENDINGS_KEY = 'bosphorus-ferry-endings';
 const COMPLETED_KEY = 'bosphorus-ferry-completed';
 
+// Bump this whenever the GameState shape changes in a way that makes older
+// saves unsafe to load. A save with a *different* stamp is discarded; a save
+// with no stamp (written before versioning existed) is treated as legacy and
+// still accepted, since the shape it was written with is the current one.
+const SAVE_VERSION = 1;
+
 export function createInitialState(): GameState {
   return {
     currentEpisode: 1,
@@ -67,7 +73,7 @@ export function applyNpcTrust(
 
 export function saveGame(state: GameState): void {
   try {
-    localStorage.setItem(SAVE_KEY, JSON.stringify(state));
+    localStorage.setItem(SAVE_KEY, JSON.stringify({ ...state, _v: SAVE_VERSION }));
   } catch {
     // Silent fail if localStorage unavailable
   }
@@ -78,8 +84,9 @@ export function loadGame(): GameState | null {
     const saved = localStorage.getItem(SAVE_KEY);
     if (saved) {
       const parsed = JSON.parse(saved);
+      const versionOk = parsed && (parsed._v === undefined || parsed._v === SAVE_VERSION);
       if (
-        parsed &&
+        versionOk &&
         typeof parsed.currentEpisode === 'number' &&
         typeof parsed.currentScene === 'string' &&
         parsed.axes &&
@@ -88,8 +95,11 @@ export function loadGame(): GameState | null {
         Array.isArray(parsed.visitedScenes) &&
         Array.isArray(parsed.choiceHistory)
       ) {
+        // Strip the storage-only version marker before handing back GameState.
+        delete parsed._v;
         return parsed as GameState;
       }
+      // Malformed, or written by an incompatible newer/older schema — discard.
       localStorage.removeItem(SAVE_KEY);
     }
   } catch {

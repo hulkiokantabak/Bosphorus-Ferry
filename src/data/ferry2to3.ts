@@ -108,7 +108,7 @@ The distinction lands like a depth charge. You hadn't considered it. That Defne 
 
 "The house on the hill has servants' quarters," İrfan adds. "But there are other mansions on the island. Empty ones, mostly. Summer houses locked up for winter. A person could hide in one of those for a long time. If someone was leaving food for them."
 
-He grips the wheel. "That's all I know. But I know the water, and I know this: the Bosphorus doesn't take people who don't want to be taken. It took me thirty years to learn that."`,
+He grips the wheel. "That's all I know. But I know the water, and I know this: this water doesn't take people who don't want to be taken. It took me thirty years to learn that."`,
     location: 'Ferry — Captain\'s Bridge',
     phase: 'ferry',
     npcPresent: ['irfan'],

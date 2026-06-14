@@ -69,7 +69,7 @@ const LOCATION_AMBIENCE: Record<string, AmbienceBase> = {
   'Istanbul Airport': 'indoor-quiet',
   // Indoor — cafe
   'Liman Meyhane': 'indoor-cafe',
-  'Melisin Yeri Cafe': 'indoor-cafe',
+  'Melis\'in Yeri Cafe': 'indoor-cafe',
   'Kadıköy Kahvehane': 'indoor-cafe',
   'Büyükada Bakkal': 'indoor-cafe',
   'Baskı Evi': 'indoor-cafe',
@@ -132,12 +132,24 @@ function pick<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-function getContext(): AudioContext {
+function getContext(): AudioContext | null {
   if (!audioCtx) {
-    audioCtx = new AudioContext();
-    masterGain = audioCtx.createGain();
-    masterGain.gain.value = 0.15;
-    masterGain.connect(audioCtx.destination);
+    // Feature-detect (older Safari/WebViews expose webkitAudioContext) and never
+    // let an unavailable or throwing constructor crash the caller — audio is a
+    // non-essential enhancement and should degrade to silence.
+    try {
+      const Ctor =
+        window.AudioContext ||
+        (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+      if (!Ctor) return null;
+      audioCtx = new Ctor();
+      masterGain = audioCtx.createGain();
+      masterGain.gain.value = 0.15;
+      masterGain.connect(audioCtx.destination);
+    } catch {
+      audioCtx = null;
+      return null;
+    }
   }
   return audioCtx;
 }
@@ -741,6 +753,7 @@ export function setAmbience(location: string, opts?: AmbienceOpts) {
   if (ambience === currentAmbience) return;
 
   const ctx = getContext();
+  if (!ctx) return; // Web Audio unavailable — stay silent rather than throw
   if (ctx.state === 'suspended') {
     pendingAmbience = location;
     pendingOpts = opts || {};

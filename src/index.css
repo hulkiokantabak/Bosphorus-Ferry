@@ -236,3 +236,36 @@ body {
 .audio-toggle:hover {
   color: var(--accent-gold) !important;
 }
+
+/* ============================================================
+   REDUCED MOTION — honour the OS "reduce motion" preference.
+   The typewriter and intro sequence are handled in JS
+   (see utils/motion.ts); this neutralises the CSS animations
+   (fades, pulses, toasts, staggered reveals) so nothing slides,
+   blinks, or pulses for motion-sensitive players.
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Reveal anything whose start-state is opacity:0 driven by an
+     animation, so disabling the animation does not leave it invisible. */
+  .fade-in,
+  .slow-fade,
+  .choice-enter,
+  .type-in {
+    opacity: 1 !important;
+    transform: none !important;
+    letter-spacing: normal;
+  }
+
+  .cursor-blink {
+    opacity: 1 !important;
+  }
+}

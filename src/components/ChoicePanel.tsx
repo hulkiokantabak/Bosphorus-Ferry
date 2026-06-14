@@ -11,8 +11,6 @@ interface ChoicePanelProps {
 export default function ChoicePanel({ choices, lockedChoices, onChoose, visible }: ChoicePanelProps) {
   if (!visible || choices.length === 0) return null;
 
-  const totalItems = choices.length + (lockedChoices?.length || 0);
-
   return (
     <div className="mt-8 space-y-3">
       {choices.map((choice, index) => (

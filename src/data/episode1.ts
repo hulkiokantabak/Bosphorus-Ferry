@@ -15,7 +15,7 @@ You read the message again. Unknown number, received forty minutes ago while you
 
 "Your sister didn't drown. Arnavutköy. The blue house past the mosque. Ask for the painting."
 
-Two years. Two years of police shrugs and closed files. Two years of your mother lighting candles at the church in Kurtuluş, whispering Defne's name like a prayer that might still be answered. And now six sentences from a stranger that have turned your blood to ice water.
+Two years. Two years of police shrugs and closed files. Two years of your mother lighting candles at the church in Kurtuluş, whispering Defne's name like a prayer that might still be answered. And now four sentences from a stranger that have turned your blood to ice water.
 
 The ferry horn sounds — low, mournful, shaking your ribs. Ahead, the wooden yalıs of Arnavutköy glow amber against the darkening hills. Ottoman facades, crumbling paint, fishing boats nudging the shore. Somewhere in that tangle of narrow streets and old money, someone knows what happened to your sister.
 
@@ -54,7 +54,7 @@ You pocket the phone. Your hands are trembling. Not from cold.`,
     episode: 1,
     phase: 'exploration',
     location: 'Arnavutköy Waterfront',
-    text: `You step off the ferry and the crowd swallows you — commuters heading home, a woman balancing a tray of simit on her head, two boys chasing a football across the cobbles. The iskele empties fast. Within minutes you're standing alone on the promenade, the Bosphorus lapping at stone steps black with algae.
+    text: `You step off the ferry and the crowd swallows you — commuters heading home, a vendor threading a simit trolley through the crush, two boys chasing a football across the cobbles. The iskele empties fast. Within minutes you're standing alone on the promenade, the Bosphorus lapping at stone steps black with algae.
 
 The waterfront stretches in both directions. To your left, a row of fish restaurants hums with early dinner service — white tablecloths, candles in glass jars, waiters calling out to passersby. To your right, the promenade narrows past shuttered boathouses and a small park where plane trees drop their leaves into the wind.
 
@@ -1293,7 +1293,7 @@ A woman's voice carries from the lit cafe back down the hill. Melis, calling som
     id: 'e1_melis_cafe_arrive',
     episode: 1,
     phase: 'complication',
-    location: 'Melisin Yeri Cafe',
+    location: 'Melis\'in Yeri Cafe',
     npcPresent: ['melis'],
     text: `The cafe is small and warm — six tables, mismatched chairs, walls covered in framed photographs and hand-drawn menus. It smells of fresh bread, basil, and strong coffee. A radio plays low — some Turkish jazz station, piano and saxophone drifting like smoke.
 
@@ -1336,7 +1336,7 @@ A framed photo behind the counter catches your eye. Two women at a table, laughi
     id: 'e1_melis_reveal',
     episode: 1,
     phase: 'complication',
-    location: 'Melisin Yeri Cafe',
+    location: 'Melis\'in Yeri Cafe',
     npcPresent: ['melis'],
     text: `The glass she's holding slips. She catches it — barely — and sets it down with trembling hands. Her eyes go to the photo, then to you, then back to the photo.
 
@@ -1381,7 +1381,7 @@ She takes a shaking breath.
     id: 'e1_melis_slow_approach',
     episode: 1,
     phase: 'complication',
-    location: 'Melisin Yeri Cafe',
+    location: 'Melis\'in Yeri Cafe',
     npcPresent: ['melis'],
     text: `She makes you a Turkish coffee — proper, in a copper cezve, with a dusting of cardamom. Her movements are practiced and precise. She sets the cup before you with a small glass of water on the side.
 
@@ -1424,7 +1424,7 @@ She's picking her words like someone walking through a minefield.`,
     id: 'e1_melis_indirect',
     episode: 1,
     phase: 'complication',
-    location: 'Melisin Yeri Cafe',
+    location: 'Melis\'in Yeri Cafe',
     npcPresent: ['melis'],
     text: `"Art in the neighborhood." She gives you a look — shrewd, appraising. "My menemen is famous but my art expertise is limited. You should talk to Selim next door, or Levent at the gallery up the hill."
 
@@ -1458,7 +1458,7 @@ The photo of Defne is right there, behind her shoulder. You and Defne have the s
     id: 'e1_melis_careful',
     episode: 1,
     phase: 'complication',
-    location: 'Melisin Yeri Cafe',
+    location: 'Melis\'in Yeri Cafe',
     npcPresent: ['melis'],
     text: `She opens her mouth. Closes it. Glances at the door, the windows, the shared wall. Then she reaches up and turns the radio louder — the saxophone swells, covering your words.
 
@@ -1496,7 +1496,7 @@ She comes around the counter, locks the door, pulls the blinds.
     id: 'e1_melis_full_story',
     episode: 1,
     phase: 'complication',
-    location: 'Melisin Yeri Cafe',
+    location: 'Melis\'in Yeri Cafe',
     npcPresent: ['melis'],
     text: `Melis speaks in a low, steady voice, her hands wrapped around a coffee cup gone cold.
 
@@ -1537,7 +1537,7 @@ Melis glances at the wall separating her cafe from Köşk Antik.
     id: 'e1_melis_about_selim',
     episode: 1,
     phase: 'complication',
-    location: 'Melisin Yeri Cafe',
+    location: 'Melis\'in Yeri Cafe',
     npcPresent: ['melis'],
     text: `Melis looks at the shared wall like she can see through it.
 
@@ -1579,7 +1579,7 @@ She reaches under the counter and pulls out a small envelope. Inside is a single
     id: 'e1_melis_key',
     episode: 1,
     phase: 'complication',
-    location: 'Melisin Yeri Cafe',
+    location: 'Melis\'in Yeri Cafe',
     npcPresent: ['melis'],
     text: `"She didn't leave notes with me. She was careful — paranoid, even, toward the end. But..." Melis reaches under the counter and produces a small envelope. Inside is a brass key on a worn leather fob. "She gave me this. The spare key to her apartment. Three streets back, number 14, second floor."
 
@@ -1620,7 +1620,7 @@ She wipes her eyes again. Steadies herself.
     id: 'e1_melis_overheard',
     episode: 1,
     phase: 'complication',
-    location: 'Melisin Yeri Cafe',
+    location: 'Melis\'in Yeri Cafe',
     npcPresent: ['melis'],
     text: `Melis leans close. The radio plays on — covering you both, she hopes.
 
@@ -1665,7 +1665,7 @@ She presses the key into your hand.
     id: 'e1_melis_about_levent',
     episode: 1,
     phase: 'complication',
-    location: 'Melisin Yeri Cafe',
+    location: 'Melis\'in Yeri Cafe',
     npcPresent: ['melis'],
     text: `"Levent." Something complicated crosses her face — affection and exasperation tangled together. "Yes, I know him. He has a gallery one block up the hill. He's a good person. Honest. He knew Defne — they worked in the same circles. I think he was a little in love with her, honestly."
 

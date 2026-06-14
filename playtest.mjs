@@ -20,6 +20,8 @@ function clampTrust(v) { return Math.max(-2, Math.min(3, v)); }
 
 function checkCondition(cond, state) {
   if (!cond) return true;
+  // OR conditions: any member passing satisfies the whole (mirrors conditionChecker.ts).
+  if (cond.or && cond.or.length > 0) return cond.or.some(sub => checkCondition(sub, state));
   if (cond.flag && !state.flags[cond.flag]) return false;
   if (cond.flagFalse && state.flags[cond.flagFalse]) return false;
   if (cond.npcTrust) {
@@ -32,6 +34,48 @@ function checkCondition(cond, state) {
     if (cond.axis.max !== undefined && val > cond.axis.max) return false;
   }
   return true;
+}
+
+// 'ending_calculate' is a code-level sentinel: useGame intercepts it and runs
+// calculateEnding() to pick an ending by weighted score, rather than navigating
+// to a scene of that id. The harness must model it the same way, or it will
+// report phantom "broken links" and "dead ends" for the 8 climax choices that
+// route through it. Ported verbatim from src/engine/endingCalculator.ts.
+const ENDING_CALCULATE = 'ending_calculate';
+
+function calculateEnding(state) {
+  const { axes, flags, npcTrust } = state;
+  const scores = [];
+
+  const aBase =
+    (flags.has_evidence_package ? 3 : 0) + (flags.found_vedat_ledger ? 2 : 0) +
+    (flags.has_sude_photos ? 1.5 : 0) + (flags.has_vedat_letter ? 1 : 0) +
+    axes.method * 2 + axes.approach * 1.5 +
+    (npcTrust.naz ?? 0) * 0.5 + (npcTrust.sude ?? 0) * 0.5;
+  scores.push({ ending: 'A1', score: aBase + (axes.approach > 0.3 ? 1 : 0) + (flags.ruya_press_contact ? 1.5 : 0) + (npcTrust.ruya ?? 0) * 0.5 });
+  scores.push({ ending: 'A2', score: aBase + (axes.approach <= 0.3 ? 1 : 0) + (axes.trust > 0 ? 1 : 0) + (npcTrust.bora ?? 0) * 0.5 });
+
+  const bBase =
+    axes.trust * 2.5 + (!flags.compromised ? 2 : 0) +
+    (npcTrust.vedat ?? 0) * 0.5 + (npcTrust.filiz ?? 0) * 0.5 + (npcTrust.bora ?? 0) * 0.3;
+  scores.push({ ending: 'B1', score: bBase + (axes.approach < 0 ? 1.5 : 0) + (axes.heart > 0 ? 1 : 0) + (flags.found_defne ? 1 : 0) });
+  scores.push({ ending: 'B2', score: bBase + (Math.abs(axes.approach) < 0.3 ? 1 : 0) + (axes.method > 0 ? 1 : 0) });
+
+  const cBase =
+    (flags.found_defne ? 3 : 0) + axes.heart * 2.5 +
+    (npcTrust.defne ?? 0) * 1 + (npcTrust.melis ?? 0) * 0.3 + (flags.hakan_deal ? 1 : 0);
+  scores.push({ ending: 'C1', score: cBase + (axes.method < 0 ? 1.5 : 0) + (axes.trust < 0 ? 0.5 : 0) });
+  scores.push({ ending: 'C2', score: cBase + (axes.method > 0 ? 1.5 : 0) + (flags.has_evidence_package ? 1 : 0) });
+
+  const dBase =
+    (flags.compromised ? 3 : 0) + (flags.tayfun_alert ? 2 : 0) +
+    (flags.spotted_by_tayfun ? 1.5 : 0) + axes.approach * 1.5;
+  scores.push({ ending: 'D1', score: dBase + (axes.method > 0 ? 1.5 : 0) + (npcTrust.hakan ?? 0) * 0.5 + (npcTrust.irfan ?? 0) * 0.3 });
+  scores.push({ ending: 'D2', score: dBase + (axes.method <= 0 ? 1.5 : 0) + (axes.heart > 0 ? 0.5 : 0) });
+
+  scores.sort((a, b) => b.score - a.score);
+  const winner = scores[0].score >= 3 ? scores[0].ending : 'B1';
+  return `ending_${winner.toLowerCase()}`;
 }
 
 function getAvailableChoices(scene, state) {
@@ -142,14 +186,15 @@ const allIds = new Set(allScenes.map(s => s.id));
 for (const scene of allScenes) {
   for (const choice of scene.choices) {
     allTargets.add(choice.next);
-    if (!sceneMap.has(choice.next)) {
+    if (!sceneMap.has(choice.next) && choice.next !== ENDING_CALCULATE) {
       console.error(`  ✗ BROKEN LINK: ${scene.id} → ${choice.next}`);
       errors++;
     }
   }
 }
 
-// Check for orphaned scenes (unreachable except e1_opening)
+// Check for orphaned scenes (unreachable except e1_opening). The ENDING_CALCULATE
+// sentinel resolves to one of the 8 ending scenes, so seed all of them as reachable.
 const reachable = new Set(['e1_opening']);
 const queue = ['e1_opening'];
 while (queue.length > 0) {
@@ -157,9 +202,14 @@ while (queue.length > 0) {
   const scene = sceneMap.get(id);
   if (!scene) continue;
   for (const c of scene.choices) {
-    if (!reachable.has(c.next)) {
-      reachable.add(c.next);
-      queue.push(c.next);
+    const target = c.next === ENDING_CALCULATE
+      ? ['ending_a1','ending_a2','ending_b1','ending_b2','ending_c1','ending_c2','ending_d1','ending_d2']
+      : [c.next];
+    for (const t of target) {
+      if (!reachable.has(t)) {
+        reachable.add(t);
+        queue.push(t);
+      }
     }
   }
 }
@@ -228,6 +278,13 @@ function simulatePath(targetChoiceHints) {
   const path = [];
 
   while (steps < maxSteps) {
+    // Resolve the ending-calculator sentinel exactly as the live engine does.
+    if (state.currentScene === ENDING_CALCULATE) {
+      const resolved = calculateEnding(state);
+      path.push(resolved);
+      return { ending: resolved, steps, path, state };
+    }
+
     const scene = sceneMap.get(state.currentScene);
     if (!scene) {
       return { error: `Scene not found: ${state.currentScene}`, steps, path, state };
@@ -335,6 +392,11 @@ for (let run = 0; run < 100; run++) {
   let failed = false;
 
   while (steps < maxSteps) {
+    if (state.currentScene === ENDING_CALCULATE) {
+      const resolved = calculateEnding(state);
+      endingsReached.set(resolved, (endingsReached.get(resolved) || 0) + 1);
+      break;
+    }
     const scene = sceneMap.get(state.currentScene);
     if (!scene) { failed = true; break; }
     if (scene.choices.length === 0) {
@@ -386,8 +448,14 @@ for (const scene of allScenes) {
   }
 }
 
-// Also check endingCalculator flags
-const endingFlags = ['has_evidence_package', 'compromised', 'found_defne', 'tayfun_alert'];
+// Also count every flag the ending calculator reads as "checked", so flags that
+// influence the outcome via scoring (rather than via a choice condition) are not
+// mis-reported as dead. Keep in sync with src/engine/endingCalculator.ts.
+const endingFlags = [
+  'has_evidence_package', 'found_vedat_ledger', 'has_sude_photos', 'has_vedat_letter',
+  'ruya_press_contact', 'compromised', 'found_defne', 'hakan_deal',
+  'tayfun_alert', 'spotted_by_tayfun',
+];
 for (const f of endingFlags) flagsChecked.add(f);
 
 const setButNeverChecked = [...flagsSet].filter(f => !flagsChecked.has(f));

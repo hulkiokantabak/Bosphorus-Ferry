@@ -563,7 +563,7 @@ Tayfun looks like he wants to argue, but forty years of authority outweigh five 
     episode: 3,
     text: `You approach the veranda steps openly, hands visible. "Filiz Hanım? Merhaba. Rahatsız ettiğim için özür dilerim."
 
-She looks up from her watering can. Her face is creased with seventy years of island wind and household worry, but her eyes are sharp. She takes in everything — your clothes, your posture, the bag on your shoulder.
+She looks up from her watering can. Her face is creased with sixty years of island wind and household worry, but her eyes are sharp. She takes in everything — your clothes, your posture, the bag on your shoulder.
 
 "Who are you?" Not unfriendly. Careful.
 
@@ -699,7 +699,7 @@ The words hit you like something physical. You grip the veranda railing. The woo
 
 "She's here," Filiz continues. "On the island. In the servants' quarters behind the Dimitriades house." She pauses. "I've been feeding her. Bringing her clothes, blankets, supplies. For two years."
 
-The magnitude of that settles over you. This seventy-year-old woman, the housekeeper of a man who drove your sister into hiding, has been secretly sustaining her for two years. Groceries. Blankets. Kindness, smuggled past the very man who caused the need for it.`,
+The magnitude of that settles over you. This sixty-year-old woman, the housekeeper of a man who drove your sister into hiding, has been secretly sustaining her for two years. Groceries. Blankets. Kindness, smuggled past the very man who caused the need for it.`,
     location: 'Büyükada — Mansion Veranda',
     phase: 'complication',
     npcPresent: ['filiz'],
@@ -952,7 +952,7 @@ Filiz knocks on the door — a pattern, three short, two long. Footsteps inside.
 
 The door opens. And there, in the dim light of an oil lamp, stands your sister.
 
-Two years. Two years of grief, of an empty apartment in Arnavutköy with a dried plant on the balcony, of a death certificate signed by a coast guard officer who never found a body. Two years of learning to live without someone. And she's been here. Thirty meters from the man who drove her into hiding, sustained by the quiet heroism of a seventy-year-old housekeeper.
+Two years. Two years of grief, of an empty apartment in Arnavutköy with a dried plant on the balcony, of a death certificate signed by a coast guard officer who never found a body. Two years of learning to live without someone. And she's been here. Thirty meters from the man who drove her into hiding, sustained by the quiet heroism of a sixty-year-old housekeeper.
 
 Defne stares at you. Her face cycles through emotions like weather — shock, joy, fear, anger, relief — each one visible, none dominant.
 
@@ -1842,7 +1842,7 @@ Another sip of brandy. "Perhaps. But let me tell you what else you have." He set
 
 He lets that settle.
 
-"If this goes to court, Defne doesn't walk away clean. She walks into a legal nightmare. The prosecution will take years. She'll be a witness and a defendant simultaneously. Filiz — the seventy-year-old woman who fed your sister — becomes an accessory. Is that what you want for them?"
+"If this goes to court, Defne doesn't walk away clean. She walks into a legal nightmare. The prosecution will take years. She'll be a witness and a defendant simultaneously. Filiz — the sixty-year-old woman who fed your sister — becomes an accessory. Is that what you want for them?"
 
 He straightens in his chair. "Or. Your sister comes home. Tomorrow. The death certificate is quietly corrected — I have contacts who handle these things. No police. No charges. Filiz keeps her job and her dignity. And Defne lives freely. Not hiding. Not testifying. Living."
 

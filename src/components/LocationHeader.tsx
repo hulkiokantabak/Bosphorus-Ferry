@@ -6,8 +6,6 @@ interface LocationHeaderProps {
   episode: number;
   phase?: string;
   onMenuToggle?: () => void;
-  scenesInEpisode?: number; // how many scenes visited in this episode
-  totalScenesInEpisode?: number; // total scenes available in this episode
 }
 
 const episodeNames: Record<number, string> = {
@@ -16,8 +14,21 @@ const episodeNames: Record<number, string> = {
   3: 'Büyükada',
 };
 
-export default function LocationHeader({ location, episode, phase, onMenuToggle, scenesInEpisode, totalScenesInEpisode }: LocationHeaderProps) {
+// Narrative stage within an episode. Honest, monotonic progress that always
+// reaches 4/4 at the climax — unlike a scene-count ratio against all authored
+// branches, which a single playthrough can never fill.
+const PHASE_STEP: Record<string, number> = {
+  arrival: 1,
+  exploration: 2,
+  complication: 3,
+  climax: 4,
+  ferry: 4,
+  ending: 4,
+};
+
+export default function LocationHeader({ location, episode, phase, onMenuToggle }: LocationHeaderProps) {
   const [audioOn, setAudioOn] = useState(isAudioEnabled());
+  const step = phase ? (PHASE_STEP[phase] ?? 0) : 0;
 
   // Update ambience when location changes
   useEffect(() => {
@@ -53,35 +64,20 @@ export default function LocationHeader({ location, episode, phase, onMenuToggle,
           >
             Episode {episode} — {episodeNames[episode] || 'The Bosphorus'}
           </span>
-          {typeof scenesInEpisode === 'number' && scenesInEpisode > 0 && totalScenesInEpisode && totalScenesInEpisode > 0 && (
-            <div className="flex items-center gap-2" aria-label={`${scenesInEpisode} of ${totalScenesInEpisode} scenes visited`}>
-              <div
-                className="rounded-full overflow-hidden"
-                style={{
-                  width: '40px',
-                  height: '3px',
-                  backgroundColor: 'var(--border-subtle)',
-                }}
-              >
-                <div
-                  className="h-full rounded-full"
+          {step > 0 && (
+            <div className="flex items-center gap-1" aria-label={`Chapter stage ${step} of 4`}>
+              {[1, 2, 3, 4].map((i) => (
+                <span
+                  key={i}
+                  className="inline-block rounded-full"
                   style={{
-                    width: `${Math.min((scenesInEpisode / totalScenesInEpisode) * 100, 100)}%`,
-                    backgroundColor: 'var(--accent-gold-dim)',
-                    transition: 'width 0.5s ease',
+                    width: i === step ? '14px' : '6px',
+                    height: '3px',
+                    backgroundColor: i <= step ? 'var(--accent-gold-dim)' : 'var(--border-subtle)',
+                    transition: 'all 0.4s ease',
                   }}
                 />
-              </div>
-              <span
-                style={{
-                  fontFamily: "'Inter', sans-serif",
-                  fontSize: '0.6rem',
-                  color: 'var(--accent-gold-dim)',
-                  opacity: 0.6,
-                }}
-              >
-                {scenesInEpisode}/{totalScenesInEpisode}
-              </span>
+              ))}
             </div>
           )}
         </div>
