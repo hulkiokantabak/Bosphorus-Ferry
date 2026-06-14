@@ -899,7 +899,7 @@ Selim removes his reading glasses and polishes them with a cloth from his breast
 
 Every word is calibrated. He's not denying contact — that would be checkable — but he's minimizing it, flattening it, draining it of significance.
 
-"She was a journalist," you say. "She was investigating something. Something connected to this shop."
+"She was a restorer," you say. "She was investigating something. Something connected to this shop."
 
 Now his expression hardens. Just slightly. The warmth drains from his eyes like water from a sink.
 
@@ -1500,7 +1500,7 @@ She comes around the counter, locks the door, pulls the blinds.
     npcPresent: ['melis'],
     text: `Melis speaks in a low, steady voice, her hands wrapped around a coffee cup gone cold.
 
-"Defne started coming here about three years ago. She was researching art fraud — not publishing yet, just gathering. She'd sit at that table with her laptop and her notebooks, drinking coffee for hours. We became friends."
+"Defne started coming here about three years ago. She was researching art fraud — not going public yet, just gathering. She'd sit at that table with her laptop and her notebooks, drinking coffee for hours. We became friends."
 
 She pauses. Wipes her eyes with the back of her hand.
 
@@ -1843,7 +1843,7 @@ His voice breaks slightly.
 
 He refills your wine.
 
-"There was a journalist who was looking into the art market here. A woman, Defne Karadağ. About two years ago. She disappeared — drowned, they said. But..." He trails off. "She'd been asking questions about provenance. About where certain pieces came from. And then she was gone."
+"There was a restorer who was looking into the art market here. A woman, Defne Karadağ. About two years ago. She disappeared — drowned, they said. But..." He trails off. "She'd been asking questions about provenance. About where certain pieces came from. And then she was gone."
 
 His eyes meet yours with sudden, unguarded sincerity. "That always bothered me."`,
     choices: [
@@ -1948,7 +1948,7 @@ The key — if you have it — is warm in your pocket. If you don't, there might
 
 The second-floor windows are dark. A balcony with a wrought-iron railing holds two dead plants in ceramic pots. The paint on the window frames is peeling.
 
-Two years. Your sister lived behind those windows. Drank her morning coffee on that balcony, looked out at that same slice of sky. Wrote her stories, made her phone calls, pieced together the investigation that would erase her from the world.
+Two years. Your sister lived behind those windows. Drank her morning coffee on that balcony, looked out at that same slice of sky. Filled her notebooks, made her phone calls, pieced together the investigation that would erase her from the world.
 
 The street door is unlocked — this is still a neighborhood where people trust their neighbors. A dim stairwell, tiles cracked, a fuse box humming. The second-floor landing has two doors. The one on the left has a faded nameplate: KARADAĞ.`,
     choices: [
@@ -2033,7 +2033,7 @@ Melis has a key. That's the way in. There are no shortcuts tonight.`,
     location: 'Defne Apartment',
     text: `The key turns with a click. The door swings open and the smell hits you — dust, old books, and beneath it, faint but unmistakable, the jasmine perfume Defne wore. Your mother gave her a bottle every birthday. The scent is a fist around your heart.
 
-The apartment is small — one bedroom, a living room with a kitchenette, a bathroom. Everything is exactly as she left it. A coffee cup on the counter, brown ring dried at the bottom. Books stacked by the sofa — Turkish literature, art history, investigative journalism manuals. A laptop cable coiled on the desk but no laptop. The police took that.
+The apartment is small — one bedroom, a living room with a kitchenette, a bathroom. Everything is exactly as she left it. A coffee cup on the counter, brown ring dried at the bottom. Books stacked by the sofa — Turkish literature, art history, restoration manuals. A laptop cable coiled on the desk but no laptop. The police took that.
 
 Her jacket hangs by the door. You touch the sleeve and your hand shakes.
 
@@ -2079,7 +2079,7 @@ Radiating outward: names, dates, locations. Selim Köşker is mentioned repeated
 
 One note catches your eye: "Naz Y. — Kadıköy Çarşı — authenticator or accomplice? Meeting Thursday." No date on which Thursday.
 
-Another note, scrawled urgently in different ink: "They know I'm looking. S. asked about my 'article.' Need to photograph the piece and get out. Print copies at Kadıköy print shop — BACKUP EVERYTHING."
+Another note, scrawled urgently in different ink: "They know I'm looking. S. asked what I'm really after. Need to photograph the piece and get out. Print copies at Kadıköy print shop — BACKUP EVERYTHING."
 
 The board is a map of your sister's mind in its last weeks. Brilliant, obsessive, increasingly frightened.`,
     choices: [
@@ -2142,7 +2142,7 @@ Your sister left a trail. Fragmented, hidden, but real.`,
     location: 'Defne Apartment',
     text: `You sit on her sofa. The cushion gives in a familiar way — she always complained about this sofa, said it was eating her alive. You press your face into the fabric and breathe in two-year-old dust and a ghost of jasmine.
 
-Defne at sixteen, arguing politics at the dinner table until your father threw his hands up. Defne at twenty-two, graduating top of her journalism class, grinning so wide her face couldn't contain it. Defne at thirty, calling you from some godforsaken eastern province where she was chasing a story about land grabs, her voice alive with the thrill of the hunt.
+Defne at sixteen, arguing politics at the dinner table until your father threw his hands up. Defne at twenty-two, graduating top of her art history class, grinning so wide her face couldn't contain it. Defne at thirty, calling you from some godforsaken eastern province where she was saving a fire-scorched icon from a half-abandoned monastery, her voice alive with the thrill of the rescue.
 
 Defne at thirty-two, vanishing.
 

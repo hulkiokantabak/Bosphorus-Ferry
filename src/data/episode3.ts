@@ -2098,7 +2098,7 @@ Ahead, across the black water, the distant lights of the city shimmer on the hor
       },
       {
         text: 'Cut the engine. Drift. Let the water and the night decide where you wash up.',
-        next: 'ending_calculate',
+        next: 'ending_d2',
         effects: {
           setFlags: ['found_defne'],
           axisShift: { heart: 0.1 },
@@ -2132,7 +2132,7 @@ But the last ferry is gone. Its lights are distant, already nearing the city. Yo
       },
       {
         text: 'Sit in the boat with Defne, watching the stars. Whatever happens next — let it come.',
-        next: 'ending_calculate',
+        next: 'ending_d2',
         effects: {
           setFlags: ['found_defne'],
           axisShift: { heart: 0.1 },
